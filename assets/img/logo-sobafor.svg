@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+  <title id="title">Logo provisoire SOBAFOR SA</title>
+  <desc id="desc">Monogramme S avec silhouette de route et chantier</desc>
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3c72"/>
+      <stop offset="1" stop-color="#2a5298"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="164" height="164" rx="30" fill="url(#g1)"/>
+  <path d="M48 47h84v20H90l42 45v21H48v-20h41L48 68z" fill="#fff"/>
+  <path d="M20 135l36-18 26 9 30-16 48 23v21H20z" fill="#f39c12" opacity=".95"/>
+  <circle cx="144" cy="42" r="13" fill="#f39c12"/>
+</svg>
