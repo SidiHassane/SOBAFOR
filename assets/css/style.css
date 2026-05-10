@@ -326,7 +326,7 @@ img {
 .gallery-meta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 0.5rem;
   padding: 0.7rem 0.8rem;
 }
@@ -334,25 +334,6 @@ img {
 .gallery-meta h3 {
   margin: 0;
   font-size: 0.98rem;
-  color: var(--primary);
-}
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  padding: 0.2rem 0.65rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.status.in-progress {
-  background: rgba(243, 156, 18, 0.18);
-  color: #9a5800;
-}
-
-.status.done {
-  background: rgba(42, 82, 152, 0.16);
   color: var(--primary);
 }
 
