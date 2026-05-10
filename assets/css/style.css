@@ -302,6 +302,60 @@ img {
   border-radius: 8px;
 }
 
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+
+.gallery-card {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.gallery-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.gallery-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.7rem 0.8rem;
+}
+
+.gallery-meta h3 {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--primary);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.status.in-progress {
+  background: rgba(243, 156, 18, 0.18);
+  color: #9a5800;
+}
+
+.status.done {
+  background: rgba(42, 82, 152, 0.16);
+  color: var(--primary);
+}
+
 .faq details {
   background: #fff;
   border: 1px solid var(--border);
@@ -377,6 +431,25 @@ img {
 
 .contact-item .ico {
   font-size: 1.15rem;
+}
+
+.map-wrap {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.map-wrap iframe {
+  display: block;
+  width: 100%;
+  min-height: 340px;
+  border: 0;
+}
+
+.map-actions {
+  margin: 1rem 0 0;
 }
 
 form {
@@ -494,6 +567,12 @@ textarea {
   transform: translateY(0);
 }
 
+@media (min-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (min-width: 860px) {
   .menu-toggle {
     display: none;
@@ -531,6 +610,10 @@ textarea {
   }
 
   .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .gallery-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 
