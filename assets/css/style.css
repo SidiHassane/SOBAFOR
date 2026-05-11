@@ -698,6 +698,11 @@ textarea {
   .process {
     grid-template-columns: repeat(2, 1fr);
     align-items: start;
+    grid-auto-rows: 1fr;
+  }
+
+  .process .step {
+    height: 100%;
   }
 
   .footer-grid {
