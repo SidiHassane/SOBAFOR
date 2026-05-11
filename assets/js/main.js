@@ -3,16 +3,43 @@
   const toggle = document.querySelector("[data-menu-toggle]");
 
   if (nav && toggle) {
+    const closeMenu = () => {
+      nav.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+      backdrop.classList.remove("show");
+    };
+
+    const openMenu = () => {
+      nav.classList.add("open");
+      toggle.setAttribute("aria-expanded", "true");
+      document.body.classList.add("menu-open");
+      backdrop.classList.add("show");
+    };
+
+    const backdrop = document.createElement("div");
+    backdrop.className = "nav-backdrop";
+    document.body.appendChild(backdrop);
+
     toggle.addEventListener("click", () => {
       const expanded = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!expanded));
-      nav.classList.toggle("open");
+      if (expanded) closeMenu();
+      else openMenu();
+    });
+
+    backdrop.addEventListener("click", closeMenu);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 860) closeMenu();
     });
 
     nav.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
-        nav.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
+        closeMenu();
       });
     });
   }
@@ -86,13 +113,13 @@
         "Je souhaite demander un devis.",
         "",
         `Nom: ${nom}`,
-        `Telephone: ${tel}`,
+        `Téléphone: ${tel}`,
         `Service: ${service}`,
         `Ville/Zone: ${ville}`,
-        `Details: ${details}`,
+        `Détails: ${details}`,
       ].join("\n");
 
-      const whatsappUrl = `https://wa.me/22796968766?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/22798036482?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, "_blank", "noopener");
       quoteForm.reset();
     });
@@ -112,7 +139,7 @@
         "Bonjour SOBAFOR SA,",
         "",
         `Nom: ${nom}`,
-        `Telephone: ${tel}`,
+        `Téléphone: ${tel}`,
         `Sujet: ${sujet}`,
         "",
         message,
@@ -123,4 +150,32 @@
       contactForm.reset();
     });
   }
+
+  const mobileCta = document.querySelector(".sticky-mobile-cta");
+  if (mobileCta) {
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const handleCtaVisibility = () => {
+      const currentY = window.scrollY;
+      const scrollingDown = currentY > lastY;
+      const scrolledEnough = currentY > 120;
+      mobileCta.classList.toggle("is-hidden", scrollingDown && scrolledEnough);
+      lastY = currentY;
+      ticking = false;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(handleCtaVisibility);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
 })();
+
+
