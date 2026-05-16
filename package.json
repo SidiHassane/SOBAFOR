@@ -1,0 +1,15 @@
+{
+  "name": "sobafor",
+  "version": "1.0.0",
+  "description": "SOBAFOR SA - BTP, Forages et Infrastructures",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "dev": "npx http-server -p 3000"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.1.0"
+  },
+  "devDependencies": {},
+  "type": "module"
+}
