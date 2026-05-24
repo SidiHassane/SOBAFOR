@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Demande de Devis | SOBAFOR SA</title>
-  <meta name="description" content="Demandez un devis à SOBAFOR SA pour vos projets BTP, routes, forages, hydraulique, assainissement et infrastructures au Niger." />
-  <meta property="og:title" content="Demande de Devis SOBAFOR SA" />
+  <title>Demande de Devis | SOBAFOR SARL</title>
+  <meta name="description" content="Demandez un devis à SOBAFOR SARL pour vos projets BTP, routes, forages, hydraulique, assainissement et infrastructures au Niger." />
+  <meta property="og:title" content="Demande de Devis SOBAFOR SARL" />
   <meta property="og:description" content="Formulaire de devis simple et rapide avec envoi direct via WhatsApp." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sobafor.com/devis.html" />
@@ -17,8 +17,8 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="Accueil SOBAFOR">
-        <img class="brand-logo" src="logo.jpeg" alt="Logo SOBAFOR SA" />
-        <span class="brand-name">SOBAFOR SA<span class="brand-sub">Bâtiments, Forages &amp; Routes</span></span>
+        <img class="brand-logo" src="logo.jpeg" alt="Logo SOBAFOR SARL" />
+        <span class="brand-name">SOBAFOR SARL<span class="brand-sub">Bâtiments, Forages &amp; Routes</span></span>
       </a>
       <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-menu-toggle>
         <span></span><span></span><span></span>
@@ -39,7 +39,7 @@
     <section class="hero hero-inner">
       <div class="container" data-reveal>
         <h1>Obtenez une estimation rapide pour votre projet</h1>
-        <p>Remplissez ce formulaire en 1 minute. Votre demande est préparée automatiquement puis envoyée à SOBAFOR SA via WhatsApp.</p>
+        <p>Remplissez ce formulaire en 1 minute. Votre demande est préparée automatiquement puis envoyée à SOBAFOR SARL via WhatsApp.</p>
       </div>
     </section>
 
@@ -48,52 +48,45 @@
         <div class="cards two">
           <article class="contact-box" data-reveal>
             <h2>Formulaire de devis</h2>
-            <form data-quote-form>
-              <div>
-                <label for="nom">Nom et prénom</label>
-                <input id="nom" name="nom" type="text" required />
+            <form class="form" data-quote-form>
+              <div class="form-group">
+                <label for="nom">Nom complet / Entreprise</label>
+                <input type="text" id="nom" name="nom" required placeholder="Ex: Jean Dupont">
               </div>
-              <div>
-                <label for="telephone">Téléphone</label>
-                <input id="telephone" name="telephone" type="tel" required />
+              <div class="form-group">
+                <label for="telephone">Téléphone (WhatsApp)</label>
+                <input type="tel" id="telephone" name="telephone" required placeholder="Ex: +227 98 03 64 82">
               </div>
-              <div>
-                <label for="service">Type de projet</label>
+              <div class="form-group">
+                <label for="service">Domaine d'intervention</label>
                 <select id="service" name="service" required>
-                  <option value="">Choisir un service</option>
-                  <option>Bâtiment / Génie civil</option>
-                  <option>Routes / Assainissement</option>
-                  <option>Hydraulique / AEP</option>
-                  <option>Forage</option>
-                  <option>Énergie solaire</option>
-                  <option>Location d'engins</option>
+                  <option value="" disabled selected>Choisir un domaine...</option>
+                  <option value="Bâtiment & Génie Civil">Bâtiment & Génie Civil</option>
+                  <option value="Routes & Assainissement">Routes & Assainissement</option>
+                  <option value="Hydraulique & Forages">Hydraulique & Forages</option>
+                  <option value="Énergie Solaire">Énergie Solaire</option>
+                  <option value="Location d'engins">Location d'engins</option>
                 </select>
               </div>
-              <div>
-                <label for="ville">Ville / Zone du chantier</label>
-                <input id="ville" name="ville" type="text" required />
+              <div class="form-group">
+                <label for="ville">Ville / Zone du projet</label>
+                <input type="text" id="ville" name="ville" required placeholder="Ex: Niamey, Maradi...">
               </div>
-              <div>
-                <label for="details">Description du besoin</label>
-                <textarea id="details" name="details" required placeholder="Objectif, volume, délai souhaité, contraintes du site..."></textarea>
+              <div class="form-group">
+                <label for="details">Détails du besoin</label>
+                <textarea id="details" name="details" required placeholder="Décrivez brièvement votre projet..."></textarea>
               </div>
-              <button class="btn btn-primary" type="submit">Envoyer la demande via WhatsApp</button>
+              <button class="btn btn-primary" type="submit">Envoyer par WhatsApp</button>
             </form>
           </article>
-
-          <article class="contact-box" data-reveal>
-            <h2>Ce que vous obtenez</h2>
+          <article class="contact-box soft" data-reveal>
+            <h3>Pourquoi choisir SOBAFOR SARL ?</h3>
             <ul class="list">
-              <li>Un premier retour rapide de notre équipe</li>
-              <li>Une qualification technique du besoin</li>
-              <li>Une proposition adaptée au contexte local</li>
-              <li>Des prochaines étapes claires pour démarrer</li>
+              <li><strong>Expertise terrain</strong> : Plus de 30 ans d'expérience au Niger.</li>
+              <li><strong>Équipements propres</strong> : Un parc d'engins complet et performant.</li>
+              <li><strong>Réactivité</strong> : Un chiffrage technique rapide et réaliste.</li>
+              <li><strong>Qualité</strong> : Respect strict des normes de sécurité et de durabilité.</li>
             </ul>
-            <div class="kpis" style="margin-top:1rem;">
-              <div class="kpi"><strong>Appel direct</strong><p><a href="tel:+22798036482">+227 98 03 64 82</a></p></div>
-              <div class="kpi"><strong>WhatsApp</strong><p><a href="https://wa.me/22798036482" target="_blank" rel="noopener">Discuter maintenant</a></p></div>
-              <div class="kpi"><strong>Email</strong><p><a href="mailto:sob_sarl@yahoo.fr">sob_sarl@yahoo.fr</a></p></div>
-            </div>
           </article>
         </div>
       </div>
@@ -104,8 +97,8 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <h3 class="footer-title">SOBAFOR SA</h3>
-          <p>Votre partenaire pour des infrastructures fiables, performantes et durables au Niger.</p>
+          <h3 class="footer-title">SOBAFOR SARL</h3>
+          <p>La référence du BTP et des infrastructures au Niger depuis 1987. Engagement, qualité et fiabilité.</p>
         </div>
         <div class="footer-links">
           <h3 class="footer-title">Navigation</h3>
@@ -122,7 +115,7 @@
           <p><a href="mailto:sob_sarl@yahoo.fr">sob_sarl@yahoo.fr</a></p>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2026 SOBAFOR SA. Tous droits réservés. RCCM 5326 | NIF 1021/R</div>
+      <div class="footer-bottom">&copy; 2026 SOBAFOR SARL. Tous droits réservés. RCCM 5326 | NIF 1021/R</div>
     </div>
   </footer>
 
