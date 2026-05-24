@@ -72,6 +72,32 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
+  const galleryVideos = document.querySelectorAll(".gallery-card video");
+  if (galleryVideos.length) {
+    const videoIO = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          const card = video.parentElement;
+
+          if (entry.isIntersecting) {
+            // Sur mobile, on peut vouloir lancer la lecture auto quand visible
+            if (window.innerWidth < 960) {
+              video.play().catch(() => {});
+              card.classList.add("is-playing");
+            }
+          } else {
+            video.pause();
+            card.classList.remove("is-playing");
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    galleryVideos.forEach((video) => videoIO.observe(video));
+  }
+
   const counters = document.querySelectorAll("[data-counter]");
   if (counters.length) {
     const easeOut = (t) => 1 - Math.pow(1 - t, 3);
