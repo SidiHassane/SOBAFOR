@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">Energie solaire isolee</title>
+  <desc id="desc">Illustration de panneaux solaires et soleil</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1d4ed8"/></linearGradient></defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect y="315" width="800" height="135" fill="#365314"/>
+  <circle cx="130" cy="95" r="48" fill="#facc15"/>
+  <g fill="#60a5fa" stroke="#dbeafe" stroke-width="4">
+    <polygon points="220,300 370,250 430,320 280,370"/>
+    <polygon points="390,290 540,240 600,310 450,360"/>
+  </g>
+  <g stroke="#dbeafe" stroke-width="3" opacity="0.8">
+    <line x1="255" y1="288" x2="315" y2="347"/><line x1="292" y1="276" x2="352" y2="336"/><line x1="329" y1="264" x2="389" y2="324"/>
+    <line x1="425" y1="278" x2="485" y2="337"/><line x1="462" y1="266" x2="522" y2="326"/><line x1="499" y1="254" x2="559" y2="314"/>
+  </g>
+</svg>

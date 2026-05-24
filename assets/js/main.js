@@ -146,7 +146,7 @@
       const details = String(data.get("details") || "").trim();
 
       const message = [
-        "Bonjour SOBAFOR SARL,",
+        "Bonjour SOBAFOR SA,",
         "Je souhaite demander un devis.",
         "",
         `Nom: ${nom}`,
@@ -173,7 +173,7 @@
       const message = String(data.get("message") || "").trim();
 
       const body = [
-        "Bonjour SOBAFOR SARL,",
+        "Bonjour SOBAFOR SA,",
         "",
         `Nom: ${nom}`,
         `Téléphone: ${tel}`,

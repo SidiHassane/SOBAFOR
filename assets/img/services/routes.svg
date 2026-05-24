@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">Routes et pistes rurales</title>
+  <desc id="desc">Illustration d une route en perspective</desc>
+  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0f172a"/></linearGradient></defs>
+  <rect width="800" height="450" fill="url(#sky)"/>
+  <rect y="270" width="800" height="180" fill="#3f6212"/>
+  <path d="M320 450 L390 180 L410 180 L480 450 Z" fill="#1f2937"/>
+  <path d="M393 450 L399 310 L401 310 L407 450 Z" fill="#f8fafc"/>
+  <rect x="120" y="210" width="170" height="18" rx="9" fill="#f59e0b" opacity="0.95" transform="rotate(-10 120 210)"/>
+  <rect x="520" y="200" width="170" height="18" rx="9" fill="#f59e0b" opacity="0.95" transform="rotate(10 520 200)"/>
+  <circle cx="160" cy="120" r="38" fill="#fde68a"/>
+</svg>
