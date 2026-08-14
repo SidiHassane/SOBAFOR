@@ -399,7 +399,7 @@ svg {
   background:
     linear-gradient(90deg, rgba(2, 6, 23, 0.92), rgba(2, 6, 23, 0.74)),
     linear-gradient(180deg, rgba(2, 6, 23, 0.15), rgba(2, 6, 23, 0.75)),
-    url("../../Chantier/1.jpeg") center/cover;
+    url("../img/gallery/parc-engins-1080.jpg") center/cover;
 }
 
 .page-home .hero .container {
@@ -489,7 +489,6 @@ svg {
 .contact-box,
 .faq details,
 .kpi,
-.gallery-card,
 .process .step,
 .map-wrap {
   position: relative;
@@ -505,7 +504,6 @@ svg {
 .card::before,
 .contact-box::before,
 .faq details::before,
-.gallery-card::before,
 .process .step::before,
 .kpi::before {
   content: "";
@@ -551,7 +549,6 @@ svg {
 }
 
 .card:hover,
-.gallery-card:hover,
 .process .step:hover,
 .contact-box:hover,
 .kpi:hover {
@@ -562,7 +559,6 @@ svg {
 }
 
 .card h3,
-.gallery-meta h3,
 .process .step h3 {
   margin-top: 0;
   margin-bottom: 0.75rem;
@@ -685,190 +681,259 @@ svg {
   color: var(--heading);
 }
 
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
+/* ---------------------------------------------------------------
+   Galerie des realisations
+   Mise en page en colonnes (masonry) : chaque photo garde son ratio
+   naturel. Les sources vont de 307x173 a 1080x1264 ; un recadrage
+   uniforme en 4/3 les deformait et les rendait floues.
+   --------------------------------------------------------------- */
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1.85rem;
 }
 
-.featured-project {
-  display: grid;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background:
-    radial-gradient(circle at top left, rgba(251, 146, 60, 0.14), transparent 28%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03)),
-    var(--surface);
-  border: 1px solid rgba(251, 146, 60, 0.2);
-  border-radius: 1.5rem;
-  box-shadow: var(--shadow-soft);
-}
-
-.featured-project-media {
-  position: relative;
-}
-
-.featured-project-badge {
-  position: absolute;
-  top: 0.85rem;
-  left: 0.85rem;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  min-height: 2rem;
-  padding: 0.35rem 0.8rem;
-  border: 1px solid rgba(251, 146, 60, 0.26);
+.filter-chip {
+  min-height: 2.9rem;
+  padding: 0.6rem 1.15rem;
+  border: 1px solid var(--border);
   border-radius: 999px;
-  background: rgba(2, 6, 23, 0.72);
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 800;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+}
+
+.filter-chip:hover {
+  color: var(--heading);
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.filter-chip.is-active {
+  color: var(--accent);
+  border-color: rgba(251, 146, 60, 0.42);
+  background: rgba(251, 146, 60, 0.1);
+}
+
+.gallery {
+  columns: 2;
+  column-gap: 0.75rem;
+}
+
+.shot {
+  margin: 0 0 0.75rem;
+  break-inside: avoid;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1.15rem;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.shot:hover {
+  transform: translateY(-4px);
+  border-color: rgba(251, 146, 60, 0.3);
+  box-shadow: var(--shadow);
+}
+
+/* L'attribut hidden sert au filtrage : il doit primer sur tout display. */
+.shot[hidden] {
+  display: none;
+}
+
+.shot-open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.shot-open img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.shot:hover .shot-open img {
+  transform: scale(1.04);
+}
+
+.shot figcaption {
+  padding: 0.78rem 0.95rem 0.85rem;
+  border-top: 1px solid var(--border);
+  color: var(--heading);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Cartes video : rien n'est telecharge tant que l'utilisateur n'a pas
+   clique. Le poids est annonce, la connexion mobile est souvent limitee. */
+.shot-play {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  padding: 1.25rem;
+  border: 0;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(251, 146, 60, 0.16), transparent 62%),
+    linear-gradient(180deg, #101c33, #030814);
+  color: var(--heading);
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.shot-play:hover {
+  background:
+    radial-gradient(circle at 50% 38%, rgba(251, 146, 60, 0.26), transparent 62%),
+    linear-gradient(180deg, #16233d, #050b1a);
+}
+
+.play-badge {
+  flex: none;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  background: rgba(2, 6, 23, 0.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat center / 1.45rem;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.shot-play:hover .play-badge {
+  transform: scale(1.08);
+  border-color: rgba(251, 146, 60, 0.55);
+}
+
+.play-label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.play-weight {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.featured-project video {
-  width: 100%;
-  aspect-ratio: 16 / 9;
+.shot video {
   display: block;
-  object-fit: cover;
-  border-radius: 1.1rem;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
   background: #000;
-  box-shadow: 0 16px 36px rgba(2, 6, 23, 0.28);
-  border: 0;
 }
 
-.featured-project-content {
+.gallery-empty {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+
+/* Visionneuse plein ecran */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
   display: grid;
-  gap: 0.9rem;
-  align-content: center;
+  grid-template-rows: 1fr auto;
+  place-items: center;
+  gap: 1rem;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  background: rgba(2, 6, 23, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
-.featured-project-kicker {
-  margin: 0;
-  color: var(--accent);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.featured-project-content h3 {
+.lightbox img {
+  max-width: 100%;
+  max-height: 76vh;
+  width: auto;
+  height: auto;
+  border-radius: 0.9rem;
+  box-shadow: var(--shadow);
+}
+
+.lightbox-caption {
   margin: 0;
   color: var(--heading);
-  font-size: clamp(1.45rem, 2.6vw, 2.4rem);
-  line-height: 1.08;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
 }
 
-.featured-project-content p {
-  margin: 0;
-  color: rgba(226, 232, 240, 0.9);
-}
-
-.featured-project-points {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 0.75rem;
-}
-
-.featured-project-points li {
-  position: relative;
-  padding-left: 1.45rem;
-  color: var(--text);
-}
-
-.featured-project-points li::before {
-  content: "";
+.lightbox button {
   position: absolute;
-  top: 0.62rem;
-  left: 0;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  box-shadow: 0 0 0 0.28rem rgba(251, 146, 60, 0.12);
-}
-
-.featured-project-actions {
-  margin-top: 0.35rem;
-}
-
-.gallery-card {
-  position: relative;
-  margin: 0;
-  border-radius: 1.25rem;
-  overflow: hidden;
-  background: var(--surface);
-  box-shadow: 0 4px 20px rgba(2, 6, 23, 0.2);
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-}
-
-.gallery-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.4);
-}
-
-.gallery-card img,
-.gallery-card video {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.gallery-card:hover img,
-.gallery-card:hover video {
-  transform: scale(1.1);
-}
-
-/* Indicateur vidéo */
-.gallery-card.is-video::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 3.5rem;
-  height: 3.5rem;
-  background: rgba(2, 6, 23, 0.6);
-  backdrop-filter: blur(4px);
-  border-radius: 50%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 1.5rem;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 2;
-}
-
-.gallery-card.is-video.is-playing::after {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.8);
-}
-
-.gallery-meta {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 2.5rem 1.25rem 1.25rem;
-  background: linear-gradient(0deg, rgba(2, 6, 23, 0.9) 0%, rgba(2, 6, 23, 0.4) 60%, transparent 100%);
-  z-index: 3;
-}
-
-.gallery-meta h3 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
+  width: 3.1rem;
+  height: 3.1rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.75);
   color: var(--heading);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.lightbox button:hover {
+  border-color: rgba(251, 146, 60, 0.5);
+  background: rgba(251, 146, 60, 0.14);
+  color: var(--accent);
+}
+
+.lightbox-close {
+  top: clamp(0.75rem, 3vw, 1.5rem);
+  right: clamp(0.75rem, 3vw, 1.5rem);
+}
+
+.lightbox-prev {
+  left: clamp(0.5rem, 2vw, 1.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-next {
+  right: clamp(0.5rem, 2vw, 1.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+body.lightbox-open {
+  overflow: hidden;
 }
 
 .faq details {
@@ -1219,11 +1284,13 @@ textarea {
 }
 
 @media (min-width: 640px) {
-  .featured-project {
-    padding: 1.25rem;
+  .gallery {
+    column-gap: 1.05rem;
   }
 
-  /* Supprimé gallery-grid ici car géré par auto-fill */
+  .shot {
+    margin-bottom: 1.05rem;
+  }
 }
 
 @media (min-width: 860px) {
@@ -1253,10 +1320,13 @@ textarea {
 }
 
 @media (min-width: 960px) {
-  .featured-project {
-    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-    align-items: stretch;
-    padding: 1.35rem;
+  .gallery {
+    columns: 3;
+    column-gap: 1.15rem;
+  }
+
+  .shot {
+    margin-bottom: 1.15rem;
   }
 
   .menu-toggle {
@@ -1323,27 +1393,53 @@ textarea {
 }
 
 @media (max-width: 639px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+  /* Bandeau defilant : 5 filtres empiles occupaient 4 lignes sur un ecran
+     de 375px. On les garde sur une seule ligne, balayable au doigt. */
+  .gallery-filters {
+    flex-wrap: nowrap;
+    gap: 0.45rem;
+    margin-bottom: 1.35rem;
+    padding-bottom: 0.4rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .gallery-card {
+  .gallery-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-chip {
+    flex: none;
+    min-height: 2.6rem;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    scroll-snap-align: start;
+  }
+
+  .shot {
     border-radius: 0.85rem;
   }
 
-  .gallery-meta {
-    padding: 1.5rem 0.75rem 0.75rem;
+  .shot figcaption {
+    padding: 0.6rem 0.7rem 0.65rem;
+    font-size: 0.74rem;
   }
 
-  .gallery-meta h3 {
-    font-size: 0.8rem;
+  .play-badge {
+    width: 2.6rem;
+    height: 2.6rem;
+    background-size: 1.1rem;
   }
 
-  .gallery-card.is-video::after {
-    width: 2.5rem;
-    height: 2.5rem;
-    background-size: 1rem;
+  .play-label {
+    font-size: 0.74rem;
+  }
+
+  .play-weight {
+    font-size: 0.64rem;
   }
 }
 
