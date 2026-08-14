@@ -1,1 +1,4 @@
-*.mp4 filter=lfs diff=lfs merge=lfs -text
+# Les .mp4 sont stockes comme de vrais binaires, pas via Git LFS :
+# GitHub Pages ne resout pas les pointeurs LFS et servirait un fichier
+# texte de 132 octets a la place de la video.
+*.mp4 -text

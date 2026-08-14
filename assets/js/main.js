@@ -72,30 +72,133 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
-  const galleryVideos = document.querySelectorAll(".gallery-card video");
-  if (galleryVideos.length) {
-    const videoIO = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target;
-          const card = video.parentElement;
+  const gallery = document.querySelector("[data-gallery]");
+  if (gallery) {
+    const shots = Array.from(gallery.querySelectorAll(".shot"));
+    const filterBar = document.querySelector("[data-gallery-filters]");
+    const emptyMsg = document.querySelector("[data-gallery-empty]");
 
-          if (entry.isIntersecting) {
-            // Sur mobile, on peut vouloir lancer la lecture auto quand visible
-            if (window.innerWidth < 960) {
-              video.play().catch(() => {});
-              card.classList.add("is-playing");
-            }
-          } else {
-            video.pause();
-            card.classList.remove("is-playing");
-          }
+    // --- Filtrage par domaine ---
+    if (filterBar) {
+      const chips = Array.from(filterBar.querySelectorAll(".filter-chip"));
+
+      const applyFilter = (value) => {
+        let visible = 0;
+        shots.forEach((shot) => {
+          const match = value === "all" || shot.dataset.cat === value;
+          shot.hidden = !match;
+          if (match) visible++;
         });
-      },
-      { threshold: 0.6 }
-    );
+        if (emptyMsg) emptyMsg.hidden = visible > 0;
+      };
 
-    galleryVideos.forEach((video) => videoIO.observe(video));
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          chips.forEach((c) => {
+            const active = c === chip;
+            c.classList.toggle("is-active", active);
+            c.setAttribute("aria-pressed", active ? "true" : "false");
+          });
+          applyFilter(chip.dataset.filter);
+        });
+      });
+    }
+
+    // --- Lecture video a la demande ---
+    // Rien n'est telecharge tant que l'utilisateur n'a pas clique : sur une
+    // connexion mobile limitee, une galerie qui precharge coute trop cher.
+    gallery.addEventListener("click", (event) => {
+      const trigger = event.target.closest(".shot-play");
+      if (!trigger) return;
+
+      const video = document.createElement("video");
+      video.src = trigger.dataset.video;
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.preload = "auto";
+      video.setAttribute("aria-label", trigger.dataset.title || "Video de chantier");
+      trigger.replaceWith(video);
+      video.play().catch(() => {});
+    });
+
+    // --- Visionneuse plein ecran ---
+    const openers = shots
+      .map((shot) => shot.querySelector(".shot-open"))
+      .filter(Boolean);
+
+    if (openers.length) {
+      const lightbox = document.createElement("div");
+      lightbox.className = "lightbox";
+      lightbox.setAttribute("role", "dialog");
+      lightbox.setAttribute("aria-modal", "true");
+      lightbox.setAttribute("aria-label", "Visionneuse des realisations");
+      lightbox.innerHTML =
+        '<img alt="" />' +
+        '<p class="lightbox-caption"></p>' +
+        '<button class="lightbox-close" type="button" aria-label="Fermer">&times;</button>' +
+        '<button class="lightbox-prev" type="button" aria-label="Image precedente">&#8249;</button>' +
+        '<button class="lightbox-next" type="button" aria-label="Image suivante">&#8250;</button>';
+      document.body.appendChild(lightbox);
+
+      const lbImg = lightbox.querySelector("img");
+      const lbCaption = lightbox.querySelector(".lightbox-caption");
+      const btnClose = lightbox.querySelector(".lightbox-close");
+      const btnPrev = lightbox.querySelector(".lightbox-prev");
+      const btnNext = lightbox.querySelector(".lightbox-next");
+
+      let current = 0;
+      let lastFocused = null;
+
+      // Ne parcourt que les vignettes actuellement visibles apres filtrage.
+      const visibleOpeners = () =>
+        openers.filter((o) => !o.closest(".shot").hidden);
+
+      const show = (index) => {
+        const list = visibleOpeners();
+        if (!list.length) return;
+        current = (index + list.length) % list.length;
+        const opener = list[current];
+        lbImg.src = opener.dataset.full;
+        lbImg.alt = opener.querySelector("img").alt;
+        lbCaption.textContent = opener.dataset.title || "";
+        const multiple = list.length > 1;
+        btnPrev.hidden = !multiple;
+        btnNext.hidden = !multiple;
+      };
+
+      const close = () => {
+        lightbox.classList.remove("is-open");
+        document.body.classList.remove("lightbox-open");
+        lbImg.removeAttribute("src");
+        if (lastFocused) lastFocused.focus();
+      };
+
+      openers.forEach((opener) => {
+        opener.addEventListener("click", () => {
+          lastFocused = opener;
+          show(visibleOpeners().indexOf(opener));
+          lightbox.classList.add("is-open");
+          document.body.classList.add("lightbox-open");
+          btnClose.focus();
+        });
+      });
+
+      btnClose.addEventListener("click", close);
+      btnPrev.addEventListener("click", () => show(current - 1));
+      btnNext.addEventListener("click", () => show(current + 1));
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) close();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) return;
+        if (event.key === "Escape") close();
+        if (event.key === "ArrowLeft") show(current - 1);
+        if (event.key === "ArrowRight") show(current + 1);
+      });
+    }
   }
 
   const counters = document.querySelectorAll("[data-counter]");
