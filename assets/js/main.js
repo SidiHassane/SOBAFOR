@@ -82,6 +82,15 @@
     if (filterBar) {
       const chips = Array.from(filterBar.querySelectorAll(".filter-chip"));
 
+      // Compteurs par domaine, calcules depuis le contenu reel.
+      filterBar.querySelectorAll(".chip-count").forEach((el) => {
+        const cat = el.dataset.count;
+        el.textContent =
+          cat === "all"
+            ? shots.length
+            : shots.filter((s) => s.dataset.cat === cat).length;
+      });
+
       const applyFilter = (value) => {
         let visible = 0;
         shots.forEach((shot) => {
@@ -104,27 +113,12 @@
       });
     }
 
-    // --- Lecture video a la demande ---
-    // Rien n'est telecharge tant que l'utilisateur n'a pas clique : sur une
-    // connexion mobile limitee, une galerie qui precharge coute trop cher.
-    gallery.addEventListener("click", (event) => {
-      const trigger = event.target.closest(".shot-play");
-      if (!trigger) return;
-
-      const video = document.createElement("video");
-      video.src = trigger.dataset.video;
-      video.controls = true;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.preload = "auto";
-      video.setAttribute("aria-label", trigger.dataset.title || "Video de chantier");
-      trigger.replaceWith(video);
-      video.play().catch(() => {});
-    });
-
     // --- Visionneuse plein ecran ---
+    // Photos et videos passent par la meme visionneuse. Les videos sont
+    // majoritairement verticales : les lire dans la carte les reduisait a un
+    // timbre-poste sur telephone. Rien n'est telecharge avant le clic.
     const openers = shots
-      .map((shot) => shot.querySelector(".shot-open"))
+      .map((shot) => shot.querySelector(".shot-open, .shot-play"))
       .filter(Boolean);
 
     if (openers.length) {
@@ -134,14 +128,14 @@
       lightbox.setAttribute("aria-modal", "true");
       lightbox.setAttribute("aria-label", "Visionneuse des realisations");
       lightbox.innerHTML =
-        '<img alt="" />' +
+        '<div class="lightbox-stage"></div>' +
         '<p class="lightbox-caption"></p>' +
         '<button class="lightbox-close" type="button" aria-label="Fermer">&times;</button>' +
-        '<button class="lightbox-prev" type="button" aria-label="Image precedente">&#8249;</button>' +
-        '<button class="lightbox-next" type="button" aria-label="Image suivante">&#8250;</button>';
+        '<button class="lightbox-prev" type="button" aria-label="Element precedent">&#8249;</button>' +
+        '<button class="lightbox-next" type="button" aria-label="Element suivant">&#8250;</button>';
       document.body.appendChild(lightbox);
 
-      const lbImg = lightbox.querySelector("img");
+      const stage = lightbox.querySelector(".lightbox-stage");
       const lbCaption = lightbox.querySelector(".lightbox-caption");
       const btnClose = lightbox.querySelector(".lightbox-close");
       const btnPrev = lightbox.querySelector(".lightbox-prev");
@@ -154,13 +148,42 @@
       const visibleOpeners = () =>
         openers.filter((o) => !o.closest(".shot").hidden);
 
+      // Libere la video en cours : sans cela le telechargement continue en
+      // arriere-plan apres la fermeture.
+      const clearStage = () => {
+        const playing = stage.querySelector("video");
+        if (playing) {
+          playing.pause();
+          playing.removeAttribute("src");
+          playing.load();
+        }
+        stage.innerHTML = "";
+      };
+
       const show = (index) => {
         const list = visibleOpeners();
         if (!list.length) return;
         current = (index + list.length) % list.length;
         const opener = list[current];
-        lbImg.src = opener.dataset.full;
-        lbImg.alt = opener.querySelector("img").alt;
+        clearStage();
+
+        if (opener.dataset.video) {
+          const video = document.createElement("video");
+          video.src = opener.dataset.video;
+          video.controls = true;
+          video.autoplay = true;
+          video.playsInline = true;
+          video.preload = "auto";
+          video.setAttribute("aria-label", opener.dataset.title || "Video de chantier");
+          stage.appendChild(video);
+          video.play().catch(() => {});
+        } else {
+          const img = document.createElement("img");
+          img.src = opener.dataset.full;
+          img.alt = opener.querySelector("img").alt;
+          stage.appendChild(img);
+        }
+
         lbCaption.textContent = opener.dataset.title || "";
         const multiple = list.length > 1;
         btnPrev.hidden = !multiple;
@@ -170,7 +193,7 @@
       const close = () => {
         lightbox.classList.remove("is-open");
         document.body.classList.remove("lightbox-open");
-        lbImg.removeAttribute("src");
+        clearStage();
         if (lastFocused) lastFocused.focus();
       };
 
