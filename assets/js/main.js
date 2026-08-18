@@ -55,21 +55,43 @@
     });
   }
 
+  // --- Revelations en cascade ---
+  // Les groupes de cartes se revelent element par element plutot qu'en bloc.
+  // Le retard est porte par une variable CSS, donc c'est le compositeur qui
+  // anime : le fil principal ne fait qu'ajouter une classe.
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const GROUPS = ".cards, .stats, .process, .kpis, .footer-grid, .gallery-teaser";
+  document.querySelectorAll(GROUPS).forEach((group) => {
+    if (group.hasAttribute("data-reveal")) group.removeAttribute("data-reveal");
+    Array.from(group.children).forEach((child, i) => {
+      child.setAttribute("data-reveal", "");
+      // Au-dela de six, le retard cumule se voit comme une lenteur.
+      child.style.setProperty("--stagger", Math.min(i, 5));
+    });
+  });
+
   const revealEls = document.querySelectorAll("[data-reveal]");
   if (revealEls.length) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
+    if (reducedMotion) {
+      revealEls.forEach((el) => el.classList.add("show"));
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        // Declenche un peu avant l'entree dans le cadre : l'element est deja
+        // en place quand le regard l'atteint, ce qui supprime l'effet de pop.
+        { threshold: 0.05, rootMargin: "0px 0px -8% 0px" }
+      );
 
-    revealEls.forEach((el) => io.observe(el));
+      revealEls.forEach((el) => io.observe(el));
+    }
   }
 
   const gallery = document.querySelector("[data-gallery]");
