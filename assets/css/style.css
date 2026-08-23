@@ -939,7 +939,10 @@ h3,
   justify-content: center;
   gap: 0.9rem;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  /* Le ratio natif de la video est ecrit dans le HTML : la carte a le bon
+     format des le premier rendu, donc aucun decalage quand la vignette
+     arrive. La plupart de ces videos sont verticales. */
+  aspect-ratio: var(--ar, 16 / 10);
   padding: 1.25rem;
   border: 0;
   background:
@@ -949,6 +952,43 @@ h3,
   font: inherit;
   cursor: pointer;
   transition: background 0.25s ease;
+}
+
+/* Vignette extraite de la video elle-meme. Le canvas remplace le fond uni :
+   18 rectangles gris devenaient illisibles cote a cote. */
+.shot-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--dur-enter) var(--ease);
+  z-index: 0;
+}
+
+.shot-play.has-poster .shot-poster {
+  opacity: 1;
+}
+
+.shot-play.has-poster {
+  background: #050b18;
+}
+
+/* Voile degrade : sans lui, le libelle et le poids se perdent sur une
+   image claire. */
+.shot-play.has-poster::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.2) 0%, rgba(2, 6, 23, 0.45) 45%, rgba(2, 6, 23, 0.82) 100%);
+}
+
+.play-badge,
+.play-label {
+  position: relative;
+  z-index: 2;
 }
 
 .play-badge {

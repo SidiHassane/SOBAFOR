@@ -135,6 +135,108 @@
       });
     }
 
+    // --- Vignettes video ---
+    // La vignette est extraite de la video elle-meme : une image est tiree
+    // d'une premiere seconde, dessinee sur un canvas, puis la video est
+    // relachee. Aucun fichier d'apercu a produire ni a stocker.
+    // Le chargement n'a lieu qu'a l'approche de la carte, et pas du tout si
+    // le visiteur a demande l'economie de donnees ou est en 2G.
+    const lien = navigator.connection || {};
+    const economiseDonnees =
+      lien.saveData === true || /(^|-)2g$/.test(lien.effectiveType || "");
+
+    const boutonsVideo = gallery.querySelectorAll(".shot-play[data-video]");
+    if (boutonsVideo.length && !economiseDonnees && "IntersectionObserver" in window) {
+      // File d'attente : lancer les dix-huit extractions d'un coup saturait
+      // les connexions au domaine et les decodeurs, si bien que la plupart
+      // expiraient avant d'avoir ete servies. Deux a la fois suffisent et
+      // menagent les telephones modestes.
+      const file = [];
+      let actifs = 0;
+      const MAX_SIMULTANE = 2;
+
+      const capturer = (bouton, termine) => {
+        const v = document.createElement("video");
+        v.muted = true;
+        v.playsInline = true;
+        v.preload = "metadata";
+        let fini = false;
+
+        const finir = () => {
+          if (fini) return;
+          fini = true;
+          v.removeAttribute("src");
+          v.load();
+          termine();
+        };
+
+        // Dessine des qu'une image est decodee. On ne se fie pas au seul
+        // evenement "seeked" : selon l'encodage il n'arrive pas toujours, et
+        // la file restait alors bloquee sur la premiere video.
+        const tenterDessin = () => {
+          if (fini) return false;
+          if (v.readyState < 2 || !v.videoWidth) return false;
+          try {
+            const c = document.createElement("canvas");
+            const largeur = 480;
+            c.width = largeur;
+            c.height = Math.round((largeur * v.videoHeight) / v.videoWidth) || 270;
+            c.getContext("2d").drawImage(v, 0, 0, c.width, c.height);
+            c.className = "shot-poster";
+            c.setAttribute("aria-hidden", "true");
+            bouton.prepend(c);
+            bouton.classList.add("has-poster");
+          } catch (e) {
+            /* le fond uni reste en place */
+          }
+          finir();
+          return true;
+        };
+
+        v.addEventListener("loadedmetadata", () => {
+          // Certaines sequences durent trois secondes : on vise une fraction,
+          // pas un instant fixe qui tomberait apres la fin.
+          v.currentTime = Math.min(1.5, (v.duration || 3) * 0.3);
+          // Si le deplacement n'aboutit pas, on se contente de l'image
+          // disponible plutot que d'attendre en vain.
+          setTimeout(tenterDessin, 2500);
+        });
+
+        v.addEventListener("seeked", tenterDessin);
+        v.addEventListener("loadeddata", tenterDessin);
+        v.addEventListener("error", finir);
+        // Filet de securite : une video muette ne doit pas bloquer la file.
+        setTimeout(finir, 7000);
+
+        v.src = bouton.dataset.video;
+      };
+
+      const defiler = () => {
+        while (actifs < MAX_SIMULTANE && file.length) {
+          const bouton = file.shift();
+          actifs++;
+          capturer(bouton, () => {
+            actifs--;
+            defiler();
+          });
+        }
+      };
+
+      const ioPoster = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            ioPoster.unobserve(entry.target);
+            file.push(entry.target);
+          });
+          defiler();
+        },
+        { rootMargin: "300px 0px" }
+      );
+
+      boutonsVideo.forEach((b) => ioPoster.observe(b));
+    }
+
     // --- Visionneuse plein ecran ---
     // Photos et videos passent par la meme visionneuse. Les videos sont
     // majoritairement verticales : les lire dans la carte les reduisait a un
