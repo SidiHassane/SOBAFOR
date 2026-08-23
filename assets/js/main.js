@@ -55,21 +55,43 @@
     });
   }
 
+  // --- Revelations en cascade ---
+  // Les groupes de cartes se revelent element par element plutot qu'en bloc.
+  // Le retard est porte par une variable CSS, donc c'est le compositeur qui
+  // anime : le fil principal ne fait qu'ajouter une classe.
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const GROUPS = ".cards, .stats, .process, .kpis, .footer-grid, .gallery-teaser";
+  document.querySelectorAll(GROUPS).forEach((group) => {
+    if (group.hasAttribute("data-reveal")) group.removeAttribute("data-reveal");
+    Array.from(group.children).forEach((child, i) => {
+      child.setAttribute("data-reveal", "");
+      // Au-dela de six, le retard cumule se voit comme une lenteur.
+      child.style.setProperty("--stagger", Math.min(i, 5));
+    });
+  });
+
   const revealEls = document.querySelectorAll("[data-reveal]");
   if (revealEls.length) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
+    if (reducedMotion) {
+      revealEls.forEach((el) => el.classList.add("show"));
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        // Declenche un peu avant l'entree dans le cadre : l'element est deja
+        // en place quand le regard l'atteint, ce qui supprime l'effet de pop.
+        { threshold: 0.05, rootMargin: "0px 0px -8% 0px" }
+      );
 
-    revealEls.forEach((el) => io.observe(el));
+      revealEls.forEach((el) => io.observe(el));
+    }
   }
 
   const gallery = document.querySelector("[data-gallery]");
@@ -111,6 +133,108 @@
           applyFilter(chip.dataset.filter);
         });
       });
+    }
+
+    // --- Vignettes video ---
+    // La vignette est extraite de la video elle-meme : une image est tiree
+    // d'une premiere seconde, dessinee sur un canvas, puis la video est
+    // relachee. Aucun fichier d'apercu a produire ni a stocker.
+    // Le chargement n'a lieu qu'a l'approche de la carte, et pas du tout si
+    // le visiteur a demande l'economie de donnees ou est en 2G.
+    const lien = navigator.connection || {};
+    const economiseDonnees =
+      lien.saveData === true || /(^|-)2g$/.test(lien.effectiveType || "");
+
+    const boutonsVideo = gallery.querySelectorAll(".shot-play[data-video]");
+    if (boutonsVideo.length && !economiseDonnees && "IntersectionObserver" in window) {
+      // File d'attente : lancer les dix-huit extractions d'un coup saturait
+      // les connexions au domaine et les decodeurs, si bien que la plupart
+      // expiraient avant d'avoir ete servies. Deux a la fois suffisent et
+      // menagent les telephones modestes.
+      const file = [];
+      let actifs = 0;
+      const MAX_SIMULTANE = 2;
+
+      const capturer = (bouton, termine) => {
+        const v = document.createElement("video");
+        v.muted = true;
+        v.playsInline = true;
+        v.preload = "metadata";
+        let fini = false;
+
+        const finir = () => {
+          if (fini) return;
+          fini = true;
+          v.removeAttribute("src");
+          v.load();
+          termine();
+        };
+
+        // Dessine des qu'une image est decodee. On ne se fie pas au seul
+        // evenement "seeked" : selon l'encodage il n'arrive pas toujours, et
+        // la file restait alors bloquee sur la premiere video.
+        const tenterDessin = () => {
+          if (fini) return false;
+          if (v.readyState < 2 || !v.videoWidth) return false;
+          try {
+            const c = document.createElement("canvas");
+            const largeur = 480;
+            c.width = largeur;
+            c.height = Math.round((largeur * v.videoHeight) / v.videoWidth) || 270;
+            c.getContext("2d").drawImage(v, 0, 0, c.width, c.height);
+            c.className = "shot-poster";
+            c.setAttribute("aria-hidden", "true");
+            bouton.prepend(c);
+            bouton.classList.add("has-poster");
+          } catch (e) {
+            /* le fond uni reste en place */
+          }
+          finir();
+          return true;
+        };
+
+        v.addEventListener("loadedmetadata", () => {
+          // Certaines sequences durent trois secondes : on vise une fraction,
+          // pas un instant fixe qui tomberait apres la fin.
+          v.currentTime = Math.min(1.5, (v.duration || 3) * 0.3);
+          // Si le deplacement n'aboutit pas, on se contente de l'image
+          // disponible plutot que d'attendre en vain.
+          setTimeout(tenterDessin, 2500);
+        });
+
+        v.addEventListener("seeked", tenterDessin);
+        v.addEventListener("loadeddata", tenterDessin);
+        v.addEventListener("error", finir);
+        // Filet de securite : une video muette ne doit pas bloquer la file.
+        setTimeout(finir, 7000);
+
+        v.src = bouton.dataset.video;
+      };
+
+      const defiler = () => {
+        while (actifs < MAX_SIMULTANE && file.length) {
+          const bouton = file.shift();
+          actifs++;
+          capturer(bouton, () => {
+            actifs--;
+            defiler();
+          });
+        }
+      };
+
+      const ioPoster = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            ioPoster.unobserve(entry.target);
+            file.push(entry.target);
+          });
+          defiler();
+        },
+        { rootMargin: "300px 0px" }
+      );
+
+      boutonsVideo.forEach((b) => ioPoster.observe(b));
     }
 
     // --- Visionneuse plein ecran ---
@@ -190,12 +314,37 @@
         btnNext.hidden = !multiple;
       };
 
-      const close = () => {
+      const isOpen = () => lightbox.classList.contains("is-open");
+
+      const teardown = () => {
         lightbox.classList.remove("is-open");
         document.body.classList.remove("lightbox-open");
+        stage.style.transform = "";
+        stage.style.opacity = "";
         clearStage();
         if (lastFocused) lastFocused.focus();
       };
+
+      // La visionneuse empile une entree d'historique. Sur Android, le bouton
+      // Retour la referme au lieu de quitter la page : sans cela le visiteur
+      // perdait sa position dans la galerie.
+      let historyEntry = false;
+
+      const close = () => {
+        if (historyEntry) {
+          historyEntry = false;
+          history.back(); // popstate se charge du demontage
+        } else {
+          teardown();
+        }
+      };
+
+      window.addEventListener("popstate", () => {
+        if (isOpen()) {
+          historyEntry = false;
+          teardown();
+        }
+      });
 
       openers.forEach((opener) => {
         opener.addEventListener("click", () => {
@@ -204,6 +353,8 @@
           lightbox.classList.add("is-open");
           document.body.classList.add("lightbox-open");
           btnClose.focus();
+          historyEntry = true;
+          history.pushState({ sobaforLightbox: true }, "");
         });
       });
 
@@ -216,11 +367,77 @@
       });
 
       document.addEventListener("keydown", (event) => {
-        if (!lightbox.classList.contains("is-open")) return;
+        if (!isOpen()) return;
         if (event.key === "Escape") close();
         if (event.key === "ArrowLeft") show(current - 1);
         if (event.key === "ArrowRight") show(current + 1);
       });
+
+      // --- Gestes tactiles ---
+      // Balayage lateral pour changer d'element, vers le bas pour fermer.
+      // Le media suit le doigt pendant le geste, puis file ou revient en
+      // place : sans ce retour visuel, un balayage donne l'impression que
+      // rien ne se passe tant qu'on n'a pas relache.
+      const SEUIL_X = 60;
+      const SEUIL_Y = 90;
+      let x0 = 0;
+      let y0 = 0;
+      let suit = false;
+
+      const finDeGeste = () => {
+        suit = false;
+        stage.classList.remove("is-dragging");
+        stage.style.transform = "";
+        stage.style.opacity = "";
+      };
+
+      lightbox.addEventListener(
+        "touchstart",
+        (event) => {
+          // Les commandes de la video gardent la priorite : sinon deplacer le
+          // curseur de lecture declencherait un changement d'element.
+          if (event.target.closest("video")) return;
+          if (event.touches.length !== 1) return;
+          x0 = event.touches[0].clientX;
+          y0 = event.touches[0].clientY;
+          suit = true;
+          stage.classList.add("is-dragging");
+        },
+        { passive: true }
+      );
+
+      lightbox.addEventListener(
+        "touchmove",
+        (event) => {
+          if (!suit) return;
+          const dx = event.touches[0].clientX - x0;
+          const dy = event.touches[0].clientY - y0;
+          if (Math.abs(dx) > Math.abs(dy)) {
+            stage.style.transform = "translate3d(" + dx + "px,0,0)";
+          } else if (dy > 0) {
+            // Resistance : le geste vers le bas s'attenue, il faut le vouloir.
+            stage.style.transform = "translate3d(0," + dy * 0.55 + "px,0)";
+            stage.style.opacity = String(Math.max(0.4, 1 - dy / 420));
+          }
+          if (event.cancelable) event.preventDefault();
+        },
+        { passive: false }
+      );
+
+      lightbox.addEventListener("touchend", (event) => {
+        if (!suit) return;
+        const t = event.changedTouches[0];
+        const dx = t.clientX - x0;
+        const dy = t.clientY - y0;
+        finDeGeste();
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SEUIL_X) {
+          show(dx < 0 ? current + 1 : current - 1);
+        } else if (dy > SEUIL_Y) {
+          close();
+        }
+      });
+
+      lightbox.addEventListener("touchcancel", finDeGeste);
     }
   }
 

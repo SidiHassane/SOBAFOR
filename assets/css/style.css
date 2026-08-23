@@ -1,4 +1,72 @@
+/* ===================================================================
+   Typographie auto-hebergee. Aucun appel a un service externe : les
+   fichiers sont sous-echantillonnes au jeu de caracteres francais
+   (82 Ko au total contre 291 Ko pour les fontes completes).
+   Archivo pour les titres, IBM Plex Sans pour le texte courant.
+   =================================================================== */
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 500 800;
+  font-display: swap;
+  src: url("../fonts/archivo-500-800-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Plex";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/plex-400-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Plex";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/plex-600-latin.woff2") format("woff2");
+}
+
+/* Transitions entre pages : le navigateur enchaine les documents au lieu
+   de repeindre brutalement. Ignore silencieusement la ou c'est inconnu. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* L'en-tete est nomme, donc traite comme un element persistant : il reste
+   en place pendant que le contenu se substitue, au lieu de clignoter. */
+.site-header {
+  view-transition-name: site-header;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 :root {
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Plex", "Segoe UI", system-ui, sans-serif;
+
+  /* Une seule courbe signature pour tout le site : demarrage franc,
+     arrivee longue et amortie. C'est elle qui donne la sensation de poids. */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-tap: 140ms;
+  --dur-ui: 300ms;
+  --dur-enter: 620ms;
+  --stagger-step: 65ms;
+
   --bg: #020617;
   --bg-elevated: #0f172a;
   --bg-soft: #111c32;
@@ -34,15 +102,44 @@ html {
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-body);
   color: var(--text);
+  /* Une seule source de lumiere, en haut a gauche, plutot que les quatre
+     degrades superposes d'avant : le fond avait du bruit sans intention. */
   background:
-    radial-gradient(circle at top left, rgba(251, 146, 60, 0.11), transparent 28%),
-    radial-gradient(circle at right 20%, rgba(59, 130, 246, 0.08), transparent 24%),
-    linear-gradient(180deg, #020617 0%, #0b1120 45%, #020617 100%);
+    radial-gradient(120% 80% at 12% -10%, rgba(251, 146, 60, 0.09), transparent 55%),
+    linear-gradient(180deg, #030918 0%, #020617 60%);
+  /* Pas de background-attachment: fixed ici : sur mobile il force un
+     repaint du fond a chaque frame de defilement. La trame en position
+     fixed du pseudo-element ci-dessous obtient le meme effet sans le cout. */
   line-height: 1.65;
   min-height: 100vh;
   padding-top: var(--header-height);
+  /* Indispensable sur fond sombre : sans cela le texte parait gras et sale. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Trame de calque d'architecte + grain. Purement decoratif, non cliquable,
+   masque en fondu pour ne rester lisible que dans le haut de page. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 76px 76px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 55% at 50% 0%, #000 25%, transparent 85%);
+  mask-image: radial-gradient(ellipse 90% 55% at 50% 0%, #000 25%, transparent 85%);
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 body.menu-open {
@@ -308,29 +405,57 @@ svg {
 }
 
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
   min-height: 3.5rem;
-  padding: 0.95rem 1.5rem;
+  padding: 0.95rem 1.6rem;
   border: 1px solid transparent;
   border-radius: 999px;
-  font: inherit;
-  font-size: 0.82rem;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease, color 0.22s ease;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--dur-ui) var(--ease),
+    box-shadow var(--dur-ui) var(--ease),
+    border-color var(--dur-ui) var(--ease),
+    background var(--dur-ui) var(--ease),
+    color var(--dur-ui) var(--ease);
 }
 
-.btn:hover {
-  transform: translateY(-2px);
+/* Balayage lumineux au survol : une seule transformee, donc compose par
+   le GPU et invisible pour le fil principal. */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
+  transform: translateX(-120%);
+  pointer-events: none;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn:hover::after {
+    transform: translateX(120%);
+    transition: transform 720ms var(--ease);
+  }
+}
+
+/* Retour tactile immediat : l'appui doit s'enfoncer, pas attendre. */
 .btn:active {
-  transform: translateY(0) scale(0.99);
+  transform: translateY(0) scale(0.985);
+  transition-duration: var(--dur-tap);
 }
 
 .btn-primary {
@@ -408,14 +533,36 @@ svg {
   padding-inline: clamp(1rem, 3vw, 2.5rem);
 }
 
+/* Les titres portent le caractere : graisse haute, interlettrage negatif
+   qui se resserre a mesure que le corps grandit, et equilibrage des lignes
+   pour eviter le mot orphelin en bas de titre. */
+h1,
+h2,
+h3,
+.brand-name,
+.stat strong,
+.footer-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-wrap: balance;
+}
+
 .hero h1 {
   position: relative;
-  margin: 0 0 1.25rem;
+  margin: 0 0 1.35rem;
   max-width: 15ch;
   color: var(--heading);
-  font-size: clamp(2.35rem, 5vw, 4.9rem);
-  line-height: 1.03;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.5rem, 5.2vw, 5.1rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.042em;
+}
+
+.hero p,
+.section-intro,
+.card p,
+.faq p {
+  text-wrap: pretty;
 }
 
 .page-home .hero h1::before {
@@ -468,8 +615,10 @@ svg {
 .contact-box h2 {
   margin: 0 0 1rem;
   color: var(--heading);
-  font-size: clamp(1.8rem, 2.8vw, 3rem);
-  line-height: 1.08;
+  font-size: clamp(1.9rem, 2.9vw, 3.1rem);
+  font-weight: 750;
+  line-height: 1.05;
+  letter-spacing: -0.032em;
 }
 
 .section-intro {
@@ -548,14 +697,25 @@ svg {
   flex-grow: 1;
 }
 
-.card:hover,
-.process .step:hover,
-.contact-box:hover,
-.kpi:hover {
-  border-color: rgba(251, 146, 60, 0.28);
-  transform: translateY(-4px);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: var(--shadow);
+.card,
+.process .step,
+.contact-box,
+.kpi {
+  transition:
+    transform var(--dur-ui) var(--ease),
+    border-color var(--dur-ui) var(--ease),
+    box-shadow var(--dur-ui) var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover,
+  .process .step:hover,
+  .contact-box:hover,
+  .kpi:hover {
+    border-color: rgba(251, 146, 60, 0.28);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
 }
 
 .card h3,
@@ -779,7 +939,10 @@ svg {
   justify-content: center;
   gap: 0.9rem;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  /* Le ratio natif de la video est ecrit dans le HTML : la carte a le bon
+     format des le premier rendu, donc aucun decalage quand la vignette
+     arrive. La plupart de ces videos sont verticales. */
+  aspect-ratio: var(--ar, 16 / 10);
   padding: 1.25rem;
   border: 0;
   background:
@@ -789,6 +952,43 @@ svg {
   font: inherit;
   cursor: pointer;
   transition: background 0.25s ease;
+}
+
+/* Vignette extraite de la video elle-meme. Le canvas remplace le fond uni :
+   18 rectangles gris devenaient illisibles cote a cote. */
+.shot-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--dur-enter) var(--ease);
+  z-index: 0;
+}
+
+.shot-play.has-poster .shot-poster {
+  opacity: 1;
+}
+
+.shot-play.has-poster {
+  background: #050b18;
+}
+
+/* Voile degrade : sans lui, le libelle et le poids se perdent sur une
+   image claire. */
+.shot-play.has-poster::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.2) 0%, rgba(2, 6, 23, 0.45) 45%, rgba(2, 6, 23, 0.82) 100%);
+}
+
+.play-badge,
+.play-label {
+  position: relative;
+  z-index: 2;
 }
 
 .play-badge {
@@ -859,6 +1059,26 @@ svg {
   justify-content: center;
   width: 100%;
   min-height: 0;
+  /* Retour en place apres un balayage avorte. */
+  transition:
+    transform var(--dur-ui) var(--ease),
+    opacity var(--dur-ui) var(--ease);
+}
+
+/* Pendant le geste, le media colle au doigt : aucune transition ne doit
+   s'interposer, sinon le suivi parait mou et en retard. */
+.lightbox-stage.is-dragging {
+  transition: none;
+}
+
+/* Le navigateur ne doit pas interpreter le balayage comme un defilement.
+   Les commandes de la video gardent leur comportement natif. */
+.lightbox {
+  touch-action: none;
+}
+
+.lightbox-stage video {
+  touch-action: auto;
 }
 
 .lightbox-stage img {
@@ -1350,15 +1570,45 @@ textarea {
   background: rgba(251, 146, 60, 0.14);
 }
 
+/* ===================================================================
+   Systeme de revelation
+   Avant : un seul fondu de 26px sur des blocs entiers, donc des pavees
+   qui apparaissaient d'un coup. Desormais chaque element part avec un
+   retard propre (--stagger, pose par le script) : le regard suit une
+   cascade au lieu de subir un pop.
+   Le deplacement est passe de 26px a 14px : plus le geste est court,
+   plus il parait maitrise.
+   =================================================================== */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    opacity var(--dur-enter) var(--ease) calc(var(--stagger, 0) * var(--stagger-step)),
+    transform var(--dur-enter) var(--ease) calc(var(--stagger, 0) * var(--stagger-step));
 }
 
 [data-reveal].show {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+}
+
+/* Parallaxe du visuel de couverture, pilotee par le defilement lui-meme.
+   Aucun ecouteur JavaScript : le compositeur du navigateur s'en charge,
+   donc zero saccade meme sur telephone modeste. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .page-home .hero {
+      animation: heroDrift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 90vh;
+    }
+  }
+}
+
+@keyframes heroDrift {
+  to {
+    background-position: center 22%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
