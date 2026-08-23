@@ -1019,6 +1019,26 @@ h3,
   justify-content: center;
   width: 100%;
   min-height: 0;
+  /* Retour en place apres un balayage avorte. */
+  transition:
+    transform var(--dur-ui) var(--ease),
+    opacity var(--dur-ui) var(--ease);
+}
+
+/* Pendant le geste, le media colle au doigt : aucune transition ne doit
+   s'interposer, sinon le suivi parait mou et en retard. */
+.lightbox-stage.is-dragging {
+  transition: none;
+}
+
+/* Le navigateur ne doit pas interpreter le balayage comme un defilement.
+   Les commandes de la video gardent leur comportement natif. */
+.lightbox {
+  touch-action: none;
+}
+
+.lightbox-stage video {
+  touch-action: auto;
 }
 
 .lightbox-stage img {

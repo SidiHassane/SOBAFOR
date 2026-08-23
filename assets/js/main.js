@@ -212,12 +212,37 @@
         btnNext.hidden = !multiple;
       };
 
-      const close = () => {
+      const isOpen = () => lightbox.classList.contains("is-open");
+
+      const teardown = () => {
         lightbox.classList.remove("is-open");
         document.body.classList.remove("lightbox-open");
+        stage.style.transform = "";
+        stage.style.opacity = "";
         clearStage();
         if (lastFocused) lastFocused.focus();
       };
+
+      // La visionneuse empile une entree d'historique. Sur Android, le bouton
+      // Retour la referme au lieu de quitter la page : sans cela le visiteur
+      // perdait sa position dans la galerie.
+      let historyEntry = false;
+
+      const close = () => {
+        if (historyEntry) {
+          historyEntry = false;
+          history.back(); // popstate se charge du demontage
+        } else {
+          teardown();
+        }
+      };
+
+      window.addEventListener("popstate", () => {
+        if (isOpen()) {
+          historyEntry = false;
+          teardown();
+        }
+      });
 
       openers.forEach((opener) => {
         opener.addEventListener("click", () => {
@@ -226,6 +251,8 @@
           lightbox.classList.add("is-open");
           document.body.classList.add("lightbox-open");
           btnClose.focus();
+          historyEntry = true;
+          history.pushState({ sobaforLightbox: true }, "");
         });
       });
 
@@ -238,11 +265,77 @@
       });
 
       document.addEventListener("keydown", (event) => {
-        if (!lightbox.classList.contains("is-open")) return;
+        if (!isOpen()) return;
         if (event.key === "Escape") close();
         if (event.key === "ArrowLeft") show(current - 1);
         if (event.key === "ArrowRight") show(current + 1);
       });
+
+      // --- Gestes tactiles ---
+      // Balayage lateral pour changer d'element, vers le bas pour fermer.
+      // Le media suit le doigt pendant le geste, puis file ou revient en
+      // place : sans ce retour visuel, un balayage donne l'impression que
+      // rien ne se passe tant qu'on n'a pas relache.
+      const SEUIL_X = 60;
+      const SEUIL_Y = 90;
+      let x0 = 0;
+      let y0 = 0;
+      let suit = false;
+
+      const finDeGeste = () => {
+        suit = false;
+        stage.classList.remove("is-dragging");
+        stage.style.transform = "";
+        stage.style.opacity = "";
+      };
+
+      lightbox.addEventListener(
+        "touchstart",
+        (event) => {
+          // Les commandes de la video gardent la priorite : sinon deplacer le
+          // curseur de lecture declencherait un changement d'element.
+          if (event.target.closest("video")) return;
+          if (event.touches.length !== 1) return;
+          x0 = event.touches[0].clientX;
+          y0 = event.touches[0].clientY;
+          suit = true;
+          stage.classList.add("is-dragging");
+        },
+        { passive: true }
+      );
+
+      lightbox.addEventListener(
+        "touchmove",
+        (event) => {
+          if (!suit) return;
+          const dx = event.touches[0].clientX - x0;
+          const dy = event.touches[0].clientY - y0;
+          if (Math.abs(dx) > Math.abs(dy)) {
+            stage.style.transform = "translate3d(" + dx + "px,0,0)";
+          } else if (dy > 0) {
+            // Resistance : le geste vers le bas s'attenue, il faut le vouloir.
+            stage.style.transform = "translate3d(0," + dy * 0.55 + "px,0)";
+            stage.style.opacity = String(Math.max(0.4, 1 - dy / 420));
+          }
+          if (event.cancelable) event.preventDefault();
+        },
+        { passive: false }
+      );
+
+      lightbox.addEventListener("touchend", (event) => {
+        if (!suit) return;
+        const t = event.changedTouches[0];
+        const dx = t.clientX - x0;
+        const dy = t.clientY - y0;
+        finDeGeste();
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SEUIL_X) {
+          show(dx < 0 ? current + 1 : current - 1);
+        } else if (dy > SEUIL_Y) {
+          close();
+        }
+      });
+
+      lightbox.addEventListener("touchcancel", finDeGeste);
     }
   }
 
