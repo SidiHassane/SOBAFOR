@@ -1570,6 +1570,22 @@ textarea {
   background: rgba(251, 146, 60, 0.14);
 }
 
+.cta-number {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  opacity: 0.78;
+}
+
+.wa-tag {
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #34d399;
+  margin-left: 0.35em;
+}
+
 /* ===================================================================
    Systeme de revelation
    Avant : un seul fondu de 26px sur des blocs entiers, donc des pavees

@@ -510,7 +510,7 @@
         `Détails: ${details}`,
       ].join("\n");
 
-      const whatsappUrl = `https://wa.me/22798036482?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/22781919154?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, "_blank", "noopener");
       quoteForm.reset();
     });
