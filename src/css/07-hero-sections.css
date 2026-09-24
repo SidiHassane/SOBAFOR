@@ -1,0 +1,131 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0 4.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.hero::before {
+  width: 28rem;
+  height: 28rem;
+  top: -8rem;
+  right: -10rem;
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.2), transparent 68%);
+}
+
+.hero::after {
+  width: 22rem;
+  height: 22rem;
+  bottom: -10rem;
+  left: -6rem;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.12), transparent 72%);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-home .hero {
+  padding: 7rem 0 6rem;
+  background:
+    linear-gradient(90deg, rgba(2, 6, 23, 0.92), rgba(2, 6, 23, 0.74)),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.15), rgba(2, 6, 23, 0.75)),
+    url("../img/gallery/parc-engins-1080.jpg") center/cover;
+}
+
+/* Les titres portent le caractere : graisse haute, interlettrage negatif
+   qui se resserre a mesure que le corps grandit, et equilibrage des lignes
+   pour eviter le mot orphelin en bas de titre. */
+h1,
+h2,
+h3,
+.brand-name,
+.stat strong,
+.footer-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.hero h1 {
+  position: relative;
+  margin: 0 0 1.35rem;
+  max-width: 15ch;
+  color: var(--heading);
+  font-size: clamp(2.5rem, 5.2vw, 5.1rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.042em;
+}
+
+.hero p,
+.section-intro,
+.card p,
+.faq p {
+  text-wrap: pretty;
+}
+
+.hero p {
+  margin: 0;
+  max-width: 62ch;
+  color: rgba(226, 232, 240, 0.9);
+  font-size: 1.02rem;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+.section {
+  position: relative;
+  padding: 6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 12% 18%, rgba(251, 146, 60, 0.06), transparent 28%);
+  pointer-events: none;
+}
+
+.section.soft {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.035));
+}
+
+.section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.section h2,
+.contact-box h2 {
+  margin: 0 0 1rem;
+  color: var(--heading);
+  font-size: clamp(1.9rem, 2.9vw, 3.1rem);
+  font-weight: 750;
+  line-height: 1.05;
+  letter-spacing: -0.032em;
+}
+
+.section-intro {
+  margin: 0 0 2.25rem;
+  max-width: 56rem;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+

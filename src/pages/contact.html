@@ -1,0 +1,94 @@
+---
+titre: Contact SOBAFOR SA | Entreprise BTP à Niamey
+description: Contactez SOBAFOR SA à Niamey pour vos projets de bâtiment, routes, hydraulique, forages et infrastructures publiques.
+og_titre: Contact SOBAFOR SA
+og_description: Téléphone, WhatsApp, email et formulaire de contact direct pour vos demandes de projet.
+og_image: logo.jpeg
+classe: page-contact
+bandeau: non
+slogan: Accompagnement professionnel de vos projets d'infrastructures publiques et privées au Niger.
+---
+    <section class="hero hero-inner">
+      <div class="container">
+        <p class="eyebrow">Contact</p>
+        <h1>Parlons de votre projet</h1>
+        <p>Nos équipes vous répondent rapidement pour qualifier votre besoin et proposer une solution technique adaptée.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cards two">
+          <article class="contact-box">
+            <h2>Coordonnées SOBAFOR SA</h2>
+            <div class="contact-item"><span class="ico">ADR</span><div>{{ site.adresse.rue }}, {{ site.adresse.ville }}, {{ site.adresse.pays }}</div></div>
+            <div class="contact-item"><span class="ico">TEL</span><div><a href="tel:{{ site.telephones.principal.lien }}">{{ site.telephones.principal.affiche }}</a><span class="wa-tag">Appel &amp; WhatsApp</span><br><a href="tel:{{ site.telephones.dg.lien }}">{{ site.telephones.dg.affiche }} (DG)</a></div></div>
+            <div class="contact-item"><span class="ico">MAIL</span><div><a href="mailto:{{ site.email }}">{{ site.email }}</a></div></div>
+            <div class="contact-item"><span class="ico">ID</span><div>RCCM {{ site.rccm }} | NIF {{ site.nif }}</div></div>
+            <div class="contact-item"><span class="ico">DG</span><div>Directeur Général : {{ site.directeur }}</div></div>
+            <div class="cta-row" style="margin-top:1rem;">
+              <a class="btn btn-whatsapp" href="{{ whatsapp }}" target="_blank" rel="noopener">
+                {{> icone-whatsapp }}
+                WhatsApp <span class="btn-numero">{{ site.telephones.principal.court }}</span>
+              </a>
+              <a class="btn btn-secondary" href="tel:{{ site.telephones.principal.lien }}">Appeler maintenant</a>
+            </div>
+          </article>
+
+          <article class="contact-box">
+            <h2>Formulaire de contact rapide</h2>
+            <form data-contact-form data-email="{{ site.email }}" data-whatsapp="{{ whatsapp }}">
+              <div>
+                <label for="nom">Nom et prénom</label>
+                <input id="nom" name="nom" type="text" required />
+              </div>
+              <div>
+                <label for="telephone">Téléphone</label>
+                <input id="telephone" name="telephone" type="tel" required />
+              </div>
+              <div>
+                <label for="sujet">Sujet</label>
+                <select id="sujet" name="sujet" required>
+                  <option value="">Choisir un sujet</option>
+                  <option>Demande d'information</option>
+                  <option>Projet BTP</option>
+                  <option>Projet hydraulique / forage</option>
+                  <option>Partenariat</option>
+                </select>
+              </div>
+              <div>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-whatsapp" type="submit" name="canal" value="whatsapp">
+                  {{> icone-whatsapp }}
+                  Envoyer par WhatsApp
+                </button>
+                <button class="btn btn-secondary" type="submit" name="canal" value="email">Envoyer par e-mail</button>
+              </div>
+            </form>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="container">
+        <p class="eyebrow" data-reveal>Nous trouver</p>
+        <h2 data-reveal>Localisation du siège</h2>
+        <p class="section-intro" data-reveal>Retrouvez facilement SOBAFOR SA à Niamey pour vos rendez-vous techniques et administratifs.</p>
+        <div class="map-wrap" data-reveal>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11171.517882488182!2d2.1183289096850437!3d13.534561522367156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x11da9f34569669f3%3A0x5a3d2b19821b548e!2sSobafor%20SA!5e1!3m2!1sfr!2sma!4v1778440976406!5m2!1sfr!2sma"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            title="Localisation de SOBAFOR SA à Niamey">
+          </iframe>
+        </div>
+        <p class="map-actions" data-reveal>
+          <a class="btn btn-primary" href="https://www.google.com/maps/place/Sobafor/@13.534561522367156,2.1183289096850437,16z" target="_blank" rel="noopener">Ouvrir dans Google Maps</a>
+        </p>
+      </div>
+    </section>

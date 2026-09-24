@@ -1,4 +1,3 @@
-/* Généré par build.mjs depuis src/sw.js — modifier la source, pas ce fichier. */
 /* Service worker SOBAFOR
  *
  * Objectif : que le site se rouvre instantanement, et reste consultable
@@ -13,7 +12,7 @@
  * 95 Mo et saturerait le stockage du telephone.
  */
 
-const VERSION = "sobafor-a03427bc12";
+const VERSION = "sobafor-__VERSION__";
 const COQUE = VERSION + "-coque";
 const IMAGES = VERSION + "-images";
 const PAGES = VERSION + "-pages";
@@ -22,24 +21,7 @@ const MAX_IMAGES = 80;
 
 // Coque minimale : environ 350 Ko. On ne precharge pas les photos de la
 // galerie, qui arriveront au fil de la consultation.
-const A_PRECHARGER = [
-  "./",
-  "./a-propos.html",
-  "./contact.html",
-  "./devis.html",
-  "./hors-ligne.html",
-  "./index.html",
-  "./realisations.html",
-  "./services.html",
-  "./assets/css/style.css?v=c926de139f",
-  "./assets/js/main.js?v=775894038c",
-  "./assets/fonts/archivo-500-800-latin.woff2",
-  "./assets/fonts/plex-400-latin.woff2",
-  "./assets/fonts/plex-600-latin.woff2",
-  "./logo.jpeg",
-  "./assets/icons/icone-192.png",
-  "./manifest.webmanifest"
-];
+const A_PRECHARGER = __A_PRECHARGER__;
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

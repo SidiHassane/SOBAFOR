@@ -1,0 +1,25 @@
+/* Transitions entre pages : le navigateur enchaine les documents au lieu
+   de repeindre brutalement. Ignore silencieusement la ou c'est inconnu. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* L'en-tete est nomme, donc traite comme un element persistant : il reste
+   en place pendant que le contenu se substitue, au lieu de clignoter. */
+.site-header {
+  view-transition-name: site-header;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+

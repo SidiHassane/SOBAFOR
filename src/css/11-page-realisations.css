@@ -1,0 +1,110 @@
+/* Page Realisations */
+.page-gallery .gallery-filters {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 50;
+  margin-bottom: 1.6rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  /* Fond opaque plutot qu'un backdrop-filter : un flou recalcule a chaque
+     frame de defilement coute cher sur les telephones d'entree de gamme. */
+  background: #050b18;
+  box-shadow: 0 10px 20px -12px rgba(2, 6, 23, 0.9);
+}
+
+.chip-count {
+  margin-left: 0.4rem;
+  opacity: 0.65;
+  font-size: 0.92em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Filtrage anime : chaque cliche porte un nom de transition le temps du
+   changement (pose par 40-galerie.js). Le navigateur fait glisser ceux qui
+   restent vers leur nouvelle place, fond ceux qui partent et qui arrivent. */
+.shot {
+  view-transition-class: cliche;
+}
+
+::view-transition-group(*.cliche) {
+  animation-duration: 460ms;
+  animation-timing-function: var(--ease);
+}
+
+::view-transition-new(*.cliche):only-child {
+  animation: clicheArrive 460ms var(--ease) both;
+}
+
+::view-transition-old(*.cliche):only-child {
+  animation: clichePart 260ms var(--ease-soft) both;
+}
+
+@keyframes clicheArrive {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+
+@keyframes clichePart {
+  to {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+
+/* Renvoi vers la page complete depuis l'accueil */
+.gallery-more {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.gallery-more-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+/* --- Confort tactile ---------------------------------------------------
+   Les effets de survol sont reserves aux appareils qui pointent vraiment.
+   Sur un ecran tactile, un appui declenchait l'etat :hover et repeignait
+   l'image agrandie, ce qui accrochait le defilement. */
+@media (hover: hover) and (pointer: fine) {
+  .shot:hover {
+    transform: translateY(-4px);
+    border-color: rgba(251, 146, 60, 0.3);
+    box-shadow: var(--shadow);
+  }
+
+  .shot:hover .shot-open img {
+    transform: scale(1.04);
+  }
+
+  .shot-play:hover {
+    background:
+      radial-gradient(circle at 50% 38%, rgba(251, 146, 60, 0.26), transparent 62%),
+      linear-gradient(180deg, #16233d, #050b1a);
+  }
+
+  .shot-play:hover .play-badge {
+    transform: scale(1.08);
+    border-color: rgba(251, 146, 60, 0.55);
+  }
+}
+
+.shot-open,
+.shot-play,
+.filter-chip,
+.lightbox button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.shot-open:active,
+.shot-play:active {
+  opacity: 0.85;
+}
+

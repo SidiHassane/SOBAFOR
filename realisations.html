@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Généré par build.mjs depuis src/pages/realisations.html — modifier la source, pas ce fichier. -->
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -18,7 +19,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="SOBAFOR" />
   <link rel="icon" type="image/jpeg" href="logo.jpeg" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=c926de139f" />
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body class="page-gallery">
   <a class="skip-link" href="#contenu">Aller au contenu principal</a>
@@ -46,8 +48,9 @@
 
   <main class="site-main" id="contenu">
     <section class="hero hero-inner">
-      <div class="container" data-reveal>
-        <h1>Nos réalisations en images</h1>
+      <div class="container">
+        <p class="eyebrow">Réalisations</p>
+        <h1 class="titre-anime"><span class="mot"><span style="--i:0">Nos</span></span> <span class="mot"><span style="--i:1">réalisations</span></span> <span class="mot"><span style="--i:2">en</span></span> <span class="mot"><span style="--i:3">images</span></span></h1>
         <p>Chantiers livrés et travaux en cours : bâtiments, routes et assainissement, hydraulique et forages, ainsi que notre parc d'engins. Touchez une image pour l'agrandir, une vidéo pour la lire en plein écran.</p>
       </div>
     </section>
@@ -55,11 +58,11 @@
     <section class="section gallery-section">
       <div class="container">
         <div class="gallery-filters" role="group" aria-label="Filtrer les réalisations par domaine" data-gallery-filters>
-          <button type="button" class="filter-chip is-active" data-filter="all" aria-pressed="true">Tout <span class="chip-count" data-count="all"></span></button>
-          <button type="button" class="filter-chip" data-filter="batiments" aria-pressed="false">Bâtiments <span class="chip-count" data-count="batiments"></span></button>
-          <button type="button" class="filter-chip" data-filter="routes" aria-pressed="false">Routes &amp; assainissement <span class="chip-count" data-count="routes"></span></button>
-          <button type="button" class="filter-chip" data-filter="hydraulique" aria-pressed="false">Hydraulique &amp; forages <span class="chip-count" data-count="hydraulique"></span></button>
-          <button type="button" class="filter-chip" data-filter="engins" aria-pressed="false">Location d'engins <span class="chip-count" data-count="engins"></span></button>
+          <button type="button" class="filter-chip is-active" data-filter="all" aria-pressed="true">Tout <span class="chip-count">39</span></button>
+          <button type="button" class="filter-chip" data-filter="batiments" aria-pressed="false">Bâtiments <span class="chip-count">14</span></button>
+          <button type="button" class="filter-chip" data-filter="routes" aria-pressed="false">Routes &amp; assainissement <span class="chip-count">4</span></button>
+          <button type="button" class="filter-chip" data-filter="hydraulique" aria-pressed="false">Hydraulique &amp; forages <span class="chip-count">9</span></button>
+          <button type="button" class="filter-chip" data-filter="engins" aria-pressed="false">Location d'engins <span class="chip-count">12</span></button>
         </div>
 
         <div class="gallery" data-gallery>
@@ -356,18 +359,32 @@
         </div>
 
         <p class="gallery-empty" data-gallery-empty hidden>Aucune réalisation dans ce domaine pour le moment.</p>
+      </div>
+    </section>
 
-        <div class="gallery-cta" data-reveal>
-          <h2>Un projet similaire ?</h2>
-          <p>Décrivez-nous votre chantier : nos chargés de projet vous répondent avec une estimation et un planning d'exécution.</p>
-          <div class="cta-row">
+    <section class="bandeau-cta" aria-labelledby="bandeau-titre">
+      <div class="container">
+        <div class="bandeau-cadre" data-reveal>
+          <div class="bandeau-texte">
+            <p class="eyebrow">Parlons de votre projet</p>
+            <h2 id="bandeau-titre">Un projet similaire ?</h2>
+            <p>Décrivez-nous votre chantier : nos chargés de projet vous répondent avec une estimation et un planning d'exécution.</p>
+          </div>
+          <div class="bandeau-actions">
             <a class="btn btn-primary" href="devis.html">Demander un devis</a>
-            <a class="btn btn-outline" href="contact.html">Parler à un chargé de projet</a>
+            <a class="btn btn-whatsapp" href="https://wa.me/22781919154" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 11.5A8.5 8.5 0 0 1 7.3 18.9L4 20l1.1-3.1A8.5 8.5 0 1 1 20 11.5Z"></path>
+                <path d="M8.6 9.3c.2-.4.4-.4.6-.4h.5c.2 0 .4 0 .6.5.2.4.7 1.6.8 1.7.1.1.1.3 0 .5-.1.2-.2.3-.4.5l-.3.4c-.1.1-.2.2-.1.4.1.2.5.9 1.2 1.4.8.7 1.5.9 1.7 1 .2.1.3.1.4-.1l.5-.6c.1-.2.3-.2.5-.1.2.1 1.5.7 1.7.8.2.1.4.2.4.3 0 .1 0 .8-.3 1.1-.3.3-.8.8-1.8.8s-2.1-.6-3.6-1.9c-1.7-1.4-2.7-3.1-3-3.5-.3-.4-.8-1.1-.8-2 0-1 .5-1.5.7-1.8Z"></path>
+              </svg>
+              WhatsApp <span class="btn-numero">81 91 91 54</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -387,7 +404,7 @@
         <div>
           <h3 class="footer-title">Contact</h3>
           <p>Boulevard Mali Bero, BP 11279, Niamey, Niger</p>
-          <p><a href="tel:+22798036482">+227 98 03 64 82</a> | <a href="tel:+22781919154">+227 81 91 91 54</a><span class="wa-tag">WhatsApp</span></p>
+          <p><a href="tel:+22781919154">+227 81 91 91 54</a><span class="wa-tag">Appel &amp; WhatsApp</span></p>
           <p><a href="mailto:sob_sarl@yahoo.fr">sob_sarl@yahoo.fr</a></p>
         </div>
       </div>
@@ -396,7 +413,7 @@
   </footer>
 
   <div class="sticky-mobile-cta" aria-label="Actions rapides mobile">
-    <a class="call" href="tel:+22798036482">
+    <a class="call" href="tel:+22781919154">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72l.35 2.57a2 2 0 0 1-.57 1.72l-1.4 1.4a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 1.72-.57l2.57.35A2 2 0 0 1 22 16.92Z"></path>
       </svg>
@@ -421,6 +438,6 @@
     </a>
   </div>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=775894038c"></script>
 </body>
 </html>

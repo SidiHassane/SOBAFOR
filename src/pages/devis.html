@@ -1,0 +1,69 @@
+---
+titre: Demande de Devis | SOBAFOR SA
+description: Demandez un devis à SOBAFOR SA pour vos projets BTP, routes, forages, hydraulique, assainissement et infrastructures au Niger.
+og_titre: Demande de Devis SOBAFOR SA
+og_description: Formulaire de devis simple et rapide avec envoi direct via WhatsApp.
+og_image: logo.jpeg
+classe: page-quote
+bandeau: non
+slogan: La référence du BTP et des infrastructures au Niger depuis 1987. Engagement, qualité et fiabilité.
+---
+    <section class="hero hero-inner">
+      <div class="container">
+        <p class="eyebrow">Demande de devis</p>
+        <h1>Obtenez une estimation rapide pour votre projet</h1>
+        <p>Remplissez ce formulaire en 1 minute. Votre demande est préparée automatiquement puis envoyée à SOBAFOR SA via WhatsApp ({{ site.telephones.principal.court }}).</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cards two">
+          <article class="contact-box">
+            <h2>Formulaire de devis</h2>
+            <form class="form" data-quote-form data-whatsapp="{{ whatsapp }}">
+              <div class="form-group">
+                <label for="nom">Nom complet / Entreprise</label>
+                <input type="text" id="nom" name="nom" required placeholder="Ex: Jean Dupont">
+              </div>
+              <div class="form-group">
+                <label for="telephone">Téléphone (WhatsApp)</label>
+                <input type="tel" id="telephone" name="telephone" required placeholder="Ex : +227 90 00 00 00">
+              </div>
+              <div class="form-group">
+                <label for="service">Domaine d'intervention</label>
+                <select id="service" name="service" required>
+                  <option value="" disabled selected>Choisir un domaine...</option>
+                  <option value="Bâtiment & Génie Civil">Bâtiment & Génie Civil</option>
+                  <option value="Routes & Assainissement">Routes & Assainissement</option>
+                  <option value="Hydraulique & Forages">Hydraulique & Forages</option>
+                  <option value="Énergie Solaire">Énergie Solaire</option>
+                  <option value="Location d'engins">Location d'engins</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ville">Ville / Zone du projet</label>
+                <input type="text" id="ville" name="ville" required placeholder="Ex: Niamey, Maradi...">
+              </div>
+              <div class="form-group">
+                <label for="details">Détails du besoin</label>
+                <textarea id="details" name="details" required placeholder="Décrivez brièvement votre projet..."></textarea>
+              </div>
+              <button class="btn btn-whatsapp" type="submit">
+                {{> icone-whatsapp }}
+                Envoyer par WhatsApp
+              </button>
+            </form>
+          </article>
+          <article class="contact-box soft">
+            <h3>Pourquoi choisir SOBAFOR SA ?</h3>
+            <ul class="list">
+              <li><strong>Expertise terrain</strong> : Plus de 30 ans d'expérience au Niger.</li>
+              <li><strong>Équipements propres</strong> : Un parc d'engins complet et performant.</li>
+              <li><strong>Réactivité</strong> : Un chiffrage technique rapide et réaliste.</li>
+              <li><strong>Qualité</strong> : Respect strict des normes de sécurité et de durabilité.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>

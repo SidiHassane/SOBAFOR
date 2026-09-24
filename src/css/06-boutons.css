@@ -1,0 +1,78 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3.5rem;
+  padding: 0.95rem 1.6rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--dur-ui) var(--ease),
+    box-shadow var(--dur-ui) var(--ease),
+    border-color var(--dur-ui) var(--ease),
+    background var(--dur-ui) var(--ease),
+    color var(--dur-ui) var(--ease);
+}
+
+/* Balayage lumineux au survol : une seule transformee, donc compose par
+   le GPU et invisible pour le fil principal. */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn:hover::after {
+    transform: translateX(120%);
+    transition: transform 720ms var(--ease);
+  }
+}
+
+/* Retour tactile immediat : l'appui doit s'enfoncer, pas attendre. */
+.btn:active {
+  transform: translateY(0) scale(0.985);
+  transition-duration: var(--dur-tap);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #fff;
+  box-shadow: 0 18px 34px rgba(249, 115, 22, 0.25);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 24px 38px rgba(249, 115, 22, 0.33);
+}
+
+.btn-outline,
+.btn-secondary {
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--heading);
+}
+
+.btn-outline:hover,
+.btn-secondary:hover {
+  border-color: rgba(251, 146, 60, 0.4);
+  color: var(--accent);
+  background: rgba(251, 146, 60, 0.08);
+}
+

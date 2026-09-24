@@ -1,0 +1,214 @@
+@media (max-width: 639px) {
+  body {
+    padding-bottom: 6rem;
+  }
+
+  .header-inner {
+    gap: 0.65rem;
+  }
+
+  .brand {
+    min-width: 0;
+    max-width: calc(100% - 4.25rem);
+  }
+
+  .brand-name {
+    font-size: 0.92rem;
+    letter-spacing: 0.12em;
+  }
+
+  .brand-sub {
+    display: none;
+  }
+
+  .hero,
+  .page-home .hero {
+    padding: 4.4rem 0 4rem;
+  }
+
+  .hero h1 {
+    max-width: none;
+    font-size: clamp(2rem, 10vw, 3.4rem);
+  }
+
+  .cta-row {
+    flex-direction: column;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-outline,
+  .btn-secondary {
+    width: 100%;
+  }
+}
+
+@media (min-width: 640px) {
+  .gallery {
+    column-gap: 1.05rem;
+  }
+
+  .shot {
+    margin-bottom: 1.05rem;
+  }
+}
+
+@media (min-width: 860px) {
+  .cards.two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cards.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .kpis {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .gallery {
+    columns: 3;
+    column-gap: 1.15rem;
+  }
+
+  .shot {
+    margin-bottom: 1.15rem;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav-backdrop {
+    display: none;
+  }
+
+  .main-nav {
+    position: static;
+    width: auto;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    transform: none;
+    visibility: visible;
+    overflow: visible;
+  }
+
+  .main-nav ul {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .main-nav a {
+    min-height: auto;
+    /* Resserre : avec six entrees, l'ancien interlettrage de 0.22em faisait
+       passer le menu sur deux lignes des 1280px. */
+    padding: 0.7rem 0.7rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: rgba(248, 250, 252, 0.86);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .main-nav ul {
+    flex-wrap: nowrap;
+  }
+
+  .main-nav a:hover,
+  .main-nav a.active {
+    transform: none;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--heading);
+    box-shadow: inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+  }
+
+  .main-nav a.active {
+    color: var(--accent);
+  }
+
+  .page-home .hero {
+    min-height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: center;
+  }
+
+  .section {
+    padding: 7.5rem 0;
+  }
+
+  .site-footer {
+    padding-bottom: 2.4rem;
+  }
+}
+
+@media (max-width: 639px) {
+  /* Bandeau defilant : 5 filtres empiles occupaient 4 lignes sur un ecran
+     de 375px. On les garde sur une seule ligne, balayable au doigt. */
+  .gallery-filters {
+    flex-wrap: nowrap;
+    gap: 0.45rem;
+    margin-bottom: 1.35rem;
+    padding-bottom: 0.4rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .gallery-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-chip {
+    flex: none;
+    min-height: 2.6rem;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    scroll-snap-align: start;
+  }
+
+  .shot {
+    border-radius: 0.85rem;
+  }
+
+  .shot figcaption {
+    padding: 0.6rem 0.7rem 0.65rem;
+    font-size: 0.74rem;
+  }
+
+  .play-badge {
+    width: 2.6rem;
+    height: 2.6rem;
+    background-size: 1.1rem;
+  }
+
+  .play-label {
+    font-size: 0.74rem;
+  }
+
+  .play-weight {
+    font-size: 0.64rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .sticky-mobile-cta {
+    display: none;
+  }
+}

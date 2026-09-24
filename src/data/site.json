@@ -1,0 +1,40 @@
+{
+  "nom": "SOBAFOR SA",
+  "nomComplet": "Société de Bâtiments, Forages et Routes",
+  "slogan": "Bâtiments, Forages & Routes",
+  "url": "https://sobafor.com/",
+  "fondation": "1987",
+  "email": "sob_sarl@yahoo.fr",
+  "rccm": "5326",
+  "nif": "1021/R",
+  "directeur": "Alhousseni Sidi Mohamed",
+  "adresse": {
+    "rue": "Boulevard Mali Bero, BP 11279",
+    "ville": "Niamey",
+    "pays": "Niger",
+    "codePays": "NE"
+  },
+  "geo": { "latitude": 13.5345615, "longitude": 2.1183289 },
+  "telephones": {
+    "principal": { "affiche": "+227 81 91 91 54", "court": "81 91 91 54", "lien": "+22781919154" },
+    "dg": { "affiche": "+227 96 96 87 66", "lien": "+22796968766" }
+  },
+  "pays": ["Niger", "Mauritanie", "Burkina Faso", "Mali", "Tchad"],
+  "domaines": [
+    "Bâtiments et génie civil",
+    "Routes et pistes rurales",
+    "Assainissement et drainage",
+    "Hydraulique et adduction d'eau potable",
+    "Forages",
+    "Énergie solaire isolée",
+    "Location d'engins de chantier"
+  ],
+  "navigation": [
+    { "page": "index", "titre": "Accueil" },
+    { "page": "services", "titre": "Services" },
+    { "page": "realisations", "titre": "Réalisations" },
+    { "page": "a-propos", "titre": "À Propos" },
+    { "page": "contact", "titre": "Contact" },
+    { "page": "devis", "titre": "Devis", "titrePied": "Demande de devis" }
+  ]
+}

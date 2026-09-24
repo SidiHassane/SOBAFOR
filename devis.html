@@ -1,23 +1,26 @@
 <!DOCTYPE html>
+<!-- Généré par build.mjs depuis src/pages/devis.html — modifier la source, pas ce fichier. -->
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Demande de Devis | SOBAFOR SA</title>
   <meta name="description" content="Demandez un devis à SOBAFOR SA pour vos projets BTP, routes, forages, hydraulique, assainissement et infrastructures au Niger." />
+  <link rel="canonical" href="https://sobafor.com/devis.html" />
+  <meta name="theme-color" content="#020617" />
   <meta property="og:title" content="Demande de Devis SOBAFOR SA" />
   <meta property="og:description" content="Formulaire de devis simple et rapide avec envoi direct via WhatsApp." />
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
   <meta property="og:url" content="https://sobafor.com/devis.html" />
   <meta property="og:image" content="https://sobafor.com/logo.jpeg" />
-  <link rel="canonical" href="https://sobafor.com/devis.html" />
-  <meta name="theme-color" content="#020617" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="SOBAFOR" />
   <link rel="icon" type="image/jpeg" href="logo.jpeg" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=c926de139f" />
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body class="page-quote">
   <a class="skip-link" href="#contenu">Aller au contenu principal</a>
@@ -45,8 +48,9 @@
 
   <main class="site-main" id="contenu">
     <section class="hero hero-inner">
-      <div class="container" data-reveal>
-        <h1>Obtenez une estimation rapide pour votre projet</h1>
+      <div class="container">
+        <p class="eyebrow">Demande de devis</p>
+        <h1 class="titre-anime"><span class="mot"><span style="--i:0">Obtenez</span></span> <span class="mot"><span style="--i:1">une</span></span> <span class="mot"><span style="--i:2">estimation</span></span> <span class="mot"><span style="--i:3">rapide</span></span> <span class="mot"><span style="--i:4">pour</span></span> <span class="mot"><span style="--i:5">votre</span></span> <span class="mot"><span style="--i:6">projet</span></span></h1>
         <p>Remplissez ce formulaire en 1 minute. Votre demande est préparée automatiquement puis envoyée à SOBAFOR SA via WhatsApp (81 91 91 54).</p>
       </div>
     </section>
@@ -54,16 +58,16 @@
     <section class="section">
       <div class="container">
         <div class="cards two">
-          <article class="contact-box" data-reveal>
+          <article class="contact-box">
             <h2>Formulaire de devis</h2>
-            <form class="form" data-quote-form>
+            <form class="form" data-quote-form data-whatsapp="https://wa.me/22781919154">
               <div class="form-group">
                 <label for="nom">Nom complet / Entreprise</label>
                 <input type="text" id="nom" name="nom" required placeholder="Ex: Jean Dupont">
               </div>
               <div class="form-group">
                 <label for="telephone">Téléphone (WhatsApp)</label>
-                <input type="tel" id="telephone" name="telephone" required placeholder="Ex: +227 98 03 64 82">
+                <input type="tel" id="telephone" name="telephone" required placeholder="Ex : +227 90 00 00 00">
               </div>
               <div class="form-group">
                 <label for="service">Domaine d'intervention</label>
@@ -84,10 +88,16 @@
                 <label for="details">Détails du besoin</label>
                 <textarea id="details" name="details" required placeholder="Décrivez brièvement votre projet..."></textarea>
               </div>
-              <button class="btn btn-primary" type="submit">Envoyer par WhatsApp</button>
+              <button class="btn btn-whatsapp" type="submit">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 11.5A8.5 8.5 0 0 1 7.3 18.9L4 20l1.1-3.1A8.5 8.5 0 1 1 20 11.5Z"></path>
+                  <path d="M8.6 9.3c.2-.4.4-.4.6-.4h.5c.2 0 .4 0 .6.5.2.4.7 1.6.8 1.7.1.1.1.3 0 .5-.1.2-.2.3-.4.5l-.3.4c-.1.1-.2.2-.1.4.1.2.5.9 1.2 1.4.8.7 1.5.9 1.7 1 .2.1.3.1.4-.1l.5-.6c.1-.2.3-.2.5-.1.2.1 1.5.7 1.7.8.2.1.4.2.4.3 0 .1 0 .8-.3 1.1-.3.3-.8.8-1.8.8s-2.1-.6-3.6-1.9c-1.7-1.4-2.7-3.1-3-3.5-.3-.4-.8-1.1-.8-2 0-1 .5-1.5.7-1.8Z"></path>
+                </svg>
+                Envoyer par WhatsApp
+              </button>
             </form>
           </article>
-          <article class="contact-box soft" data-reveal>
+          <article class="contact-box soft">
             <h3>Pourquoi choisir SOBAFOR SA ?</h3>
             <ul class="list">
               <li><strong>Expertise terrain</strong> : Plus de 30 ans d'expérience au Niger.</li>
@@ -99,6 +109,7 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
@@ -115,12 +126,12 @@
           <a href="realisations.html">Réalisations</a>
           <a href="a-propos.html">À Propos</a>
           <a href="contact.html">Contact</a>
-          <a href="devis.html">Demande de Devis</a>
+          <a href="devis.html">Demande de devis</a>
         </div>
         <div>
           <h3 class="footer-title">Contact</h3>
           <p>Boulevard Mali Bero, BP 11279, Niamey, Niger</p>
-          <p><a href="tel:+22798036482">+227 98 03 64 82</a> | <a href="tel:+22781919154">+227 81 91 91 54</a><span class="wa-tag">WhatsApp</span></p>
+          <p><a href="tel:+22781919154">+227 81 91 91 54</a><span class="wa-tag">Appel &amp; WhatsApp</span></p>
           <p><a href="mailto:sob_sarl@yahoo.fr">sob_sarl@yahoo.fr</a></p>
         </div>
       </div>
@@ -129,7 +140,7 @@
   </footer>
 
   <div class="sticky-mobile-cta" aria-label="Actions rapides mobile">
-    <a class="call" href="tel:+22798036482">
+    <a class="call" href="tel:+22781919154">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72l.35 2.57a2 2 0 0 1-.57 1.72l-1.4 1.4a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 1.72-.57l2.57.35A2 2 0 0 1 22 16.92Z"></path>
       </svg>
@@ -154,17 +165,6 @@
     </a>
   </div>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=775894038c"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,448 @@
+{
+  "categories": [
+    {
+      "id": "batiments",
+      "nom": "Bâtiments"
+    },
+    {
+      "id": "routes",
+      "nom": "Routes & assainissement"
+    },
+    {
+      "id": "hydraulique",
+      "nom": "Hydraulique & forages"
+    },
+    {
+      "id": "engins",
+      "nom": "Location d'engins"
+    }
+  ],
+  "accueil": [
+    "mur-cloture-portail",
+    "tour-de-controle",
+    "foreuse-detail",
+    "parc-engins",
+    "chateau-deau",
+    "canal-assainissement"
+  ],
+  "elements": [
+    {
+      "id": "batiment-structure-r2",
+      "cat": "batiments",
+      "titre": "Bâtiment R+2 — gros œuvre",
+      "alt": "Bâtiment R+2 en cours de construction, structure poteaux-poutres en béton armé",
+      "w": 333,
+      "h": 187,
+      "tailles": [
+        333
+      ],
+      "source": "1.jpeg"
+    },
+    {
+      "id": "batiment-administratif",
+      "cat": "batiments",
+      "titre": "Bâtiment administratif",
+      "alt": "Bâtiment administratif SOBAFOR et sa voirie d'accès",
+      "w": 734,
+      "h": 843,
+      "tailles": [
+        400,
+        734
+      ],
+      "source": "9.jpeg"
+    },
+    {
+      "id": "siege-administratif",
+      "cat": "batiments",
+      "titre": "Siège administratif livré",
+      "alt": "Siège administratif livré, façade en béton architectonique",
+      "w": 307,
+      "h": 173,
+      "tailles": [
+        307
+      ],
+      "source": "10.jpeg"
+    },
+    {
+      "id": "tour-de-controle",
+      "cat": "batiments",
+      "titre": "Tour de contrôle aéroportuaire",
+      "alt": "Tour de contrôle aéroportuaire réalisée par SOBAFOR",
+      "w": 703,
+      "h": 842,
+      "tailles": [
+        400,
+        703
+      ],
+      "source": "8.jpeg"
+    },
+    {
+      "id": "mur-cloture-portail",
+      "cat": "batiments",
+      "titre": "Clôture et portail",
+      "alt": "Mur de clôture avec portail métallique en fin de chantier",
+      "w": 998,
+      "h": 1280,
+      "tailles": [
+        400,
+        800,
+        998
+      ],
+      "source": "WhatsApp Image 2026-05-16 at 22.12.23.jpeg"
+    },
+    {
+      "id": "mur-cloture",
+      "cat": "batiments",
+      "titre": "Mur de clôture périmétrique",
+      "alt": "Mur de clôture périmétrique achevé le long d'une voie",
+      "w": 1079,
+      "h": 1264,
+      "tailles": [
+        400,
+        800,
+        1079
+      ],
+      "source": "WhatsApp Image 2026-05-16 at 22.12.38.jpeg"
+    },
+    {
+      "id": "route-couche-de-base",
+      "cat": "routes",
+      "titre": "Chaussée — couche de base",
+      "alt": "Chaussée en construction, mise en œuvre de la couche de base",
+      "w": 353,
+      "h": 234,
+      "tailles": [
+        353
+      ],
+      "source": "2.jpeg"
+    },
+    {
+      "id": "canal-assainissement",
+      "cat": "routes",
+      "titre": "Canal d'assainissement",
+      "alt": "Canal d'assainissement bétonné traversant une zone rurale",
+      "w": 522,
+      "h": 448,
+      "tailles": [
+        400,
+        522
+      ],
+      "source": "5.jpeg"
+    },
+    {
+      "id": "gabions-talus",
+      "cat": "routes",
+      "titre": "Gabions de protection de talus",
+      "alt": "Protection de talus par gabions le long d'un ouvrage hydraulique",
+      "w": 455,
+      "h": 450,
+      "tailles": [
+        400,
+        455
+      ],
+      "source": "4.jpeg"
+    },
+    {
+      "id": "piste-laterite",
+      "cat": "routes",
+      "titre": "Piste rurale en latérite",
+      "alt": "Piste rurale en latérite compactée traversant la brousse",
+      "w": 322,
+      "h": 242,
+      "tailles": [
+        322
+      ],
+      "source": "WhatsApp Image 2026-05-10 at 20.02.10.jpeg"
+    },
+    {
+      "id": "chateau-deau",
+      "cat": "hydraulique",
+      "titre": "Château d'eau",
+      "alt": "Château d'eau sur pylône métallique en zone rurale",
+      "w": 487,
+      "h": 433,
+      "tailles": [
+        400,
+        487
+      ],
+      "source": "3.jpeg"
+    },
+    {
+      "id": "foreuse-chantier",
+      "cat": "hydraulique",
+      "titre": "Atelier de forage",
+      "alt": "Atelier de forage en cours d'exécution avec les équipes SOBAFOR",
+      "w": 475,
+      "h": 656,
+      "tailles": [
+        400,
+        475
+      ],
+      "source": "6.jpeg"
+    },
+    {
+      "id": "equipement-forage",
+      "cat": "hydraulique",
+      "titre": "Équipement de pompage",
+      "alt": "Équipement de forage et de pompage installé sur site",
+      "w": 411,
+      "h": 656,
+      "tailles": [
+        400,
+        411
+      ],
+      "source": "7.jpeg"
+    },
+    {
+      "id": "foreuse-detail",
+      "cat": "hydraulique",
+      "titre": "Foreuse en chantier — détail",
+      "alt": "Détail mécanique de la foreuse SOBAFOR montée sur camion",
+      "w": 720,
+      "h": 1280,
+      "tailles": [
+        400,
+        720
+      ]
+    },
+    {
+      "id": "foreuse-en-operation-sequence-1",
+      "cat": "hydraulique",
+      "video": "Chantier/New/WhatsApp Video 2026-08-14 at 15.42.33.mp4",
+      "ar": "576/1024",
+      "titre": "Foreuse en opération — séquence 1",
+      "label": "Foreuse en opération"
+    },
+    {
+      "id": "foreuse-en-operation-sequence-2",
+      "cat": "hydraulique",
+      "video": "Chantier/New/WhatsApp Video 2026-08-14 at 15.42.36.mp4",
+      "ar": "576/1024",
+      "titre": "Foreuse en opération — séquence 2",
+      "label": "Foreuse en opération"
+    },
+    {
+      "id": "foreuse-en-operation-sequence-3",
+      "cat": "hydraulique",
+      "video": "Chantier/New/WhatsApp Video 2026-08-14 at 15.42.40.mp4",
+      "ar": "576/1024",
+      "titre": "Foreuse en opération — séquence 3",
+      "label": "Foreuse en opération"
+    },
+    {
+      "id": "foreuse-en-operation-sequence-4",
+      "cat": "hydraulique",
+      "video": "Chantier/New/WhatsApp Video 2026-08-14 at 15.42.47.mp4",
+      "ar": "576/1024",
+      "titre": "Foreuse en opération — séquence 4",
+      "label": "Foreuse en opération"
+    },
+    {
+      "id": "foreuse-en-operation-sequence-5",
+      "cat": "hydraulique",
+      "video": "Chantier/New/WhatsApp Video 2026-08-14 at 15.50.00.mp4",
+      "ar": "576/1024",
+      "titre": "Foreuse en opération — séquence 5",
+      "label": "Foreuse en opération"
+    },
+    {
+      "id": "parc-engins",
+      "cat": "engins",
+      "titre": "Parc d'engins SOBAFOR",
+      "alt": "Parc d'engins SOBAFOR : chargeuse et niveleuse stationnées sur site",
+      "w": 1080,
+      "h": 486,
+      "tailles": [
+        400,
+        800,
+        1080
+      ],
+      "source": "Loction d'engin/WhatsApp Image 2026-08-14 at 00.09.58.jpeg",
+      "legende": "Parc d'engins"
+    },
+    {
+      "id": "tractopelle",
+      "cat": "engins",
+      "titre": "Tractopelle en terrassement",
+      "alt": "Tractopelle SOBAFOR bras déployé sur un site de terrassement",
+      "w": 1080,
+      "h": 486,
+      "tailles": [
+        400,
+        800,
+        1080
+      ],
+      "source": "Loction d'engin/WhatsApp Image 2026-08-14 at 00.09.57.jpeg"
+    },
+    {
+      "id": "niveleuse",
+      "cat": "engins",
+      "titre": "Niveleuse en opération",
+      "alt": "Niveleuse SOBAFOR en position de travail sur une piste",
+      "w": 1080,
+      "h": 486,
+      "tailles": [
+        400,
+        800,
+        1080
+      ],
+      "source": "Loction d'engin/WhatsApp Image 2026-08-14 at 00.09.59.jpeg"
+    },
+    {
+      "id": "villas-cnss-a-diffa-sequence-1",
+      "cat": "batiments",
+      "video": "Chantier/Constructions des 10 villa CNSS.mp4",
+      "ar": "640/360",
+      "titre": "Villas CNSS à Diffa — séquence 1",
+      "label": "Villas CNSS à Diffa"
+    },
+    {
+      "id": "villas-cnss-a-diffa-sequence-2",
+      "cat": "batiments",
+      "video": "Chantier/Constructions des 10 villa CNSS 2.mp4",
+      "ar": "640/360",
+      "titre": "Villas CNSS à Diffa — séquence 2",
+      "label": "Villas CNSS à Diffa"
+    },
+    {
+      "id": "ambassade-de-mauritanie-a-niamey-sequence-1",
+      "cat": "batiments",
+      "video": "Chantier/Chantier de l'ambassade de mauritanie a niamey 1.mp4",
+      "ar": "306/640",
+      "titre": "Ambassade de Mauritanie à Niamey — séquence 1",
+      "label": "Ambassade de Mauritanie"
+    },
+    {
+      "id": "ambassade-de-mauritanie-a-niamey-sequence-2",
+      "cat": "batiments",
+      "video": "Chantier/Chantier de l'ambassade de mauritanie a niamey 2.mp4",
+      "ar": "306/640",
+      "titre": "Ambassade de Mauritanie à Niamey — séquence 2",
+      "label": "Ambassade de Mauritanie"
+    },
+    {
+      "id": "ambassade-mauritanie-finitions-cour",
+      "cat": "batiments",
+      "titre": "Ambassade de Mauritanie — finitions de la cour pavée",
+      "alt": "Cour intérieure pavée en fin de chantier à l'ambassade de Mauritanie, avec matériaux et outillage encore sur site",
+      "w": 750,
+      "h": 1000,
+      "tailles": [
+        400,
+        750
+      ],
+      "source": "Ambassade de maurtanie/WhatsApp Image 2026-09-20 at 20.05.13.jpeg"
+    },
+    {
+      "id": "ambassade-mauritanie-amenagement-paysager",
+      "cat": "batiments",
+      "titre": "Ambassade de Mauritanie — aménagement des espaces verts",
+      "alt": "Allée pavée et pelouse nouvellement engazonnée le long du mur d'enceinte de l'ambassade de Mauritanie",
+      "w": 744,
+      "h": 892,
+      "tailles": [
+        400,
+        744
+      ],
+      "source": "Ambassade de maurtanie/WhatsApp Image 2026-09-20 at 20.05.13 (2).jpeg"
+    },
+    {
+      "id": "ambassade-mauritanie-mat-drapeau-pose",
+      "cat": "batiments",
+      "titre": "Ambassade de Mauritanie — pose du mât porte-drapeau",
+      "alt": "Pose du mât porte-drapeau contre le mur d'enceinte de l'ambassade de Mauritanie, échelle en appui",
+      "w": 750,
+      "h": 1000,
+      "tailles": [
+        400,
+        750
+      ],
+      "source": "Ambassade de maurtanie/WhatsApp Image 2026-09-20 at 20.05.13 (3).jpeg"
+    },
+    {
+      "id": "ambassade-mauritanie-mat-drapeau",
+      "cat": "batiments",
+      "titre": "Ambassade de Mauritanie — mât porte-drapeau installé",
+      "alt": "Mât porte-drapeau installé devant le bâtiment principal de l'ambassade de Mauritanie à Niamey",
+      "w": 750,
+      "h": 1000,
+      "tailles": [
+        400,
+        750
+      ],
+      "source": "Ambassade de maurtanie/WhatsApp Image 2026-09-20 at 20.05.13 (1).jpeg"
+    },
+    {
+      "id": "engin-en-operation-sequence-1",
+      "cat": "engins",
+      "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.09.58.mp4",
+      "ar": "360/640",
+      "titre": "Engin en opération — séquence 1",
+      "label": "Engin en opération"
+    },
+    {
+      "id": "engin-en-operation-sequence-2",
+      "cat": "engins",
+      "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.00 (1).mp4",
+      "ar": "576/1024",
+      "titre": "Engin en opération — séquence 2",
+      "label": "Engin en opération"
+    },
+    {
+      "id": "engin-en-operation-sequence-3",
+      "cat": "engins",
+      "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.00.mp4",
+      "ar": "640/360",
+      "titre": "Engin en opération — séquence 3",
+      "label": "Engin en opération"
+    },
+    {
+      "id": "engin-en-operation-sequence-4",
+      "cat": "engins",
+      "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.01.mp4",
+      "ar": "576/1024",
+      "titre": "Engin en opération — séquence 4",
+      "label": "Engin en opération"
+    },
+    {
+      "id": "engin-en-operation-sequence-5",
+      "cat": "engins",
+      "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.01 (1).mp4",
+      "ar": "576/1024",
+      "titre": "Engin en opération — séquence 5",
+      "label": "Engin en opération"
+    },
+    {
+      "id": "engin-en-operation-sequence-6",
+      "cat": "engins",
+      "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.02.mp4",
+      "ar": "576/1024",
+      "titre": "Engin en opération — séquence 6",
+      "label": "Engin en opération"
+    },
+    {
+      "id": "engin-en-operation-sequence-7",
+      "cat": "engins",
+      "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.09.55.mp4",
+      "ar": "358/642",
+      "titre": "Engin en opération — séquence 7",
+      "label": "Engin en opération"
+    },
+    {
+      "id": "engin-en-operation-sequence-8",
+      "cat": "engins",
+      "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.02 (1).mp4",
+      "ar": "576/1024",
+      "titre": "Engin en opération — séquence 8",
+      "label": "Engin en opération"
+    },
+    {
+      "id": "engin-en-operation-sequence-9",
+      "cat": "engins",
+      "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.09.56.mp4",
+      "ar": "360/640",
+      "titre": "Engin en opération — séquence 9",
+      "label": "Engin en opération"
+    }
+  ]
+}
