@@ -20,6 +20,13 @@
     "dg": { "affiche": "+227 96 96 87 66", "lien": "+22796968766" }
   },
   "pays": ["Niger", "Mauritanie", "Burkina Faso", "Mali", "Tchad"],
+  "references": [
+    "Palais de la Présidence",
+    "ASECNA",
+    "Aéroport d'Agadez",
+    "CNSS",
+    "Ambassade de Mauritanie"
+  ],
   "domaines": [
     "Bâtiments et génie civil",
     "Routes et pistes rurales",
