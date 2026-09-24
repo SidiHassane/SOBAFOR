@@ -1,0 +1,32 @@
+---
+titre: Hors ligne | SOBAFOR SA
+classe: page-offline
+gabarit: minimal
+---
+    <section class="hero hero-inner">
+      <div class="container">
+        <h1>Cette page n'est pas encore enregistrée</h1>
+        <p>Vous êtes hors ligne, et cette page n'avait pas encore été consultée sur cet appareil. Les pages déjà visitées restent accessibles sans réseau.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="index.html">Retour à l'accueil</a>
+          <a class="btn btn-outline" href="realisations.html">Nos réalisations</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Nous joindre malgré tout</h2>
+        <p class="section-intro">Ces actions fonctionnent sans connexion de données, dès que vous captez le réseau téléphonique.</p>
+        <div class="cards two">
+          <article class="card">
+            <h3>Par téléphone</h3>
+            <p><a href="tel:{{ site.telephones.principal.lien }}">{{ site.telephones.principal.affiche }}</a><span class="wa-tag">Appel &amp; WhatsApp</span></p>
+          </article>
+          <article class="card">
+            <h3>Nos bureaux</h3>
+            <p>{{ site.adresse.rue }}<br />{{ site.adresse.ville }}, {{ site.adresse.pays }}</p>
+          </article>
+        </div>
+      </div>
+    </section>

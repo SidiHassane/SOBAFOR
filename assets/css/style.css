@@ -1,3 +1,5 @@
+/* Généré par build.mjs depuis src/css/ — modifier la source, pas ce fichier. */
+
 /* ===================================================================
    Typographie auto-hebergee. Aucun appel a un service externe : les
    fichiers sont sous-echantillonnes au jeu de caracteres francais
@@ -329,14 +331,24 @@ svg {
   border: 1px solid var(--border);
   border-radius: 1.5rem;
   box-shadow: -24px 0 60px rgba(2, 6, 23, 0.42);
-  transform: translateX(102%);
-  transition: transform 0.32s ease;
+  /* Ferme, le panneau sort entierement de l'ecran (l'ancien 102 % en
+     laissait depasser 5 px sur le bord droit) et devient invisible : ses
+     liens ne sont plus atteignables au clavier tant qu'il est replie. */
+  transform: translateX(calc(100% + 1.5rem));
+  visibility: hidden;
+  transition:
+    transform 0.32s var(--ease),
+    visibility 0s linear 0.32s;
   z-index: 95;
   overflow-y: auto;
 }
 
 .main-nav.open {
   transform: translateX(0);
+  visibility: visible;
+  transition:
+    transform 0.32s var(--ease),
+    visibility 0s;
 }
 
 .main-nav ul {
@@ -527,12 +539,6 @@ svg {
     url("../img/gallery/parc-engins-1080.jpg") center/cover;
 }
 
-.page-home .hero .container {
-  max-width: 860px;
-  margin-inline: auto;
-  padding-inline: clamp(1rem, 3vw, 2.5rem);
-}
-
 /* Les titres portent le caractere : graisse haute, interlettrage negatif
    qui se resserre a mesure que le corps grandit, et equilibrage des lignes
    pour eviter le mot orphelin en bas de titre. */
@@ -563,15 +569,6 @@ h3,
 .card p,
 .faq p {
   text-wrap: pretty;
-}
-
-.page-home .hero h1::before {
-  content: "";
-  display: block;
-  width: 5rem;
-  height: 1px;
-  margin-bottom: 1.6rem;
-  background: linear-gradient(90deg, rgba(251, 146, 60, 0), rgba(251, 146, 60, 1), rgba(251, 146, 60, 0));
 }
 
 .hero p {
@@ -638,7 +635,6 @@ h3,
 .contact-box,
 .faq details,
 .kpi,
-.process .step,
 .map-wrap {
   position: relative;
   overflow: hidden;
@@ -653,7 +649,6 @@ h3,
 .card::before,
 .contact-box::before,
 .faq details::before,
-.process .step::before,
 .kpi::before {
   content: "";
   position: absolute;
@@ -681,24 +676,39 @@ h3,
   overflow: hidden;
 }
 
+.service-card .card-image {
+  position: relative;
+}
+
 .service-card .card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: transform 900ms var(--ease);
 }
 
-.service-card:hover .card-image img {
-  transform: scale(1.1);
+/* Fondu vers la carte : la photo et le texte forment un seul bloc au lieu
+   d'une vignette posee au-dessus d'un paragraphe. */
+.service-card .card-image::after {
+  content: "";
+  position: absolute;
+  inset: 55% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.85));
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover .card-image img {
+    transform: scale(1.05);
+  }
 }
 
 .service-card .card-content {
-  padding: 1.6rem;
+  padding: 1.4rem 1.6rem 1.6rem;
   flex-grow: 1;
 }
 
 .card,
-.process .step,
 .contact-box,
 .kpi {
   transition:
@@ -709,7 +719,6 @@ h3,
 
 @media (hover: hover) and (pointer: fine) {
   .card:hover,
-  .process .step:hover,
   .contact-box:hover,
   .kpi:hover {
     border-color: rgba(251, 146, 60, 0.28);
@@ -774,7 +783,9 @@ h3,
 }
 
 .stat {
-  padding: 1.4rem 1rem;
+  position: relative;
+  overflow: hidden;
+  padding: 1.8rem 1rem 1.6rem;
   text-align: center;
   border: 1px solid var(--border);
   border-radius: 1.6rem;
@@ -782,12 +793,36 @@ h3,
   box-shadow: var(--shadow-soft);
 }
 
+/* Filet d'accent qui se deploie depuis le centre a l'apparition. */
+.stat::before {
+  content: "";
+  position: absolute;
+  inset: 0 22% auto;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(1);
+  transition: transform 1.1s var(--ease) 0.25s;
+}
+
+.js .stat[data-reveal]:not(.show)::before {
+  transform: scaleX(0);
+}
+
+/* Chiffres en degrade et a chasse fixe : pendant le decompte, la largeur
+   ne tremble pas d'une valeur a l'autre. */
 .stat strong {
   display: block;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.55rem;
   color: var(--accent);
-  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+  font-weight: 800;
   line-height: 1;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(180deg, #fed7aa 10%, var(--accent) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .stat span {
@@ -1054,6 +1089,7 @@ h3,
 }
 
 .lightbox-stage {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1096,6 +1132,63 @@ h3,
   font-size: 0.9rem;
   font-weight: 700;
   text-align: center;
+}
+
+/* Position dans la serie : on sait ou l'on en est, et combien il reste. */
+.lightbox-compteur {
+  position: absolute;
+  top: clamp(0.75rem, 3vw, 1.5rem);
+  left: clamp(0.75rem, 3vw, 1.5rem);
+  margin: 0;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.75);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.lightbox-compteur strong {
+  color: var(--heading);
+}
+
+/* Chaque media entre en douceur, une fois decode : plus d'image qui se
+   dessine par bandes sur connexion lente. */
+.lightbox-stage img,
+.lightbox-stage video {
+  animation: mediaEntree 480ms var(--ease) both;
+}
+
+.lightbox-stage.charge img {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes mediaEntree {
+  from {
+    opacity: 0;
+    transform: scale(0.965);
+  }
+}
+
+.lightbox-stage.charge::after {
+  content: "";
+  position: absolute;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--accent);
+  border-radius: 999px;
+  animation: rotation 0.8s linear infinite;
+}
+
+@keyframes rotation {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .lightbox button {
@@ -1210,31 +1303,38 @@ body.lightbox-open {
   font-variant-numeric: tabular-nums;
 }
 
-.gallery-cta {
-  margin-top: 3rem;
-  padding: 2rem 1.6rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  background:
-    radial-gradient(circle at top left, rgba(251, 146, 60, 0.1), transparent 40%),
-    var(--surface);
-  text-align: center;
+/* Filtrage anime : chaque cliche porte un nom de transition le temps du
+   changement (pose par 40-galerie.js). Le navigateur fait glisser ceux qui
+   restent vers leur nouvelle place, fond ceux qui partent et qui arrivent. */
+.shot {
+  view-transition-class: cliche;
 }
 
-.gallery-cta h2 {
-  margin-top: 0;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
+::view-transition-group(*.cliche) {
+  animation-duration: 460ms;
+  animation-timing-function: var(--ease);
 }
 
-.gallery-cta p {
-  margin: 0 auto 1.5rem;
-  max-width: 46rem;
-  color: var(--muted);
+::view-transition-new(*.cliche):only-child {
+  animation: clicheArrive 460ms var(--ease) both;
 }
 
-.gallery-cta .cta-row {
-  justify-content: center;
-  margin-top: 0;
+::view-transition-old(*.cliche):only-child {
+  animation: clichePart 260ms var(--ease-soft) both;
+}
+
+@keyframes clicheArrive {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+
+@keyframes clichePart {
+  to {
+    opacity: 0;
+    transform: scale(0.92);
+  }
 }
 
 /* Renvoi vers la page complete depuis l'accueil */
@@ -1301,6 +1401,10 @@ body.lightbox-open {
 }
 
 .faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   cursor: pointer;
   color: var(--heading);
   font-weight: 700;
@@ -1311,47 +1415,157 @@ body.lightbox-open {
   display: none;
 }
 
+/* Le signe + pivote en croix : une seule forme qui change d'etat plutot
+   que deux caracteres qui se remplacent. */
 .faq summary::after {
   content: "+";
-  float: right;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(251, 146, 60, 0.25);
   color: var(--accent);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
+  font-weight: 400;
   line-height: 1;
+  transition: transform var(--dur-ui) var(--ease), background var(--dur-ui) var(--ease);
 }
 
 .faq details[open] summary::after {
-  content: "-";
+  transform: rotate(45deg);
+  background: var(--accent-soft);
+}
+
+/* Ouverture en douceur la ou le navigateur sait animer vers "auto" ;
+   ailleurs, le comportement natif instantane reste en place. */
+.faq details {
+  interpolate-size: allow-keywords;
+}
+
+.faq details::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size var(--dur-ui) var(--ease),
+    content-visibility var(--dur-ui) allow-discrete;
+}
+
+.faq details[open]::details-content {
+  block-size: auto;
 }
 
 .faq p {
   margin: 0.9rem 0 0;
 }
 
+/* ---------------------------------------------------------------
+   Processus en frise chronologique
+   Chaque etape porte le segment qui la relie a la suivante. Le segment
+   se remplit au rythme du defilement (timeline de vue, sans JavaScript) ;
+   sans cette capacite, il s'affiche simplement plein.
+   --------------------------------------------------------------- */
 .process {
+  --pastille: 2.75rem;
+  --ecart-etapes: 2.25rem;
   counter-reset: step;
   display: grid;
-  gap: 1rem;
+  gap: var(--ecart-etapes);
 }
 
 .process .step {
-  padding: 1.5rem 1.4rem 1.4rem 4.5rem;
+  position: relative;
+  padding-left: calc(var(--pastille) + 1.25rem);
+  min-height: var(--pastille);
+  view-timeline-name: --etape;
+}
+
+.process .step h3 {
+  margin: 0.45rem 0 0.5rem;
 }
 
 .process .step::after {
   counter-increment: step;
-  content: counter(step);
+  content: "0" counter(step);
   position: absolute;
-  top: 1.35rem;
-  left: 1.25rem;
-  width: 2.4rem;
-  height: 2.4rem;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: var(--pastille);
+  height: var(--pastille);
   display: grid;
   place-items: center;
   border-radius: 999px;
-  background: rgba(251, 146, 60, 0.14);
-  border: 1px solid rgba(251, 146, 60, 0.22);
+  background: var(--bg-elevated);
+  border: 1px solid rgba(251, 146, 60, 0.45);
+  box-shadow: 0 0 0 6px rgba(251, 146, 60, 0.07);
   color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
   font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.process .step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: var(--pastille);
+  bottom: calc(-1 * var(--ecart-etapes));
+  left: calc(var(--pastille) / 2 - 1px);
+  width: 2px;
+  background:
+    linear-gradient(var(--accent), #fdba74) top / 100% var(--rempli, 100%) no-repeat,
+    var(--border-strong);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .process .step:not(:last-child)::before {
+      animation: remplirSegment linear both;
+      animation-timeline: --etape;
+      animation-range: entry 100% cover 55%;
+    }
+  }
+}
+
+@keyframes remplirSegment {
+  from {
+    --rempli: 0%;
+  }
+  to {
+    --rempli: 100%;
+  }
+}
+
+@property --rempli {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@media (min-width: 960px) {
+  .process {
+    --ecart-etapes: 1.75rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .process .step {
+    padding-left: 0;
+    padding-top: calc(var(--pastille) + 1.1rem);
+  }
+
+  .process .step:not(:last-child)::before {
+    top: calc(var(--pastille) / 2 - 1px);
+    bottom: auto;
+    left: var(--pastille);
+    right: calc(-1 * var(--ecart-etapes));
+    width: auto;
+    height: 2px;
+    background:
+      linear-gradient(90deg, var(--accent), #fdba74) left / var(--rempli, 100%) 100% no-repeat,
+      var(--border-strong);
+  }
 }
 
 .contact-box h2 {
@@ -1447,6 +1661,72 @@ select option {
 textarea {
   min-height: 150px;
   resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Confirmation apres envoi : le visiteur sait que son message est pret, et
+   dispose d'un recours si WhatsApp ou sa messagerie ne se sont pas ouverts. */
+.form-suite {
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(37, 211, 102, 0.32);
+  border-radius: 1rem;
+  background: rgba(37, 211, 102, 0.08);
+  color: var(--text);
+  font-size: 0.92rem;
+  animation: heroFondu 500ms var(--ease) both;
+}
+
+.form-suite p {
+  margin: 0;
+}
+
+.form-suite p + p {
+  margin-top: 0.45rem;
+}
+
+.form-suite-titre {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--heading);
+  font-weight: 700;
+}
+
+.form-suite-titre::before {
+  content: "";
+  flex: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 999px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 0.8rem no-repeat,
+    #22c55e;
+}
+
+.form-suite-recours {
+  color: var(--muted);
+}
+
+.form-suite a,
+.lien-bouton {
+  color: #6ee7b7;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lien-bouton {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .site-footer {
@@ -1570,6 +1850,22 @@ textarea {
   background: rgba(251, 146, 60, 0.14);
 }
 
+.cta-number {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  opacity: 0.78;
+}
+
+.wa-tag {
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #34d399;
+  margin-left: 0.35em;
+}
+
 /* ===================================================================
    Systeme de revelation
    Avant : un seul fondu de 26px sur des blocs entiers, donc des pavees
@@ -1578,18 +1874,21 @@ textarea {
    cascade au lieu de subir un pop.
    Le deplacement est passe de 26px a 14px : plus le geste est court,
    plus il parait maitrise.
+
+   L'etat masque n'existe que si le script tourne (classe .js posee dans
+   <head>) : sans JavaScript, tout reste lisible. Une fois revele, l'element
+   perd son attribut data-reveal (30-revelations.js) et retrouve ses propres
+   transitions — sinon le leve au survol des cartes etait neutralise.
    =================================================================== */
-[data-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 14px, 0);
+.js [data-reveal] {
   transition:
     opacity var(--dur-enter) var(--ease) calc(var(--stagger, 0) * var(--stagger-step)),
     transform var(--dur-enter) var(--ease) calc(var(--stagger, 0) * var(--stagger-step));
 }
 
-[data-reveal].show {
-  opacity: 1;
-  transform: none;
+.js [data-reveal]:not(.show) {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
 }
 
 /* Parallaxe du visuel de couverture, pilotee par le defilement lui-meme.
@@ -1611,6 +1910,57 @@ textarea {
   }
 }
 
+/* ===================================================================
+   Entree des couvertures
+   Le titre monte mot a mot derriere un masque (les mots sont decoupes au
+   build, aucun script) ; le reste du bloc suit en fondu. L'etat de depart
+   n'est porte que par les images-cles : si l'animation est coupee, le
+   texte est simplement visible.
+   =================================================================== */
+.titre-anime .mot {
+  display: inline-block;
+  overflow: hidden;
+  /* Marge interne pour que le masque ne rogne pas les jambages (g, p, q). */
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  vertical-align: top;
+}
+
+.titre-anime .mot > span {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .titre-anime .mot > span {
+    animation: motMonte 1s var(--ease) both;
+    animation-delay: calc(90ms + var(--i, 0) * 42ms);
+  }
+
+  .hero .container:not(.hero-grille) > :not(h1),
+  .hero-texte > :not(h1) {
+    animation: heroFondu 900ms var(--ease) both;
+    animation-delay: 380ms;
+  }
+
+  .hero .container > .eyebrow,
+  .hero-texte > .hero-badge {
+    animation-delay: 0ms;
+  }
+}
+
+@keyframes motMonte {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+}
+
+@keyframes heroFondu {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1623,7 +1973,6 @@ textarea {
     transition: none !important;
   }
 }
-
 @media (max-width: 639px) {
   body {
     padding-bottom: 6rem;
@@ -1692,10 +2041,6 @@ textarea {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .process {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .kpis {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1731,6 +2076,7 @@ textarea {
     border: 0;
     box-shadow: none;
     transform: none;
+    visibility: visible;
     overflow: visible;
   }
 
@@ -1838,6 +2184,631 @@ textarea {
 
 @media (min-width: 960px) {
   .sticky-mobile-cta {
+    display: none;
+  }
+}
+/* ===================================================================
+   Signature commune a toutes les pages
+   =================================================================== */
+
+/* Etiquette de section : situe le lecteur avant meme le titre, a la facon
+   d'un cartouche de plan. */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1.1rem;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+/* Barre de lecture sous l'en-tete, pilotee par le defilement lui-meme :
+   ni ecouteur, ni calcul, ni cout sur le fil principal. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-strong), #fdba74);
+      transform-origin: 0 50%;
+      animation: progressionLecture linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+@keyframes progressionLecture {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Halo qui suit le pointeur sur les cartes. Reserve aux souris : sur ecran
+   tactile, il n'y a pas de survol a accompagner. La position est posee par
+   35-projecteur.js dans --mx / --my. */
+@media (hover: hover) and (pointer: fine) {
+  .card::after,
+  .contact-box::after,
+  .stat::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 0%),
+      rgba(251, 146, 60, 0.13),
+      transparent 45%
+    );
+    opacity: 0;
+    transition: opacity var(--dur-ui) var(--ease);
+  }
+
+  .card:hover::after,
+  .contact-box:hover::after,
+  .stat:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Icones dans les boutons */
+.btn svg {
+  flex: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn-whatsapp {
+  background: linear-gradient(135deg, #25d366, #128c4a);
+  color: #fff;
+  box-shadow: 0 18px 34px rgba(37, 211, 102, 0.2);
+}
+
+.btn-whatsapp:hover {
+  box-shadow: 0 24px 38px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp .btn-numero {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  opacity: 0.92;
+}
+
+/* Monogramme des experts : donne un visage a chaque nom sans photo. */
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  margin-bottom: 1.1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.95), rgba(234, 88, 12, 0.85));
+  box-shadow: 0 10px 24px rgba(249, 115, 22, 0.25);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+/* ===================================================================
+   Bandeau d'appel a l'action, en fin de page
+   Liseré lumineux qui tourne lentement autour du cadre : un seul
+   pseudo-element masque en anneau, anime sur un angle enregistre.
+   =================================================================== */
+@property --angle-lisere {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.bandeau-cta {
+  position: relative;
+  padding: 5rem 0;
+}
+
+.bandeau-cadre {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(251, 146, 60, 0.16), transparent 50%),
+    radial-gradient(80% 120% at 100% 100%, rgba(59, 130, 246, 0.1), transparent 55%),
+    var(--surface-strong);
+  box-shadow: var(--shadow);
+}
+
+.bandeau-cadre::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--angle-lisere),
+    transparent 0 55%,
+    rgba(251, 146, 60, 0.85) 72%,
+    rgba(253, 186, 116, 0.9) 78%,
+    transparent 92%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 640px) {
+  .bandeau-cadre::before {
+    animation: tourneLisere 7s linear infinite;
+  }
+}
+
+@keyframes tourneLisere {
+  to {
+    --angle-lisere: 360deg;
+  }
+}
+
+.bandeau-texte h2 {
+  margin: 0 0 0.9rem;
+  color: var(--heading);
+  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.bandeau-texte p:last-child {
+  margin: 0;
+  max-width: 44rem;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.bandeau-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+@media (min-width: 960px) {
+  .bandeau-cadre {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3rem;
+  }
+
+  .bandeau-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 639px) {
+  .bandeau-cta {
+    padding: 3.5rem 0;
+  }
+
+  .bandeau-actions {
+    flex-direction: column;
+  }
+}
+/* ===================================================================
+   Accueil : couverture
+   Texte a gauche, pile de photos de chantiers a droite. Les preuves
+   visuelles arrivent avant tout argument : c'est le vrai travail qui
+   convainc un maitre d'ouvrage, pas une illustration.
+   =================================================================== */
+.hero-grille {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0 0 1.6rem;
+  padding: 0.5rem 0.95rem 0.5rem 0.75rem;
+  border: 1px solid rgba(251, 146, 60, 0.28);
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.55);
+  color: #fed7aa;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Deux libelles : le complet, et un court pour les ecrans etroits ou le
+   badge passerait sur deux lignes. */
+.badge-court {
+  display: none;
+}
+
+@media (max-width: 479px) {
+  .badge-complet {
+    display: none;
+  }
+
+  .badge-court {
+    display: inline;
+  }
+}
+
+/* Point vivant : une pulsation lente, qui dit "entreprise en activite". */
+.point-vivant {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.point-vivant::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent);
+  animation: pulsation 2.4s var(--ease-soft) infinite;
+}
+
+@keyframes pulsation {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+.hero-confiance {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: rgba(226, 232, 240, 0.82);
+  font-size: 0.88rem;
+}
+
+.hero-confiance li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-confiance li::before {
+  content: "";
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: none;
+  border-radius: 999px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fb923c' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 0.7rem no-repeat,
+    rgba(251, 146, 60, 0.14);
+}
+
+/* ---- Pile de photos -------------------------------------------------
+   Trois cartes empilees ; 45-pile-accueil.js fait passer la premiere a
+   l'arriere toutes les quelques secondes. Chaque position est decrite
+   par des variables, la transition fait le reste. */
+.hero-pile {
+  position: relative;
+  display: none;
+  justify-self: center;
+  width: min(78%, 22rem);
+  aspect-ratio: 4 / 5;
+  margin: 1.5rem 0;
+}
+
+.pile-carte {
+  --tx: 0%;
+  --ty: 0%;
+  --rot: -2deg;
+  --s: 1;
+  --lum: 1;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1.6rem;
+  background: var(--bg-elevated);
+  box-shadow: 0 30px 60px rgba(2, 6, 23, 0.55);
+  transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--s));
+  filter: brightness(var(--lum));
+  transition:
+    transform 1s var(--ease),
+    filter 1s var(--ease);
+}
+
+.pile-carte img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pile-carte figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 3rem 1.2rem 1.1rem;
+  background: linear-gradient(180deg, transparent, rgba(2, 6, 23, 0.88));
+  color: var(--heading);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.pile-carte figcaption span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #fdba74;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.pile-carte[data-pos="0"] {
+  z-index: 3;
+}
+
+.pile-carte[data-pos="1"] {
+  z-index: 2;
+  --tx: 11%;
+  --ty: -5%;
+  --rot: 5deg;
+  --s: 0.93;
+  --lum: 0.62;
+}
+
+.pile-carte[data-pos="2"] {
+  z-index: 1;
+  --tx: -9%;
+  --ty: -8%;
+  --rot: -8deg;
+  --s: 0.87;
+  --lum: 0.45;
+}
+
+/* La carte qui quitte le dessus de la pile sort par la droite, puis se
+   glisse dessous : un geste de main qui feuillette des tirages. */
+.pile-carte.quitte {
+  /* Sans cela, la transition declenchee par le changement de position
+     l'emporterait sur l'animation (les transitions priment dans la cascade). */
+  transition: none;
+  animation: pileSortie 1s var(--ease);
+}
+
+@keyframes pileSortie {
+  0% {
+    z-index: 4;
+    transform: translate(0%, 0%) rotate(-2deg) scale(1);
+    filter: brightness(1);
+  }
+  42% {
+    z-index: 4;
+    transform: translate(62%, 3%) rotate(12deg) scale(0.96);
+  }
+  43% {
+    z-index: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-pile {
+    animation: pileEntree 1.2s var(--ease) both;
+    animation-delay: 250ms;
+  }
+}
+
+@keyframes pileEntree {
+  from {
+    opacity: 0;
+    transform: translate3d(40px, 20px, 0) rotate(4deg);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-pile:hover .pile-carte[data-pos="0"] {
+    --rot: 0deg;
+    --s: 1.02;
+  }
+}
+
+/* ---- Invitation a defiler ------------------------------------------- */
+.hero-defiler {
+  position: absolute;
+  left: 50%;
+  bottom: 1.6rem;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  transition: color var(--dur-ui) var(--ease);
+}
+
+.hero-defiler:hover {
+  color: var(--heading);
+}
+
+.hero-defiler::after {
+  content: "";
+  width: 1px;
+  height: 2.6rem;
+  background: linear-gradient(180deg, var(--accent) 0 40%, rgba(255, 255, 255, 0.15) 40%);
+  background-size: 100% 200%;
+  animation: defilerTrait 2.2s var(--ease-soft) infinite;
+}
+
+@keyframes defilerTrait {
+  from {
+    background-position: 0 100%;
+  }
+  to {
+    background-position: 0 -100%;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero-grille {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 4rem;
+  }
+
+  .hero-pile {
+    display: block;
+  }
+
+  .hero-defiler {
+    display: flex;
+  }
+
+  .page-home .hero {
+    padding-bottom: 7rem;
+  }
+}
+
+/* Les chiffres forment une bande, pas une section a part entiere : moins
+   d'air autour, pour qu'ils restent colles a la couverture qu'ils appuient. */
+.section-chiffres {
+  padding: 3.5rem 0;
+}
+
+/* ===================================================================
+   References institutionnelles : bandeau defilant
+   Deux pistes identiques qui glissent ensemble ; la seconde est masquee
+   aux lecteurs d'ecran. Arret au survol pour laisser lire.
+   =================================================================== */
+.references {
+  padding: 3rem 0 3.4rem;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+  text-align: center;
+}
+
+.references .eyebrow {
+  margin-bottom: 1.6rem;
+}
+
+.defilant {
+  display: flex;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.defilant-piste {
+  display: flex;
+  flex: none;
+  gap: 3rem;
+  margin: 0;
+  padding: 0 3rem 0 0;
+  list-style: none;
+  animation: defilement 42s linear infinite;
+}
+
+.defilant:hover .defilant-piste {
+  animation-play-state: paused;
+}
+
+.defilant-piste li {
+  display: inline-flex;
+  align-items: center;
+  gap: 3rem;
+  color: rgba(248, 250, 252, 0.62);
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.1vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: color var(--dur-ui) var(--ease);
+}
+
+.defilant-piste li:hover {
+  color: var(--heading);
+}
+
+.defilant-piste li::after {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--accent);
+  opacity: 0.8;
+}
+
+@keyframes defilement {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .defilant {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .defilant-piste {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1rem;
+    padding: 0;
+  }
+
+  .defilant-piste[aria-hidden="true"] {
     display: none;
   }
 }

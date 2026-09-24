@@ -1,0 +1,31 @@
+/* ===================================================================
+   Typographie auto-hebergee. Aucun appel a un service externe : les
+   fichiers sont sous-echantillonnes au jeu de caracteres francais
+   (82 Ko au total contre 291 Ko pour les fontes completes).
+   Archivo pour les titres, IBM Plex Sans pour le texte courant.
+   =================================================================== */
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 500 800;
+  font-display: swap;
+  src: url("../fonts/archivo-500-800-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Plex";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/plex-400-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Plex";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/plex-600-latin.woff2") format("woff2");
+}
+

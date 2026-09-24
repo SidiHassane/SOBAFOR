@@ -1,0 +1,189 @@
+/* ---------------------------------------------------------------
+   Galerie des realisations
+   Mise en page en colonnes (masonry) : chaque photo garde son ratio
+   naturel. Les sources vont de 307x173 a 1080x1264 ; un recadrage
+   uniforme en 4/3 les deformait et les rendait floues.
+   --------------------------------------------------------------- */
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1.85rem;
+}
+
+.filter-chip {
+  min-height: 2.9rem;
+  padding: 0.6rem 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+}
+
+.filter-chip:hover {
+  color: var(--heading);
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.filter-chip.is-active {
+  color: var(--accent);
+  border-color: rgba(251, 146, 60, 0.42);
+  background: rgba(251, 146, 60, 0.1);
+}
+
+.gallery {
+  columns: 2;
+  column-gap: 0.75rem;
+}
+
+.shot {
+  margin: 0 0 0.75rem;
+  break-inside: avoid;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1.15rem;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+/* L'attribut hidden sert au filtrage : il doit primer sur tout display. */
+.shot[hidden] {
+  display: none;
+}
+
+.shot-open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.shot-open img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.shot figcaption {
+  padding: 0.78rem 0.95rem 0.85rem;
+  border-top: 1px solid var(--border);
+  color: var(--heading);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Cartes video : rien n'est telecharge tant que l'utilisateur n'a pas
+   clique. Le poids est annonce, la connexion mobile est souvent limitee. */
+.shot-play {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  width: 100%;
+  /* Le ratio natif de la video est ecrit dans le HTML : la carte a le bon
+     format des le premier rendu, donc aucun decalage quand la vignette
+     arrive. La plupart de ces videos sont verticales. */
+  aspect-ratio: var(--ar, 16 / 10);
+  padding: 1.25rem;
+  border: 0;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(251, 146, 60, 0.16), transparent 62%),
+    linear-gradient(180deg, #101c33, #030814);
+  color: var(--heading);
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+/* Vignette extraite de la video elle-meme. Le canvas remplace le fond uni :
+   18 rectangles gris devenaient illisibles cote a cote. */
+.shot-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--dur-enter) var(--ease);
+  z-index: 0;
+}
+
+.shot-play.has-poster .shot-poster {
+  opacity: 1;
+}
+
+.shot-play.has-poster {
+  background: #050b18;
+}
+
+/* Voile degrade : sans lui, le libelle et le poids se perdent sur une
+   image claire. */
+.shot-play.has-poster::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.2) 0%, rgba(2, 6, 23, 0.45) 45%, rgba(2, 6, 23, 0.82) 100%);
+}
+
+.play-badge,
+.play-label {
+  position: relative;
+  z-index: 2;
+}
+
+.play-badge {
+  flex: none;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  background: rgba(2, 6, 23, 0.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat center / 1.45rem;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.play-label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.play-weight {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.shot video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: #000;
+}
+
+.gallery-empty {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+

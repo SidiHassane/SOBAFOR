@@ -1,0 +1,217 @@
+/* Visionneuse plein ecran */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  place-items: center;
+  gap: 1rem;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  background: rgba(2, 6, 23, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  /* Retour en place apres un balayage avorte. */
+  transition:
+    transform var(--dur-ui) var(--ease),
+    opacity var(--dur-ui) var(--ease);
+}
+
+/* Pendant le geste, le media colle au doigt : aucune transition ne doit
+   s'interposer, sinon le suivi parait mou et en retard. */
+.lightbox-stage.is-dragging {
+  transition: none;
+}
+
+/* Le navigateur ne doit pas interpreter le balayage comme un defilement.
+   Les commandes de la video gardent leur comportement natif. */
+.lightbox {
+  touch-action: none;
+}
+
+.lightbox-stage video {
+  touch-action: auto;
+}
+
+.lightbox-stage img {
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  border-radius: 0.9rem;
+  box-shadow: var(--shadow);
+}
+
+.lightbox-caption {
+  margin: 0;
+  color: var(--heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Position dans la serie : on sait ou l'on en est, et combien il reste. */
+.lightbox-compteur {
+  position: absolute;
+  top: clamp(0.75rem, 3vw, 1.5rem);
+  left: clamp(0.75rem, 3vw, 1.5rem);
+  margin: 0;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.75);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.lightbox-compteur strong {
+  color: var(--heading);
+}
+
+/* Chaque media entre en douceur, une fois decode : plus d'image qui se
+   dessine par bandes sur connexion lente. */
+.lightbox-stage img,
+.lightbox-stage video {
+  animation: mediaEntree 480ms var(--ease) both;
+}
+
+.lightbox-stage.charge img {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes mediaEntree {
+  from {
+    opacity: 0;
+    transform: scale(0.965);
+  }
+}
+
+.lightbox-stage.charge::after {
+  content: "";
+  position: absolute;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--accent);
+  border-radius: 999px;
+  animation: rotation 0.8s linear infinite;
+}
+
+@keyframes rotation {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.lightbox button {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.75);
+  color: var(--heading);
+  font: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.lightbox button:hover {
+  border-color: rgba(251, 146, 60, 0.5);
+  background: rgba(251, 146, 60, 0.14);
+  color: var(--accent);
+}
+
+.lightbox-close {
+  top: clamp(0.75rem, 3vw, 1.5rem);
+  right: clamp(0.75rem, 3vw, 1.5rem);
+}
+
+.lightbox-prev {
+  left: clamp(0.5rem, 2vw, 1.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-next {
+  right: clamp(0.5rem, 2vw, 1.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+/* Les videos sont majoritairement verticales (576x1024). Les lire dans la
+   carte les enfermait dans un rectangle 16/10 : minuscules sur telephone.
+   Elles s'ouvrent donc dans la visionneuse, au format reel. */
+.lightbox-stage video {
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  border-radius: 0.9rem;
+  background: #000;
+  box-shadow: var(--shadow);
+}
+
+/* Sur telephone, la visionneuse doit occuper l'ecran : on rogne les marges
+   et on laisse la hauteur au media plutot qu'aux bordures. */
+@media (max-width: 639px) {
+  .lightbox {
+    padding: 0.6rem;
+    gap: 0.6rem;
+  }
+
+  .lightbox-stage img,
+  .lightbox-stage video {
+    max-height: 82vh;
+    border-radius: 0.6rem;
+  }
+
+  .lightbox-caption {
+    font-size: 0.8rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .lightbox button {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+
+  .lightbox-prev {
+    left: 0.4rem;
+  }
+
+  .lightbox-next {
+    right: 0.4rem;
+  }
+}
+

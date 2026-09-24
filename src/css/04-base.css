@@ -1,0 +1,101 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text);
+  /* Une seule source de lumiere, en haut a gauche, plutot que les quatre
+     degrades superposes d'avant : le fond avait du bruit sans intention. */
+  background:
+    radial-gradient(120% 80% at 12% -10%, rgba(251, 146, 60, 0.09), transparent 55%),
+    linear-gradient(180deg, #030918 0%, #020617 60%);
+  /* Pas de background-attachment: fixed ici : sur mobile il force un
+     repaint du fond a chaque frame de defilement. La trame en position
+     fixed du pseudo-element ci-dessous obtient le meme effet sans le cout. */
+  line-height: 1.65;
+  min-height: 100vh;
+  padding-top: var(--header-height);
+  /* Indispensable sur fond sombre : sans cela le texte parait gras et sale. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Trame de calque d'architecte + grain. Purement decoratif, non cliquable,
+   masque en fondu pour ne rester lisible que dans le haut de page. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 76px 76px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 55% at 50% 0%, #000 25%, transparent 85%);
+  mask-image: radial-gradient(ellipse 90% 55% at 50% 0%, #000 25%, transparent 85%);
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+svg {
+  display: block;
+}
+
+.container {
+  width: min(100% - 2rem, var(--container));
+  margin-inline: auto;
+}
+
+.site-main {
+  position: relative;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 200;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: var(--heading);
+  color: var(--bg);
+  transform: translateY(-180%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+

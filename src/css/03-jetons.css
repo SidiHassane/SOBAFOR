@@ -1,0 +1,36 @@
+:root {
+  --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Plex", "Segoe UI", system-ui, sans-serif;
+
+  /* Une seule courbe signature pour tout le site : demarrage franc,
+     arrivee longue et amortie. C'est elle qui donne la sensation de poids. */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-tap: 140ms;
+  --dur-ui: 300ms;
+  --dur-enter: 620ms;
+  --stagger-step: 65ms;
+
+  --bg: #020617;
+  --bg-elevated: #0f172a;
+  --bg-soft: #111c32;
+  --surface: rgba(15, 23, 42, 0.82);
+  --surface-strong: rgba(15, 23, 42, 0.94);
+  --surface-light: rgba(255, 255, 255, 0.04);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --heading: #f8fafc;
+  --accent: #fb923c;
+  --accent-strong: #f97316;
+  --accent-soft: rgba(251, 146, 60, 0.14);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --shadow: 0 28px 60px rgba(2, 6, 23, 0.38);
+  --shadow-soft: 0 18px 45px rgba(2, 6, 23, 0.28);
+  --radius: 1.25rem;
+  --radius-xl: 2rem;
+  --container: 1180px;
+  --header-height: 88px;
+  --whatsapp: #25d366;
+}
+

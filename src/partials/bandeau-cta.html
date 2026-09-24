@@ -1,0 +1,18 @@
+    <section class="bandeau-cta" aria-labelledby="bandeau-titre">
+      <div class="container">
+        <div class="bandeau-cadre" data-reveal>
+          <div class="bandeau-texte">
+            <p class="eyebrow">Parlons de votre projet</p>
+            <h2 id="bandeau-titre">{{ bandeau.titre }}</h2>
+            <p>{{ bandeau.texte }}</p>
+          </div>
+          <div class="bandeau-actions">
+            <a class="btn btn-primary" href="devis.html">Demander un devis</a>
+            <a class="btn btn-whatsapp" href="{{ whatsapp }}" target="_blank" rel="noopener">
+              {{> icone-whatsapp }}
+              WhatsApp <span class="btn-numero">{{ site.telephones.principal.court }}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>

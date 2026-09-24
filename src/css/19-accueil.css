@@ -1,0 +1,385 @@
+/* ===================================================================
+   Accueil : couverture
+   Texte a gauche, pile de photos de chantiers a droite. Les preuves
+   visuelles arrivent avant tout argument : c'est le vrai travail qui
+   convainc un maitre d'ouvrage, pas une illustration.
+   =================================================================== */
+.hero-grille {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0 0 1.6rem;
+  padding: 0.5rem 0.95rem 0.5rem 0.75rem;
+  border: 1px solid rgba(251, 146, 60, 0.28);
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.55);
+  color: #fed7aa;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Deux libelles : le complet, et un court pour les ecrans etroits ou le
+   badge passerait sur deux lignes. */
+.badge-court {
+  display: none;
+}
+
+@media (max-width: 479px) {
+  .badge-complet {
+    display: none;
+  }
+
+  .badge-court {
+    display: inline;
+  }
+}
+
+/* Point vivant : une pulsation lente, qui dit "entreprise en activite". */
+.point-vivant {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.point-vivant::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent);
+  animation: pulsation 2.4s var(--ease-soft) infinite;
+}
+
+@keyframes pulsation {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+.hero-confiance {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: rgba(226, 232, 240, 0.82);
+  font-size: 0.88rem;
+}
+
+.hero-confiance li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-confiance li::before {
+  content: "";
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: none;
+  border-radius: 999px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fb923c' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 0.7rem no-repeat,
+    rgba(251, 146, 60, 0.14);
+}
+
+/* ---- Pile de photos -------------------------------------------------
+   Trois cartes empilees ; 45-pile-accueil.js fait passer la premiere a
+   l'arriere toutes les quelques secondes. Chaque position est decrite
+   par des variables, la transition fait le reste. */
+.hero-pile {
+  position: relative;
+  display: none;
+  justify-self: center;
+  width: min(78%, 22rem);
+  aspect-ratio: 4 / 5;
+  margin: 1.5rem 0;
+}
+
+.pile-carte {
+  --tx: 0%;
+  --ty: 0%;
+  --rot: -2deg;
+  --s: 1;
+  --lum: 1;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1.6rem;
+  background: var(--bg-elevated);
+  box-shadow: 0 30px 60px rgba(2, 6, 23, 0.55);
+  transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--s));
+  filter: brightness(var(--lum));
+  transition:
+    transform 1s var(--ease),
+    filter 1s var(--ease);
+}
+
+.pile-carte img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pile-carte figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 3rem 1.2rem 1.1rem;
+  background: linear-gradient(180deg, transparent, rgba(2, 6, 23, 0.88));
+  color: var(--heading);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.pile-carte figcaption span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #fdba74;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.pile-carte[data-pos="0"] {
+  z-index: 3;
+}
+
+.pile-carte[data-pos="1"] {
+  z-index: 2;
+  --tx: 11%;
+  --ty: -5%;
+  --rot: 5deg;
+  --s: 0.93;
+  --lum: 0.62;
+}
+
+.pile-carte[data-pos="2"] {
+  z-index: 1;
+  --tx: -9%;
+  --ty: -8%;
+  --rot: -8deg;
+  --s: 0.87;
+  --lum: 0.45;
+}
+
+/* La carte qui quitte le dessus de la pile sort par la droite, puis se
+   glisse dessous : un geste de main qui feuillette des tirages. */
+.pile-carte.quitte {
+  /* Sans cela, la transition declenchee par le changement de position
+     l'emporterait sur l'animation (les transitions priment dans la cascade). */
+  transition: none;
+  animation: pileSortie 1s var(--ease);
+}
+
+@keyframes pileSortie {
+  0% {
+    z-index: 4;
+    transform: translate(0%, 0%) rotate(-2deg) scale(1);
+    filter: brightness(1);
+  }
+  42% {
+    z-index: 4;
+    transform: translate(62%, 3%) rotate(12deg) scale(0.96);
+  }
+  43% {
+    z-index: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-pile {
+    animation: pileEntree 1.2s var(--ease) both;
+    animation-delay: 250ms;
+  }
+}
+
+@keyframes pileEntree {
+  from {
+    opacity: 0;
+    transform: translate3d(40px, 20px, 0) rotate(4deg);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-pile:hover .pile-carte[data-pos="0"] {
+    --rot: 0deg;
+    --s: 1.02;
+  }
+}
+
+/* ---- Invitation a defiler ------------------------------------------- */
+.hero-defiler {
+  position: absolute;
+  left: 50%;
+  bottom: 1.6rem;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  transition: color var(--dur-ui) var(--ease);
+}
+
+.hero-defiler:hover {
+  color: var(--heading);
+}
+
+.hero-defiler::after {
+  content: "";
+  width: 1px;
+  height: 2.6rem;
+  background: linear-gradient(180deg, var(--accent) 0 40%, rgba(255, 255, 255, 0.15) 40%);
+  background-size: 100% 200%;
+  animation: defilerTrait 2.2s var(--ease-soft) infinite;
+}
+
+@keyframes defilerTrait {
+  from {
+    background-position: 0 100%;
+  }
+  to {
+    background-position: 0 -100%;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero-grille {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 4rem;
+  }
+
+  .hero-pile {
+    display: block;
+  }
+
+  .hero-defiler {
+    display: flex;
+  }
+
+  .page-home .hero {
+    padding-bottom: 7rem;
+  }
+}
+
+/* Les chiffres forment une bande, pas une section a part entiere : moins
+   d'air autour, pour qu'ils restent colles a la couverture qu'ils appuient. */
+.section-chiffres {
+  padding: 3.5rem 0;
+}
+
+/* ===================================================================
+   References institutionnelles : bandeau defilant
+   Deux pistes identiques qui glissent ensemble ; la seconde est masquee
+   aux lecteurs d'ecran. Arret au survol pour laisser lire.
+   =================================================================== */
+.references {
+  padding: 3rem 0 3.4rem;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+  text-align: center;
+}
+
+.references .eyebrow {
+  margin-bottom: 1.6rem;
+}
+
+.defilant {
+  display: flex;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.defilant-piste {
+  display: flex;
+  flex: none;
+  gap: 3rem;
+  margin: 0;
+  padding: 0 3rem 0 0;
+  list-style: none;
+  animation: defilement 42s linear infinite;
+}
+
+.defilant:hover .defilant-piste {
+  animation-play-state: paused;
+}
+
+.defilant-piste li {
+  display: inline-flex;
+  align-items: center;
+  gap: 3rem;
+  color: rgba(248, 250, 252, 0.62);
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.1vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: color var(--dur-ui) var(--ease);
+}
+
+.defilant-piste li:hover {
+  color: var(--heading);
+}
+
+.defilant-piste li::after {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--accent);
+  opacity: 0.8;
+}
+
+@keyframes defilement {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .defilant {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .defilant-piste {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1rem;
+    padding: 0;
+  }
+
+  .defilant-piste[aria-hidden="true"] {
+    display: none;
+  }
+}

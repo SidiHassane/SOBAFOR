@@ -1,0 +1,223 @@
+.faq details {
+  padding: 1.15rem 1.2rem;
+}
+
+.faq details + details {
+  margin-top: 1rem;
+}
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  color: var(--heading);
+  font-weight: 700;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Le signe + pivote en croix : une seule forme qui change d'etat plutot
+   que deux caracteres qui se remplacent. */
+.faq summary::after {
+  content: "+";
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(251, 146, 60, 0.25);
+  color: var(--accent);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform var(--dur-ui) var(--ease), background var(--dur-ui) var(--ease);
+}
+
+.faq details[open] summary::after {
+  transform: rotate(45deg);
+  background: var(--accent-soft);
+}
+
+/* Ouverture en douceur la ou le navigateur sait animer vers "auto" ;
+   ailleurs, le comportement natif instantane reste en place. */
+.faq details {
+  interpolate-size: allow-keywords;
+}
+
+.faq details::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size var(--dur-ui) var(--ease),
+    content-visibility var(--dur-ui) allow-discrete;
+}
+
+.faq details[open]::details-content {
+  block-size: auto;
+}
+
+.faq p {
+  margin: 0.9rem 0 0;
+}
+
+/* ---------------------------------------------------------------
+   Processus en frise chronologique
+   Chaque etape porte le segment qui la relie a la suivante. Le segment
+   se remplit au rythme du defilement (timeline de vue, sans JavaScript) ;
+   sans cette capacite, il s'affiche simplement plein.
+   --------------------------------------------------------------- */
+.process {
+  --pastille: 2.75rem;
+  --ecart-etapes: 2.25rem;
+  counter-reset: step;
+  display: grid;
+  gap: var(--ecart-etapes);
+}
+
+.process .step {
+  position: relative;
+  padding-left: calc(var(--pastille) + 1.25rem);
+  min-height: var(--pastille);
+  view-timeline-name: --etape;
+}
+
+.process .step h3 {
+  margin: 0.45rem 0 0.5rem;
+}
+
+.process .step::after {
+  counter-increment: step;
+  content: "0" counter(step);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: var(--pastille);
+  height: var(--pastille);
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  border: 1px solid rgba(251, 146, 60, 0.45);
+  box-shadow: 0 0 0 6px rgba(251, 146, 60, 0.07);
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.process .step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: var(--pastille);
+  bottom: calc(-1 * var(--ecart-etapes));
+  left: calc(var(--pastille) / 2 - 1px);
+  width: 2px;
+  background:
+    linear-gradient(var(--accent), #fdba74) top / 100% var(--rempli, 100%) no-repeat,
+    var(--border-strong);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .process .step:not(:last-child)::before {
+      animation: remplirSegment linear both;
+      animation-timeline: --etape;
+      animation-range: entry 100% cover 55%;
+    }
+  }
+}
+
+@keyframes remplirSegment {
+  from {
+    --rempli: 0%;
+  }
+  to {
+    --rempli: 100%;
+  }
+}
+
+@property --rempli {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@media (min-width: 960px) {
+  .process {
+    --ecart-etapes: 1.75rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .process .step {
+    padding-left: 0;
+    padding-top: calc(var(--pastille) + 1.1rem);
+  }
+
+  .process .step:not(:last-child)::before {
+    top: calc(var(--pastille) / 2 - 1px);
+    bottom: auto;
+    left: var(--pastille);
+    right: calc(-1 * var(--ecart-etapes));
+    width: auto;
+    height: 2px;
+    background:
+      linear-gradient(90deg, var(--accent), #fdba74) left / var(--rempli, 100%) 100% no-repeat,
+      var(--border-strong);
+  }
+}
+
+.contact-box h2 {
+  font-size: clamp(1.45rem, 2.1vw, 2rem);
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.contact-item + .contact-item {
+  margin-top: 1rem;
+}
+
+.contact-item .ico {
+  flex: none;
+  min-width: 3rem;
+  height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.6rem;
+  border-radius: 999px;
+  background: rgba(251, 146, 60, 0.12);
+  border: 1px solid rgba(251, 146, 60, 0.18);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.map-wrap {
+  overflow: hidden;
+}
+
+.map-wrap iframe {
+  display: block;
+  width: 100%;
+  min-height: 380px;
+  border: 0;
+  filter: grayscale(0.25) saturate(0.9) contrast(1.02);
+}
+
+.map-actions {
+  margin: 1.25rem 0 0;
+}
+

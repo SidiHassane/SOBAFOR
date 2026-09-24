@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.titre }}</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#020617" />
+  <link rel="icon" type="image/jpeg" href="logo.jpeg" />
+  <link rel="stylesheet" href="assets/css/style.css?v={{ versions.css }}" />
+  <script>document.documentElement.classList.add("js")</script>
+</head>
+<body class="{{ page.classe }}">
+  <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+  <header class="site-header">
+    <div class="container header-inner">
+{{> marque }}
+    </div>
+  </header>
+
+  <main class="site-main" id="contenu">
+{{{ contenu }}}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">&copy; {{ annee }} {{ site.nom }}. Tous droits réservés. RCCM {{ site.rccm }} | NIF {{ site.nif }}</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js?v={{ versions.js }}"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+/* ===================================================================
+   Systeme de revelation
+   Avant : un seul fondu de 26px sur des blocs entiers, donc des pavees
+   qui apparaissaient d'un coup. Desormais chaque element part avec un
+   retard propre (--stagger, pose par le script) : le regard suit une
+   cascade au lieu de subir un pop.
+   Le deplacement est passe de 26px a 14px : plus le geste est court,
+   plus il parait maitrise.
+
+   L'etat masque n'existe que si le script tourne (classe .js posee dans
+   <head>) : sans JavaScript, tout reste lisible. Une fois revele, l'element
+   perd son attribut data-reveal (30-revelations.js) et retrouve ses propres
+   transitions — sinon le leve au survol des cartes etait neutralise.
+   =================================================================== */
+.js [data-reveal] {
+  transition:
+    opacity var(--dur-enter) var(--ease) calc(var(--stagger, 0) * var(--stagger-step)),
+    transform var(--dur-enter) var(--ease) calc(var(--stagger, 0) * var(--stagger-step));
+}
+
+.js [data-reveal]:not(.show) {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+}
+
+/* Parallaxe du visuel de couverture, pilotee par le defilement lui-meme.
+   Aucun ecouteur JavaScript : le compositeur du navigateur s'en charge,
+   donc zero saccade meme sur telephone modeste. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .page-home .hero {
+      animation: heroDrift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 90vh;
+    }
+  }
+}
+
+@keyframes heroDrift {
+  to {
+    background-position: center 22%;
+  }
+}
+
+/* ===================================================================
+   Entree des couvertures
+   Le titre monte mot a mot derriere un masque (les mots sont decoupes au
+   build, aucun script) ; le reste du bloc suit en fondu. L'etat de depart
+   n'est porte que par les images-cles : si l'animation est coupee, le
+   texte est simplement visible.
+   =================================================================== */
+.titre-anime .mot {
+  display: inline-block;
+  overflow: hidden;
+  /* Marge interne pour que le masque ne rogne pas les jambages (g, p, q). */
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  vertical-align: top;
+}
+
+.titre-anime .mot > span {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .titre-anime .mot > span {
+    animation: motMonte 1s var(--ease) both;
+    animation-delay: calc(90ms + var(--i, 0) * 42ms);
+  }
+
+  .hero .container:not(.hero-grille) > :not(h1),
+  .hero-texte > :not(h1) {
+    animation: heroFondu 900ms var(--ease) both;
+    animation-delay: 380ms;
+  }
+
+  .hero .container > .eyebrow,
+  .hero-texte > .hero-badge {
+    animation-delay: 0ms;
+  }
+}
+
+@keyframes motMonte {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+}
+
+@keyframes heroFondu {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

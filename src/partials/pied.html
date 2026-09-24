@@ -1,0 +1,21 @@
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-title">{{ site.nom }}</h3>
+          <p>{{ page.slogan }}</p>
+        </div>
+        <div class="footer-links">
+          <h3 class="footer-title">Navigation</h3>
+          {{@ liens-pied }}
+        </div>
+        <div>
+          <h3 class="footer-title">Contact</h3>
+          <p>{{ site.adresse.rue }}, {{ site.adresse.ville }}, {{ site.adresse.pays }}</p>
+          <p><a href="tel:{{ site.telephones.principal.lien }}">{{ site.telephones.principal.affiche }}</a><span class="wa-tag">Appel &amp; WhatsApp</span></p>
+          <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; {{ annee }} {{ site.nom }}. Tous droits réservés. RCCM {{ site.rccm }} | NIF {{ site.nif }}</div>
+    </div>
+  </footer>
