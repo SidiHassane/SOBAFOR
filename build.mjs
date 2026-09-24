@@ -166,6 +166,16 @@ const aides = {
 
   "nombre-realisations": () => String(galerie.elements.length),
 
+  // Bandeau defilant des references : trois pistes identiques, pour qu'aucun
+  // vide n'apparaisse en fin de cycle meme sur un tres grand ecran. Seule la
+  // premiere est lue par les lecteurs d'ecran.
+  defilant: () => {
+    const items = site.references.map((nom) => `  <li>${echapper(nom)}</li>`).join("\n");
+    return [0, 1, 2]
+      .map((i) => `<ul class="defilant-piste"${i ? ' aria-hidden="true"' : ""}>\n${items}\n</ul>`)
+      .join("\n");
+  },
+
   bandeau: (ctx) => {
     if (ctx.page.bandeau === "non") return "";
     const bandeau = {

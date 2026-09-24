@@ -13,7 +13,7 @@
  * 95 Mo et saturerait le stockage du telephone.
  */
 
-const VERSION = "sobafor-359ee77bde";
+const VERSION = "sobafor-2bc6a5ee9c";
 const COQUE = VERSION + "-coque";
 const IMAGES = VERSION + "-images";
 const PAGES = VERSION + "-pages";
