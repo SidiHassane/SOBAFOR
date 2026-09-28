@@ -85,11 +85,15 @@ for (const el of galerie.elements) {
 /* Aides appelables depuis les gabarits : {{@ nom argument }}          */
 /* ------------------------------------------------------------------ */
 
+// Un element rattache a un chantier suivi porte son identifiant : le filtre
+// « Nouadhibou » de la galerie s'appuie dessus.
+const attributProjet = (el) => (el.projet ? ` data-projet="${el.projet}"` : "");
+
 const figure = (el) => {
   const legende = echapper(el.legende || el.titre);
   if (el.video) {
     return [
-      `<figure class="shot is-video" data-cat="${el.cat}">`,
+      `<figure class="shot is-video" data-cat="${el.cat}"${attributProjet(el)}>`,
       `  <button class="shot-play" type="button" data-video="${urlFichier(el.video)}" style="--ar:${el.ar}" data-title="${echapper(el.titre)}">`,
       `    <span class="play-badge" aria-hidden="true"></span>`,
       `    <span class="play-label">${echapper(el.label)} <span class="play-weight">Vidéo · ${poidsVideo(el.video)}</span></span>`,
@@ -107,7 +111,7 @@ const figure = (el) => {
           .join(", ")}" sizes="(min-width: 960px) 360px, 45vw"`
       : `src="${imageGalerie(el.id, tailles[0])}"`;
   return [
-    `<figure class="shot" data-cat="${el.cat}">`,
+    `<figure class="shot" data-cat="${el.cat}"${attributProjet(el)}>`,
     `  <button class="shot-open" type="button" data-full="${imageGalerie(el.id, plusGrande)}" data-title="${echapper(el.titre)}">`,
     `    <img ${attributsSource} width="${el.w}" height="${el.h}" alt="${echapper(el.alt)}" loading="lazy" decoding="async" />`,
     `  </button>`,
@@ -124,6 +128,8 @@ const FORMATS = {
   galerie: "(min-width: 960px) 360px, 45vw",
   carte: "(min-width: 860px) 360px, 92vw",
   pile: "368px",
+  mosaique: "(min-width: 960px) 290px, 50vw",
+  video: "(min-width: 1180px) 580px, (min-width: 960px) 50vw, 100vw",
 };
 
 const photo = (id, format = "galerie") => {
@@ -154,14 +160,60 @@ const aides = {
   photo: (ctx, id, format) => photo(id, format),
 
   filtres: () => {
-    const puce = (id, nom, nombre, active) =>
-      `<button type="button" class="filter-chip${active ? " is-active" : ""}" data-filter="${id}" aria-pressed="${active}">${echapper(nom)} <span class="chip-count">${nombre}</span></button>`;
+    const puce = (id, nom, nombre, active, classe = "") =>
+      `<button type="button" class="filter-chip${active ? " is-active" : ""}${classe}" data-filter="${id}" aria-pressed="${active}">${echapper(nom)} <span class="chip-count">${nombre}</span></button>`;
     return [
       puce("all", "Tout", galerie.elements.length, true),
+      // Les chantiers en cours passent juste apres « Tout » : c'est ce qu'un
+      // visiteur qui revient cherche en premier.
+      ...(galerie.projets || []).map((p) =>
+        puce(`projet-${p.id}`, p.puce, galerie.elements.filter((el) => el.projet === p.id).length, false, " filter-chip-projet")
+      ),
       ...galerie.categories.map((c) =>
         puce(c.id, c.nom, galerie.elements.filter((el) => el.cat === c.id).length, false)
       ),
     ].join("\n");
+  },
+
+  // Section « chantier phare » de l'accueil, entierement tiree de
+  // galerie.json : pour publier un nouveau point d'avancement, on modifie
+  // les etapes et la date dans le fichier de donnees, rien d'autre.
+  "chantier-phare": (ctx, id) => {
+    const projet = (galerie.projets || []).find((p) => p.id === id);
+    if (!projet) {
+      erreurs.push(`chantier-phare : projet inconnu "${id}"`);
+      return "";
+    }
+    const libelles = { fait: "Terminé", "en-cours": "En cours", "a-venir": "À venir" };
+    const lienGalerie = `realisations.html?filtre=projet-${projet.id}`;
+    const affiche = (l) => `assets/img/video/${projet.video.affiche}-${l}.jpg`;
+    const donnees = {
+      ...projet,
+      nombreMedias: galerie.elements.filter((el) => el.projet === projet.id).length,
+      lienGalerie,
+      programmeHtml: projet.programme.map((p) => `<li>${echapper(p)}</li>`).join("\n"),
+      etapesHtml: projet.etapes
+        .map((e) => {
+          if (!libelles[e.etat]) erreurs.push(`chantier-phare : etat inconnu "${e.etat}"`);
+          return `<li class="etape-${e.etat}"><span class="etape-nom">${echapper(e.nom)}</span><span class="etape-etat">${libelles[e.etat]}</span></li>`;
+        })
+        .join("\n"),
+      nombreBlocs: (projet.blocs || []).length,
+      blocsHtml: (projet.blocs || [])
+        .map((b) => `<div class="phare-bloc"><dt>${echapper(b.nom)}</dt><dd>${echapper(b.travaux)}</dd></div>`)
+        .join("\n"),
+      mosaiqueHtml: projet.mosaique
+        .map((pid) => `<a class="phare-photo" href="${lienGalerie}">${photo(pid, "mosaique")}</a>`)
+        .join("\n"),
+      afficheHtml: `<img src="${affiche(960)}" srcset="${[640, 960, 1280]
+        .map((l) => `${affiche(l)} ${l}w`)
+        .join(", ")}" sizes="${FORMATS.video}" width="1280" height="720" alt="" loading="lazy" decoding="async" />`,
+      poids540: poidsVideo(projet.video.sources["540"]),
+      poids720: poidsVideo(projet.video.sources["720"]),
+    };
+    return rendre(lire(join(SRC, "partials/chantier-phare.html")).replace(/\n$/, ""), { ...ctx, projet: donnees }, [
+      "chantier-phare",
+    ]);
   },
 
   "nombre-realisations": () => String(galerie.elements.length),

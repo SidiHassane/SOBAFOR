@@ -11,10 +11,17 @@ if (gallery) {
   if (filterBar) {
     const chips = Array.from(filterBar.querySelectorAll(".filter-chip"));
 
+    // Deux familles de filtres : les domaines (data-cat) et les chantiers
+    // suivis (data-projet, puces « projet-... »).
+    const correspond = (shot, value) =>
+      value === "all" ||
+      shot.dataset.cat === value ||
+      (shot.dataset.projet !== undefined && value === `projet-${shot.dataset.projet}`);
+
     const applyFilter = (value) => {
       let visible = 0;
       shots.forEach((shot) => {
-        const match = value === "all" || shot.dataset.cat === value;
+        const match = correspond(shot, value);
         shot.hidden = !match;
         if (match) visible++;
       });
@@ -44,17 +51,30 @@ if (gallery) {
       });
     };
 
+    const activer = (chip) => {
+      chips.forEach((c) => {
+        const active = c === chip;
+        c.classList.toggle("is-active", active);
+        c.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+    };
+
     chips.forEach((chip) => {
       chip.addEventListener("click", () => {
         if (chip.classList.contains("is-active")) return;
-        chips.forEach((c) => {
-          const active = c === chip;
-          c.classList.toggle("is-active", active);
-          c.setAttribute("aria-pressed", active ? "true" : "false");
-        });
+        activer(chip);
         filtrer(chip.dataset.filter);
       });
     });
+
+    // Lien direct vers un filtre (realisations.html?filtre=projet-nouadhibou) :
+    // l'accueil renvoie ainsi droit sur les photos du chantier phare.
+    const demande = new URLSearchParams(window.location.search).get("filtre");
+    const puceDemandee = demande && chips.find((c) => c.dataset.filter === demande);
+    if (puceDemandee) {
+      activer(puceDemandee);
+      applyFilter(demande);
+    }
   }
 
   // --- Vignettes video ---

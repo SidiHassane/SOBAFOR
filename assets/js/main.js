@@ -108,7 +108,7 @@
     // ENSEMBLE dans l'ecran : la 30e photo d'une galerie n'attend donc pas
     // derriere les 29 premieres. Le retard est porte par une variable CSS :
     // c'est le compositeur qui anime, le script ne fait que poser une classe.
-    const GROUPES = ".cards, .stats, .process, .kpis, .footer-grid, .gallery";
+    const GROUPES = ".cards, .stats, .process, .kpis, .footer-grid, .gallery, .phare-mosaique";
     const RANG_MAX = 5; // au-dela, le retard cumule se lit comme une lenteur
 
     document.querySelectorAll(GROUPES).forEach((groupe) => {
@@ -206,10 +206,17 @@
       if (filterBar) {
         const chips = Array.from(filterBar.querySelectorAll(".filter-chip"));
 
+        // Deux familles de filtres : les domaines (data-cat) et les chantiers
+        // suivis (data-projet, puces « projet-... »).
+        const correspond = (shot, value) =>
+          value === "all" ||
+          shot.dataset.cat === value ||
+          (shot.dataset.projet !== undefined && value === `projet-${shot.dataset.projet}`);
+
         const applyFilter = (value) => {
           let visible = 0;
           shots.forEach((shot) => {
-            const match = value === "all" || shot.dataset.cat === value;
+            const match = correspond(shot, value);
             shot.hidden = !match;
             if (match) visible++;
           });
@@ -239,17 +246,30 @@
           });
         };
 
+        const activer = (chip) => {
+          chips.forEach((c) => {
+            const active = c === chip;
+            c.classList.toggle("is-active", active);
+            c.setAttribute("aria-pressed", active ? "true" : "false");
+          });
+        };
+
         chips.forEach((chip) => {
           chip.addEventListener("click", () => {
             if (chip.classList.contains("is-active")) return;
-            chips.forEach((c) => {
-              const active = c === chip;
-              c.classList.toggle("is-active", active);
-              c.setAttribute("aria-pressed", active ? "true" : "false");
-            });
+            activer(chip);
             filtrer(chip.dataset.filter);
           });
         });
+
+        // Lien direct vers un filtre (realisations.html?filtre=projet-nouadhibou) :
+        // l'accueil renvoie ainsi droit sur les photos du chantier phare.
+        const demande = new URLSearchParams(window.location.search).get("filtre");
+        const puceDemandee = demande && chips.find((c) => c.dataset.filter === demande);
+        if (puceDemandee) {
+          activer(puceDemandee);
+          applyFilter(demande);
+        }
       }
 
       // --- Vignettes video ---
@@ -638,6 +658,42 @@
         });
       }
     }
+  }
+
+  // ---- 47-video-vedette.js
+  {
+    // --- Video de presentation ---
+    // Tant qu'on ne clique pas, la page n'affiche qu'une image legere : la
+    // video (9 a 15 Mo) n'est demandee qu'au clic. Les petits ecrans recoivent
+    // la version 540p, les grands la 720p. Sans script, le lien ouvre le
+    // fichier directement.
+    document.querySelectorAll("[data-video-vedette]").forEach((facade) => {
+      facade.addEventListener("click", (event) => {
+        event.preventDefault();
+        const video = document.createElement("video");
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.preload = "auto";
+        video.setAttribute("aria-label", facade.textContent.trim());
+
+        // getAttribute et non dataset : « data-video-540 » ne devient pas
+        // dataset.video540 (la conversion ne s'applique que devant une lettre).
+        const petite = document.createElement("source");
+        petite.src = facade.getAttribute("data-video-540");
+        petite.type = "video/mp4";
+        petite.media = "(max-width: 767px)";
+        const grande = document.createElement("source");
+        grande.src = facade.getAttribute("data-video-720");
+        grande.type = "video/mp4";
+        video.append(petite, grande);
+
+        const cadre = facade.parentElement;
+        cadre.classList.add("est-lancee");
+        facade.replaceWith(video);
+        video.play().catch(() => {});
+      });
+    });
   }
 
   // ---- 50-compteurs.js
