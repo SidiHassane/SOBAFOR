@@ -1,0 +1,46 @@
+    <section class="section chantier-phare" id="chantier-{{ projet.id }}" aria-labelledby="titre-{{ projet.id }}">
+      <div class="container">
+        <div class="phare-entete">
+          <p class="eyebrow" data-reveal>Chantier phare en cours</p>
+          <h2 id="titre-{{ projet.id }}" data-reveal>{{ projet.titre }}</h2>
+          <p class="phare-officiel" data-reveal>{{ projet.nomOfficiel }}</p>
+        </div>
+
+        <div class="phare-grille">
+          <div class="phare-texte" data-reveal>
+            <p class="phare-lieu"><span class="point-vivant" aria-hidden="true"></span>{{ projet.lieu }} · point d'avancement de {{ projet.point }}</p>
+            <p>{{ projet.description }}</p>
+            <ul class="phare-programme">
+              {{{ projet.programmeHtml }}}
+            </ul>
+            <h3 class="phare-sous-titre">État d'avancement</h3>
+            <ol class="avancement">
+              {{{ projet.etapesHtml }}}
+            </ol>
+            <details class="phare-blocs">
+              <summary><span>Détail des travaux par bâtiment <small>({{ projet.nombreBlocs }} bâtiments)</small></span></summary>
+              <dl>
+                {{{ projet.blocsHtml }}}
+              </dl>
+            </details>
+          </div>
+
+          <figure class="video-vedette" data-reveal>
+            <a class="video-facade" href="{{ projet.video.sources.720 }}" data-video-vedette data-video-540="{{ projet.video.sources.540 }}" data-video-720="{{ projet.video.sources.720 }}">
+              {{{ projet.afficheHtml }}}
+              <span class="play-badge" aria-hidden="true"></span>
+              <span class="video-facade-texte">Regarder la vidéo <span class="video-facade-infos">{{ projet.video.duree }} · <span class="poids-mobile">{{ projet.poids540 }}</span><span class="poids-large">{{ projet.poids720 }}</span></span></span>
+            </a>
+            <figcaption>{{ projet.video.legende }}</figcaption>
+          </figure>
+        </div>
+
+        <div class="phare-mosaique">
+          {{{ projet.mosaiqueHtml }}}
+        </div>
+
+        <div class="phare-actions">
+          <a class="btn btn-primary" href="{{ projet.lienGalerie }}">Voir les {{ projet.nombreMedias }} photos et vidéos du chantier</a>
+        </div>
+      </div>
+    </section>

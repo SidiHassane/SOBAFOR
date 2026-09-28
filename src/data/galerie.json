@@ -17,6 +17,80 @@
       "nom": "Location d'engins"
     }
   ],
+  "projets": [
+    {
+      "id": "nouadhibou",
+      "puce": "Nouadhibou · en cours",
+      "titre": "École TIC de Nouadhibou",
+      "nomOfficiel": "École d’Enseignement Technique et de Formation Professionnelle des Technologies de l’Information et de Communication à Nouadhibou",
+      "lieu": "Nouadhibou, Mauritanie",
+      "point": "septembre 2026",
+      "description": "SOBAFOR construit pour l’État mauritanien une école de formation aux métiers du numérique, appelée à accompagner le développement de la zone franche de Nouadhibou. Un campus complet : enseignement, internats, restauration et logements.",
+      "programme": [
+        "9 salles de cours",
+        "16 laboratoires et ateliers",
+        "Amphithéâtre de 150 places",
+        "Réfectoire de 300 places",
+        "Internats filles et garçons, 2 × 40 chambres",
+        "Logements de fonction, voiries et parkings"
+      ],
+      "etapes": [
+        {
+          "nom": "Implantation et fondations",
+          "etat": "fait"
+        },
+        {
+          "nom": "Structure en béton armé",
+          "etat": "en-cours"
+        },
+        {
+          "nom": "Maçonnerie",
+          "etat": "en-cours"
+        },
+        {
+          "nom": "Second œuvre et finitions",
+          "etat": "a-venir"
+        }
+      ],
+      "mosaique": [
+        "nouadhibou-ossature-beton",
+        "nouadhibou-bloc-pedagogique",
+        "nouadhibou-etaiement-dalle",
+        "nouadhibou-base-vie"
+      ],
+      "video": {
+        "sources": {
+          "540": "assets/video/presentation-sobafor-540.mp4",
+          "720": "assets/video/presentation-sobafor-720.mp4"
+        },
+        "affiche": "presentation",
+        "duree": "1 min 36",
+        "legende": "Le chantier au stade des fondations, filmé par drone"
+      },
+      "blocs": [
+        {
+          "nom": "Bloc administration",
+          "travaux": "Étaiement, pose des poutrelles et des hourdis sur les deux ailes ; fabrication des poutrelles armées (aciers de 14 et 16 mm) en cours."
+        },
+        {
+          "nom": "Bloc pédagogique",
+          "travaux": "Fabrication, pose et coulage des poteaux ; maçonnerie en cours ; escalier coffré, en attente de coulage. Extension côté ouest : maçonnerie en cours."
+        },
+        {
+          "nom": "Bloc amphithéâtre",
+          "travaux": "Étaiement et coulage des éléments en béton armé en cours."
+        },
+        {
+          "nom": "Foyer des garçons",
+          "travaux": "Fabrication, pose et coffrage des poteaux en cours."
+        },
+        {
+          "nom": "Foyer des filles",
+          "travaux": "Fabrication des poutrelles, coffrage des poteaux et chaînage haut en cours."
+        }
+      ]
+    }
+  ],
   "accueil": [
     "mur-cloture-portail",
     "tour-de-controle",
@@ -26,6 +100,271 @@
     "canal-assainissement"
   ],
   "elements": [
+    {
+      "id": "nouadhibou-etaiement-dalle",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc administration — étaiement et coffrage de dalle",
+      "legende": "Bloc administration — étaiement et coffrage de dalle",
+      "alt": "Étais métalliques et coffrages sous une dalle du bloc administration de l'école TIC de Nouadhibou",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.35 (3).jpeg"
+    },
+    {
+      "id": "nouadhibou-poteaux-escalier",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc administration — poteaux, poutres et escalier",
+      "legende": "Bloc administration — poteaux, poutres et escalier",
+      "alt": "Poteaux et poutres en béton armé du bloc administration, autour d'un escalier d'accès",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.35 (4).jpeg"
+    },
+    {
+      "id": "nouadhibou-facade-elevation",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc administration — façade en élévation",
+      "legende": "Bloc administration — façade en élévation",
+      "alt": "Bloc administration en construction : rez-de-chaussée maçonné et étage en structure béton armé",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.36 (2).jpeg"
+    },
+    {
+      "id": "nouadhibou-batiment-principal",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc administration — maçonnerie et structure",
+      "legende": "Bloc administration — maçonnerie et structure",
+      "alt": "Façade du bloc administration, murs en agglos et poteaux en béton armé",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.36 (1).jpeg"
+    },
+    {
+      "id": "nouadhibou-bloc-pedagogique",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc pédagogique — poteaux et maçonnerie",
+      "legende": "Bloc pédagogique — poteaux et maçonnerie",
+      "alt": "Cour du bloc pédagogique : poteaux en cours de coffrage, maçonnerie et stock d'aciers",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.36 (5).jpeg"
+    },
+    {
+      "id": "nouadhibou-extension-ouest",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc pédagogique — extension ouest, maçonnerie",
+      "legende": "Bloc pédagogique — extension ouest, maçonnerie",
+      "alt": "Extension ouest du bloc pédagogique, maçonnerie en cours",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.36 (3).jpeg"
+    },
+    {
+      "id": "nouadhibou-dalle-aciers",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc pédagogique — dalle coulée, aciers en attente",
+      "legende": "Bloc pédagogique — dalle coulée, aciers en attente",
+      "alt": "Dalle du bloc pédagogique coulée, aciers en attente pour les poteaux de l'étage",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.37 (6).jpeg"
+    },
+    {
+      "id": "nouadhibou-coffrage-escalier",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc pédagogique — escalier coffré avant coulage",
+      "legende": "Bloc pédagogique — escalier coffré avant coulage",
+      "alt": "Coffrage en bois d'un escalier du bloc pédagogique, en attente de coulage",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.38 (5).jpeg"
+    },
+    {
+      "id": "nouadhibou-cloisons",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc pédagogique — maçonnerie des salles",
+      "legende": "Bloc pédagogique — maçonnerie des salles",
+      "alt": "Élévation des murs des salles du bloc pédagogique en blocs de béton",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.38 (3).jpeg"
+    },
+    {
+      "id": "nouadhibou-bloc-amphitheatre",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc amphithéâtre — étaiement et coulage",
+      "legende": "Bloc amphithéâtre — étaiement et coulage",
+      "alt": "Bâtiment de l'amphithéâtre en construction, étaiement de l'étage et stock de hourdis au premier plan",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.38 (6).jpeg"
+    },
+    {
+      "id": "nouadhibou-plancher-hourdis",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc amphithéâtre — plancher poutrelles et hourdis",
+      "legende": "Bloc amphithéâtre — plancher poutrelles et hourdis",
+      "alt": "Plancher en poutrelles et hourdis du bloc amphithéâtre avant le coulage de la dalle de compression",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.39 (2).jpeg"
+    },
+    {
+      "id": "nouadhibou-coulage-poteaux",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Bloc amphithéâtre — coulage des poteaux",
+      "legende": "Bloc amphithéâtre — coulage des poteaux",
+      "alt": "Rangée de poteaux en béton armé décoffrés, ouvrier au travail en hauteur",
+      "w": 1280,
+      "h": 720,
+      "tailles": [
+        400,
+        800,
+        1280
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.39 (4).jpeg"
+    },
+    {
+      "id": "nouadhibou-ossature-beton",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Foyer des garçons — coffrage des poteaux",
+      "legende": "Foyer des garçons — coffrage des poteaux",
+      "alt": "Ossature en béton armé du foyer des garçons, poteaux en cours de coffrage à l'étage",
+      "w": 960,
+      "h": 540,
+      "tailles": [
+        400,
+        800,
+        960
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.40 (1).jpeg"
+    },
+    {
+      "id": "nouadhibou-perspective",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Foyer des garçons — structure et maçonnerie",
+      "legende": "Foyer des garçons — structure et maçonnerie",
+      "alt": "Perspective le long du foyer des garçons, structure en béton armé et maçonnerie",
+      "w": 960,
+      "h": 540,
+      "tailles": [
+        400,
+        800,
+        960
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.40 (2).jpeg"
+    },
+    {
+      "id": "nouadhibou-base-vie",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Foyer des filles — poteaux et chaînage haut",
+      "legende": "Foyer des filles — poteaux et chaînage haut",
+      "alt": "Foyer des filles en construction, coffrage des poteaux et chaînage haut, conteneurs de chantier SOBAFOR au premier plan",
+      "w": 960,
+      "h": 540,
+      "tailles": [
+        400,
+        800,
+        960
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.40 (3).jpeg"
+    },
+    {
+      "id": "nouadhibou-crepuscule",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "titre": "Nouadhibou · Foyer des filles — la structure au crépuscule",
+      "legende": "Foyer des filles — la structure au crépuscule",
+      "alt": "Silhouette de l'ossature du foyer des filles à la tombée du jour, conteneur SOBAFOR au premier plan",
+      "w": 960,
+      "h": 540,
+      "tailles": [
+        400,
+        800,
+        960
+      ],
+      "source": "Projet de nouadhibou/WhatsApp Image 2026-09-28 at 22.54.40 (5).jpeg"
+    },
+    {
+      "id": "nouadhibou-fondations-vues-du-ciel",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "video": "assets/video/presentation-sobafor-540.mp4",
+      "ar": "16/9",
+      "titre": "Nouadhibou — les fondations vues du ciel",
+      "label": "Les fondations vues du ciel"
+    },
     {
       "id": "batiment-structure-r2",
       "cat": "batiments",

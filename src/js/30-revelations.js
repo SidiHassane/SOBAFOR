@@ -4,7 +4,7 @@
 // ENSEMBLE dans l'ecran : la 30e photo d'une galerie n'attend donc pas
 // derriere les 29 premieres. Le retard est porte par une variable CSS :
 // c'est le compositeur qui anime, le script ne fait que poser une classe.
-const GROUPES = ".cards, .stats, .process, .kpis, .footer-grid, .gallery";
+const GROUPES = ".cards, .stats, .process, .kpis, .footer-grid, .gallery, .phare-mosaique";
 const RANG_MAX = 5; // au-dela, le retard cumule se lit comme une lenteur
 
 document.querySelectorAll(GROUPES).forEach((groupe) => {
