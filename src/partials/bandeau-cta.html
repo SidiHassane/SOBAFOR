@@ -7,7 +7,7 @@
             <p>{{ bandeau.texte }}</p>
           </div>
           <div class="bandeau-actions">
-            <a class="btn btn-primary" href="devis.html">Demander un devis</a>
+            <a class="btn btn-primary" href="{{ lienDevis }}">Demander un devis</a>
             <a class="btn btn-whatsapp" href="{{ whatsapp }}" target="_blank" rel="noopener">
               {{> icone-whatsapp }}
               WhatsApp <span class="btn-numero">{{ site.telephones.principal.court }}</span>

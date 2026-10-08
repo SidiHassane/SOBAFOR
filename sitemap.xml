@@ -30,4 +30,24 @@
     <lastmod>2026-08-14</lastmod>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://sobafor.com/batiments.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sobafor.com/routes.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sobafor.com/forages.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sobafor.com/location-engins.html</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>

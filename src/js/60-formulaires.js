@@ -42,6 +42,8 @@ if (quoteForm) {
   quoteForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const val = champs(quoteForm);
+    // Les champs facultatifs laisses vides ne produisent pas de ligne vide
+    // dans le message recu sur WhatsApp.
     const message = [
       "Bonjour SOBAFOR SA,",
       "Je souhaite demander un devis.",
@@ -49,9 +51,11 @@ if (quoteForm) {
       `Nom: ${val("nom")}`,
       `Téléphone: ${val("telephone")}`,
       `Service: ${val("service")}`,
-      `Ville/Zone: ${val("ville")}`,
-      `Détails: ${val("details")}`,
-    ].join("\n");
+      val("ville") ? `Ville/Zone: ${val("ville")}` : null,
+      val("details") ? `Détails: ${val("details")}` : null,
+    ]
+      .filter((ligne) => ligne !== null)
+      .join("\n");
 
     const url = lienWhatsApp(quoteForm.dataset.whatsapp, message);
     afficherSuite(

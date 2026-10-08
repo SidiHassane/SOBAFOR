@@ -3261,3 +3261,226 @@ textarea {
     gap: 1rem;
   }
 }
+/* ===================================================================
+   Pages d'atterrissage par metier (campagnes Facebook / WhatsApp)
+   Structure « confiance puis conversion » : promesse et appel des le
+   premier ecran, preuves, prestations, methode, formulaire court.
+   Le menu principal est retire : le visiteur venu d'une publicite garde
+   deux issues seulement, appeler ou demander un devis.
+   =================================================================== */
+
+/* ---- En-tete allege -------------------------------------------------- */
+.lp-entete-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.lp-entete-actions .btn {
+  min-height: 2.75rem;
+  padding: 0.55rem 1.05rem;
+  font-size: 0.72rem;
+}
+
+.lp-appel {
+  gap: 0.5rem;
+}
+
+.lp-appel span {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ---- Couverture : promesse a gauche, photo reelle a droite ------------ */
+.lp-intro {
+  margin: 0;
+}
+
+.lp-hero .cta-row .btn-outline {
+  gap: 0.5rem;
+}
+
+.lp-hero-photo {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 1.6rem;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+}
+
+.lp-hero-photo img {
+  width: 100%;
+  max-height: 22rem;
+  object-fit: cover;
+}
+
+.lp-hero-photo figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 2.4rem 1.1rem 0.9rem;
+  background: linear-gradient(180deg, transparent, rgba(2, 6, 23, 0.85));
+  color: var(--heading);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lp-hero-photo {
+    animation: pileEntree 1.1s var(--ease) both;
+    animation-delay: 200ms;
+  }
+}
+
+/* ---- Prestations numerotees ------------------------------------------ */
+.lp-numero {
+  display: block;
+  margin-bottom: 0.9rem;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* ---- References nominatives ------------------------------------------ */
+.lp-references {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-references li {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.lp-references strong {
+  color: var(--heading);
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+}
+
+.lp-references span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* ---- Formulaire court ------------------------------------------------- */
+.form-group label {
+  display: block;
+}
+
+.facultatif {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.88em;
+}
+
+.form-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-wrap: pretty;
+}
+
+.lp-devis .btn-whatsapp[type="submit"] {
+  width: 100%;
+}
+
+.lp-direct h3 {
+  margin: 0 0 0.6rem;
+  color: var(--heading);
+  font-size: 1.2rem;
+}
+
+.lp-direct > p {
+  margin: 0 0 1.3rem;
+  color: var(--muted);
+}
+
+.lp-direct-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.lp-direct .list a {
+  color: var(--text);
+}
+
+@media (min-width: 640px) {
+  .lp-references {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .lp-hero-photo {
+    justify-self: center;
+    width: min(100%, 26rem);
+  }
+
+  .lp-hero-photo img {
+    max-height: 32rem;
+  }
+
+  .lp-references {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Lien « En savoir plus » des cartes de la page Services vers les pages
+   metier. */
+.card-lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  margin-top: 0.6rem;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.card-lien::after {
+  content: "→";
+  transition: transform var(--dur-ui) var(--ease);
+}
+
+.card-lien:hover::after {
+  transform: translateX(4px);
+}
+
+/* Sur telephone, l'en-tete ne garde que l'appel, en pastille : la barre
+   d'actions du bas porte deja WhatsApp et le devis. */
+@media (max-width: 639px) {
+  .lp-entete-devis {
+    display: none;
+  }
+
+  .lp-appel {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+  }
+
+  .lp-appel span {
+    display: none;
+  }
+
+  .lp-hero-photo {
+    margin-top: 0.5rem;
+  }
+}
