@@ -52,6 +52,7 @@ const erreurs = [];
 
 const site = lireJSON(join(SRC, "data/site.json"));
 const galerie = lireJSON(join(SRC, "data/galerie.json"));
+const metiers = lireJSON(join(SRC, "data/metiers.json"));
 
 const urlPage = (slug) => (slug === "index" ? "index.html" : `${slug}.html`);
 const whatsapp = "https://wa.me/" + site.telephones.principal.lien.replace(/^\+/, "");
@@ -129,6 +130,7 @@ const FORMATS = {
   carte: "(min-width: 860px) 360px, 92vw",
   pile: "368px",
   mosaique: "(min-width: 960px) 290px, 50vw",
+  landing: "(min-width: 960px) 420px, 92vw",
   video: "(min-width: 1180px) 580px, (min-width: 960px) 50vw, 100vw",
 };
 
@@ -175,6 +177,45 @@ const aides = {
     ].join("\n");
   },
 
+  // Page d'atterrissage d'un metier (campagnes Facebook / WhatsApp). Tout le
+  // texte vient de src/data/metiers.json ; les photos, de la galerie.
+  landing: (ctx, id) => {
+    const m = metiers[id];
+    if (!m) {
+      erreurs.push(`landing : metier inconnu "${id}"`);
+      return "";
+    }
+    const galerieHtml = m.galerie
+      .map((gid) => {
+        const el = elementsParId.get(gid);
+        if (!el) erreurs.push(`landing ${id} : element de galerie inconnu "${gid}"`);
+        return el ? figure(el) : "";
+      })
+      .filter(Boolean)
+      .join("\n\n");
+    const donnees = {
+      ...m,
+      photoHtml: photo(m.photo.id, "landing").replace(' loading="lazy"', ' fetchpriority="high"'),
+      confianceHtml: m.confiance.map((c) => `<li>${echapper(c)}</li>`).join("\n"),
+      prestationsHtml: m.prestations
+        .map(
+          (p, i) =>
+            `<article class="card lp-prestation"><span class="lp-numero">${String(i + 1).padStart(2, "0")}</span><h3>${echapper(p.titre)}</h3><p>${echapper(p.texte)}</p></article>`
+        )
+        .join("\n"),
+      referencesHtml: m.references.length
+        ? `<ul class="lp-references">\n${m.references
+            .map((r) => `  <li><strong>${echapper(r.nom)}</strong><span>${echapper(r.detail)}</span></li>`)
+            .join("\n")}\n</ul>`
+        : "",
+      galerieHtml,
+      faqHtml: m.faq
+        .map((f) => `<details data-reveal>\n  <summary>${echapper(f.q)}</summary>\n  <p>${echapper(f.r)}</p>\n</details>`)
+        .join("\n"),
+    };
+    return rendre(lire(join(SRC, "partials/landing.html")).replace(/\n$/, ""), { ...ctx, m: donnees }, ["landing"]);
+  },
+
   // Section « chantier phare » de l'accueil, entierement tiree de
   // galerie.json : pour publier un nouveau point d'avancement, on modifie
   // les etapes et la date dans le fichier de donnees, rien d'autre.
@@ -217,6 +258,13 @@ const aides = {
   },
 
   "nombre-realisations": () => String(galerie.elements.length),
+
+  // Adresses e-mail (site.json) : "lignes" les separe par un retour a la
+  // ligne, "liste" en fait des elements de liste.
+  emails: (ctx, format = "lignes") => {
+    const liens = site.emails.map((e) => `<a href="mailto:${echapper(e)}">${echapper(e)}</a>`);
+    return format === "liste" ? liens.map((l) => `<li>${l}</li>`).join("\n") : liens.join("<br />");
+  },
 
   // Bandeau defilant des references : trois pistes identiques, pour qu'aucun
   // vide n'apparaisse en fin de cycle meme sur un tres grand ecran. Seule la
@@ -264,11 +312,14 @@ const aides = {
 
   // Donnees structurees schema.org : reconstruites depuis site.json, donc
   // toujours d'accord avec les coordonnees affichees.
+  //   jsonld: oui      -> l'entreprise (accueil)
+  //   jsonld: contact  -> une page de contact qui decrit cette meme entreprise
+  // Les deux portent le meme @id : Google les rattache a une seule fiche.
   jsonld: (ctx) => {
-    if (ctx.page.jsonld !== "oui") return "";
-    const donnees = {
-      "@context": "https://schema.org",
+    if (ctx.page.jsonld !== "oui" && ctx.page.jsonld !== "contact") return "";
+    const entreprise = {
       "@type": "GeneralContractor",
+      "@id": site.url + "#entreprise",
       name: site.nom,
       alternateName: site.nomComplet,
       description:
@@ -277,7 +328,7 @@ const aides = {
       logo: site.url + "logo.jpeg",
       image: site.url + "logo.jpeg",
       foundingDate: site.fondation,
-      email: site.email,
+      email: site.emails,
       telephone: site.telephones.principal.lien,
       address: {
         "@type": "PostalAddress",
@@ -288,7 +339,28 @@ const aides = {
       geo: { "@type": "GeoCoordinates", ...site.geo },
       areaServed: site.pays.map((name) => ({ "@type": "Country", name })),
       knowsAbout: site.domaines,
+      // Point de contact explicite : c'est la forme que Google lit pour
+      // repondre a « comment contacter SOBAFOR ».
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "customer service",
+          telephone: site.telephones.principal.lien,
+          email: site.emails,
+          availableLanguage: ["French"],
+        },
+      ],
     };
+    const donnees =
+      ctx.page.jsonld === "contact"
+        ? {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            url: ctx.page.url,
+            name: ctx.page.titre,
+            mainEntity: entreprise,
+          }
+        : { "@context": "https://schema.org", ...entreprise };
     return `<script type="application/ld+json">\n${JSON.stringify(donnees, null, 2)}\n</script>`;
   },
 };
@@ -404,7 +476,19 @@ const versions = { css: empreinteDe(css), js: empreinteDe(js) };
 const pages = fichiers("pages", ".html").map(lirePage);
 for (const { page, corps } of pages) {
   const annee = new Date().getFullYear();
-  const ctx = { site, page, annee, experience: annee - Number(site.fondation), whatsapp, versions };
+  const ctx = {
+    site,
+    page,
+    annee,
+    experience: annee - Number(site.fondation),
+    whatsapp,
+    versions,
+    // Sur une page d'atterrissage, « Devis » mene au formulaire de la page
+    // meme : le visiteur venu d'une publicite ne doit pas en sortir.
+    lienDevis: page.gabarit === "landing" ? "#devis" : "devis.html",
+    // Le formulaire de contact ecrit a toutes les adresses a la fois.
+    emailsDestinataires: site.emails.join(","),
+  };
   try {
     ctx.contenu = decouperTitres(rendre(corps, ctx));
     const gabarit = lire(join(SRC, "layouts", (page.gabarit || "base") + ".html")).replace(/\n$/, "");

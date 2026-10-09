@@ -13,7 +13,7 @@
  * 95 Mo et saturerait le stockage du telephone.
  */
 
-const VERSION = "sobafor-8b9c2c44d2";
+const VERSION = "sobafor-53b89e40f5";
 const COQUE = VERSION + "-coque";
 const IMAGES = VERSION + "-images";
 const PAGES = VERSION + "-pages";
@@ -25,14 +25,18 @@ const MAX_IMAGES = 80;
 const A_PRECHARGER = [
   "./",
   "./a-propos.html",
+  "./batiments.html",
   "./contact.html",
   "./devis.html",
+  "./forages.html",
   "./hors-ligne.html",
   "./index.html",
+  "./location-engins.html",
   "./realisations.html",
+  "./routes.html",
   "./services.html",
-  "./assets/css/style.css?v=16fd853432",
-  "./assets/js/main.js?v=7e81dcb92c",
+  "./assets/css/style.css?v=3c5c458761",
+  "./assets/js/main.js?v=ad54a7ba38",
   "./assets/fonts/archivo-500-800-latin.woff2",
   "./assets/fonts/plex-400-latin.woff2",
   "./assets/fonts/plex-600-latin.woff2",

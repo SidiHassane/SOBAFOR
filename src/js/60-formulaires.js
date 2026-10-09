@@ -42,6 +42,8 @@ if (quoteForm) {
   quoteForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const val = champs(quoteForm);
+    // Les champs facultatifs laisses vides ne produisent pas de ligne vide
+    // dans le message recu sur WhatsApp.
     const message = [
       "Bonjour SOBAFOR SA,",
       "Je souhaite demander un devis.",
@@ -49,9 +51,11 @@ if (quoteForm) {
       `Nom: ${val("nom")}`,
       `Téléphone: ${val("telephone")}`,
       `Service: ${val("service")}`,
-      `Ville/Zone: ${val("ville")}`,
-      `Détails: ${val("details")}`,
-    ].join("\n");
+      val("ville") ? `Ville/Zone: ${val("ville")}` : null,
+      val("details") ? `Détails: ${val("details")}` : null,
+    ]
+      .filter((ligne) => ligne !== null)
+      .join("\n");
 
     const url = lienWhatsApp(quoteForm.dataset.whatsapp, message);
     afficherSuite(
@@ -84,13 +88,19 @@ if (contactForm) {
     const canal = (e.submitter && e.submitter.value) || "whatsapp";
 
     if (canal === "email") {
+      // data-email peut contenir plusieurs adresses separees par des
+      // virgules : le message part a toutes, chacune est proposee en recours.
       const email = contactForm.dataset.email;
+      const liensEmail = email
+        .split(",")
+        .map((e) => `<a href="mailto:${echapper(e)}">${echapper(e)}</a>`)
+        .join(" ou ");
       const mailto = `mailto:${email}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
       const bloc = afficherSuite(
         contactForm,
         `<p class="form-suite-titre">Votre message est prêt</p>
         <p>Votre messagerie s'ouvre avec le message déjà rédigé.</p>
-        <p class="form-suite-recours">Rien ne s'est ouvert ? Écrivez-nous à <a href="mailto:${echapper(email)}">${echapper(email)}</a>
+        <p class="form-suite-recours">Rien ne s'est ouvert ? Écrivez-nous à ${liensEmail}
         (<button type="button" class="lien-bouton" data-copier>copier le message</button>),
         ou <a href="${echapper(urlWhatsApp)}" target="_blank" rel="noopener">envoyez-le par WhatsApp</a>.</p>`
       );

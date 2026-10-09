@@ -1,0 +1,123 @@
+    <section class="hero lp-hero">
+      <div class="container hero-grille">
+        <div class="hero-texte">
+          <p class="eyebrow">{{ m.eyebrow }}</p>
+          <h1>{{ m.titre }}</h1>
+          <p class="lp-intro">{{ m.intro }}</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#devis">{{ m.cta }}</a>
+            <a class="btn btn-outline" href="tel:{{ site.telephones.principal.lien }}">
+              {{> icone-telephone }}
+              Appeler le {{ site.telephones.principal.court }}
+            </a>
+          </div>
+          <ul class="hero-confiance">
+            {{{ m.confianceHtml }}}
+          </ul>
+        </div>
+
+        <figure class="lp-hero-photo">
+          {{{ m.photoHtml }}}
+          <figcaption>{{ m.photo.legende }}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-chiffres">
+      <div class="container">
+        <div class="stats">
+          <article class="stat"><strong data-counter="{{ experience }}" data-depuis="{{ site.fondation }}" data-suffix="+">{{ experience }}+</strong><span>Années d'expérience</span></article>
+          <article class="stat"><strong data-counter="250" data-suffix="+">250+</strong><span>Projets accompagnés</span></article>
+          <article class="stat"><strong data-counter="5">5</strong><span>Pays d'intervention</span></article>
+          <article class="stat"><strong data-counter="8" data-suffix="+">8+</strong><span>Domaines techniques</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow" data-reveal>{{ m.eyebrow }}</p>
+        <h2 data-reveal>{{ m.prestationsTitre }}</h2>
+        <div class="cards three lp-prestations">
+          {{{ m.prestationsHtml }}}
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="container">
+        <p class="eyebrow" data-reveal>Preuves</p>
+        <h2 data-reveal>Nos chantiers en images</h2>
+        {{{ m.referencesHtml }}}
+        <div class="gallery lp-galerie" data-gallery>
+          {{{ m.galerieHtml }}}
+        </div>
+        <div class="gallery-more">
+          <a class="btn btn-outline" href="realisations.html?filtre={{ m.categorie }}">Voir toutes nos réalisations</a>
+        </div>
+      </div>
+    </section>
+
+{{> processus }}
+
+    <section class="section soft lp-devis" id="devis">
+      <div class="container">
+        <p class="eyebrow" data-reveal>Votre projet</p>
+        <h2 data-reveal>{{ m.cta }}</h2>
+        <p class="section-intro" data-reveal>Deux informations suffisent pour commencer. Votre demande arrive directement sur notre WhatsApp, un chargé de projet vous recontacte.</p>
+        <div class="cards two">
+          <article class="contact-box">
+            <form class="form" data-quote-form data-whatsapp="{{ whatsapp }}">
+              <input type="hidden" name="service" value="{{ m.service }}" />
+              <div class="form-group">
+                <label for="nom">Nom ou entreprise</label>
+                <input type="text" id="nom" name="nom" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="telephone">Téléphone (WhatsApp)</label>
+                <input type="tel" id="telephone" name="telephone" required inputmode="tel" autocomplete="tel" placeholder="Ex : +227 90 00 00 00" />
+              </div>
+              <div class="form-group">
+                <label for="ville">Ville ou zone du chantier <span class="facultatif">(facultatif)</span></label>
+                <input type="text" id="ville" name="ville" autocomplete="address-level2" />
+              </div>
+              <div class="form-group">
+                <label for="details">Votre besoin <span class="facultatif">(facultatif)</span></label>
+                <textarea id="details" name="details" placeholder="{{ m.detailsPlaceholder }}"></textarea>
+              </div>
+              <button class="btn btn-whatsapp" type="submit">
+                {{> icone-whatsapp }}
+                Envoyer ma demande par WhatsApp
+              </button>
+              <p class="form-note">Aucune donnée n'est enregistrée sur ce site : votre message part directement vers notre WhatsApp.</p>
+            </form>
+          </article>
+          <article class="contact-box lp-direct">
+            <h3>Vous préférez nous parler ?</h3>
+            <p>Un chargé de projet vous répond au <strong>{{ site.telephones.principal.affiche }}</strong>, par appel comme sur WhatsApp.</p>
+            <div class="lp-direct-actions">
+              <a class="btn btn-secondary" href="tel:{{ site.telephones.principal.lien }}">
+                {{> icone-telephone }}
+                Appeler maintenant
+              </a>
+              <a class="btn btn-whatsapp" href="{{ whatsapp }}" target="_blank" rel="noopener">
+                {{> icone-whatsapp }}
+                Écrire sur WhatsApp
+              </a>
+            </div>
+            <ul class="list">
+              <li>{{ site.adresse.rue }}, {{ site.adresse.ville }}</li>
+              {{@ emails liste }}
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq">
+      <div class="container">
+        <p class="eyebrow" data-reveal>Questions fréquentes</p>
+        <h2 data-reveal>Vos questions</h2>
+        {{{ m.faqHtml }}}
+      </div>
+    </section>

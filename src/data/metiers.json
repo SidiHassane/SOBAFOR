@@ -1,0 +1,303 @@
+{
+  "batiments": {
+    "page": "batiments",
+    "categorie": "batiments",
+    "service": "Bâtiment & Génie Civil",
+    "eyebrow": "Bâtiments & génie civil",
+    "titre": "Vos bâtiments construits par une entreprise qui livre depuis 1987",
+    "intro": "Bâtiments administratifs, scolaires, culturels et résidentiels, villas, clôtures : SOBAFOR conduit votre chantier de l'étude à la réception, avec ses propres équipes et ses propres engins.",
+    "cta": "Demander un devis",
+    "confiance": [
+      "Études et calculs réalisés en interne",
+      "Équipes et engins en propre",
+      "Chantiers au Niger et en Mauritanie"
+    ],
+    "photo": {
+      "id": "ambassade-mauritanie-mat-drapeau",
+      "legende": "Ambassade de Mauritanie, Niamey"
+    },
+    "prestationsTitre": "Ce que nous construisons",
+    "prestations": [
+      {
+        "titre": "Bâtiments publics et institutionnels",
+        "texte": "Bâtiments administratifs, scolaires et culturels, commissariats, sièges d'institutions."
+      },
+      {
+        "titre": "Villas et logements",
+        "texte": "Villas et ensembles de logements, comme les 10 villas de type F3 réalisées à Diffa pour la CNSS."
+      },
+      {
+        "titre": "Réhabilitation et extension",
+        "texte": "Remise à niveau, agrandissement et réaménagement de bâtiments existants."
+      },
+      {
+        "titre": "Clôtures et aménagements extérieurs",
+        "texte": "Murs d'enceinte, portails, cours pavées et espaces verts, jusqu'aux finitions."
+      },
+      {
+        "titre": "Études techniques",
+        "texte": "Topographie, dessin technique et calculs de structure sous AutoCAD et ROBOT."
+      }
+    ],
+    "references": [
+      {
+        "nom": "Ambassade de Mauritanie",
+        "detail": "Niamey"
+      },
+      {
+        "nom": "CNSS",
+        "detail": "Diffa — construction de 10 villas de type F3"
+      },
+      {
+        "nom": "École TIC de Nouadhibou",
+        "detail": "Mauritanie — campus en cours de construction"
+      },
+      {
+        "nom": "Palais de la Présidence",
+        "detail": "Niamey — guérite R+1 et héliport"
+      },
+      {
+        "nom": "Aéroport d'Agadez",
+        "detail": "Mur de clôture"
+      }
+    ],
+    "galerie": [
+      "ambassade-mauritanie-finitions-cour",
+      "tour-de-controle",
+      "nouadhibou-ossature-beton",
+      "batiment-administratif",
+      "ambassade-mauritanie-amenagement-paysager",
+      "mur-cloture-portail",
+      "nouadhibou-facade-elevation",
+      "villas-cnss-a-diffa-sequence-1",
+      "mur-cloture"
+    ],
+    "detailsPlaceholder": "Type de bâtiment, surface approximative, terrain disponible ou non…",
+    "faq": [
+      {
+        "q": "Intervenez-vous en dehors de Niamey ?",
+        "r": "Oui. Nous intervenons partout au Niger et dans la sous-région : Mauritanie, Burkina Faso, Mali et Tchad. Notre chantier en cours le plus important est l'école TIC de Nouadhibou, en Mauritanie."
+      },
+      {
+        "q": "Prenez-vous en charge les études ?",
+        "r": "Oui : topographie, dessin technique et calculs de structure (AutoCAD, ROBOT). Des essais géotechniques sont possibles en collaboration avec LEGENI SA."
+      },
+      {
+        "q": "Comment obtenir un devis ?",
+        "r": "Décrivez votre projet dans le formulaire : il arrive directement sur notre WhatsApp, et un chargé de projet vous recontacte pour préciser le besoin et chiffrer."
+      }
+    ]
+  },
+  "routes": {
+    "page": "routes",
+    "categorie": "routes",
+    "service": "Routes & Assainissement",
+    "eyebrow": "Routes & assainissement",
+    "titre": "Routes, pistes et assainissement, du terrassement au bitume",
+    "intro": "Création et remise à niveau de routes, pistes rurales, voiries et plateformes, avec les ouvrages d'assainissement qui les font durer : caniveaux, drainage, évacuation des eaux pluviales.",
+    "cta": "Demander un devis",
+    "confiance": [
+      "Niveleuses, chargeuses et compacteurs en propre",
+      "Études de tracé en interne",
+      "Depuis 1987 au Niger"
+    ],
+    "photo": {
+      "id": "canal-assainissement",
+      "legende": "Canal d'assainissement bétonné"
+    },
+    "prestationsTitre": "Ce que nous réalisons",
+    "prestations": [
+      {
+        "titre": "Routes et voiries",
+        "texte": "Création, bitumage et remise à niveau de routes et de voiries urbaines."
+      },
+      {
+        "titre": "Pistes rurales",
+        "texte": "Pistes en latérite compactée pour désenclaver villages et zones de production."
+      },
+      {
+        "titre": "Terrassement et plateformes",
+        "texte": "Déblais, remblais et plateformes de circulation, réalisés avec nos propres engins."
+      },
+      {
+        "titre": "Assainissement et drainage",
+        "texte": "Caniveaux, canaux, ouvrages d'évacuation des eaux pluviales, en milieu urbain comme rural."
+      },
+      {
+        "titre": "Protection des ouvrages",
+        "texte": "Gabions et protection de talus le long des routes et des ouvrages hydrauliques."
+      }
+    ],
+    "references": [
+      {
+        "nom": "Palais de la Présidence",
+        "detail": "Niamey — bitumage, éclairage, canalisation et drainage"
+      }
+    ],
+    "galerie": [
+      "route-couche-de-base",
+      "piste-laterite",
+      "gabions-talus",
+      "niveleuse",
+      "parc-engins"
+    ],
+    "detailsPlaceholder": "Longueur approximative, type de chaussée, travaux d'assainissement…",
+    "faq": [
+      {
+        "q": "Disposez-vous de vos propres engins ?",
+        "r": "Oui : bulldozers, chargeuses, niveleuses et compacteurs Caterpillar, camions-bennes et citerne à eau. Ils sont aussi proposés à la location."
+      },
+      {
+        "q": "Réalisez-vous les études de tracé ?",
+        "r": "Oui. Nos équipes assurent la topographie et les études techniques, notamment avec le logiciel Piste+ et AutoCAD."
+      },
+      {
+        "q": "Où intervenez-vous ?",
+        "r": "Partout au Niger et dans la sous-région : Mauritanie, Burkina Faso, Mali et Tchad."
+      }
+    ]
+  },
+  "forages": {
+    "page": "forages",
+    "categorie": "hydraulique",
+    "service": "Hydraulique & Forages",
+    "eyebrow": "Hydraulique & forages",
+    "titre": "Forages et adduction d'eau potable, du captage au château d'eau",
+    "intro": "Forages, équipements de captage, adductions d'eau potable, hydraulique villageoise et pastorale, avec des solutions solaires pour les sites isolés. SOBAFOR fore avec sa propre foreuse.",
+    "cta": "Demander un devis",
+    "confiance": [
+      "Foreuse SOBAFOR montée sur camion",
+      "Pompage solaire pour sites isolés",
+      "Depuis 1987 au Niger"
+    ],
+    "photo": {
+      "id": "foreuse-mat-leve",
+      "legende": "Foreuse SOBAFOR, mât levé"
+    },
+    "prestationsTitre": "Ce que nous réalisons",
+    "prestations": [
+      {
+        "titre": "Forages",
+        "texte": "Forages et équipements de captage, adaptés au contexte géotechnique du site."
+      },
+      {
+        "titre": "Adduction d'eau potable",
+        "texte": "Réseaux d'adduction et de distribution d'eau potable, du forage au point d'eau."
+      },
+      {
+        "titre": "Hydraulique villageoise et pastorale",
+        "texte": "Points d'eau pour les villages et les zones d'élevage."
+      },
+      {
+        "titre": "Châteaux d'eau et ouvrages",
+        "texte": "Réservoirs, châteaux d'eau et ouvrages hydrauliques associés."
+      },
+      {
+        "titre": "Pompage solaire",
+        "texte": "Solutions solaires autonomes pour alimenter les forages des sites isolés."
+      }
+    ],
+    "references": [
+      {
+        "nom": "Palais de la Présidence",
+        "detail": "Niamey — adduction d'eau"
+      },
+      {
+        "nom": "Hydraulique villageoise",
+        "detail": "Ouvrages hydrauliques et adductions d'eau potable au Niger"
+      }
+    ],
+    "galerie": [
+      "foreuse-chantier",
+      "equipement-forage",
+      "chateau-deau",
+      "foreuse-detail",
+      "foreuse-en-operation-sequence-2",
+      "foreuse-en-operation-sequence-4"
+    ],
+    "detailsPlaceholder": "Usage de l'eau (village, élevage, site privé), localisation, profondeur connue…",
+    "faq": [
+      {
+        "q": "Disposez-vous de votre propre foreuse ?",
+        "r": "Oui. SOBAFOR fore avec sa propre foreuse montée sur camion, visible dans les photos et vidéos de cette page."
+      },
+      {
+        "q": "Pouvez-vous alimenter un forage à l'énergie solaire ?",
+        "r": "Oui. Nous concevons des solutions solaires autonomes pour les sites isolés, intégrées aux besoins hydrauliques et communautaires."
+      },
+      {
+        "q": "Où intervenez-vous ?",
+        "r": "Partout au Niger et dans la sous-région : Mauritanie, Burkina Faso, Mali et Tchad."
+      }
+    ]
+  },
+  "engins": {
+    "page": "location-engins",
+    "categorie": "engins",
+    "service": "Location d'engins",
+    "eyebrow": "Location d'engins",
+    "titre": "Des engins de chantier disponibles pour renforcer vos équipes",
+    "intro": "SOBAFOR met à disposition son parc d'engins et d'équipements pour renforcer la capacité d'exécution de vos chantiers : terrassement, voirie, transport de matériaux, alimentation en eau et en énergie.",
+    "cta": "Demander une disponibilité",
+    "confiance": [
+      "Bulldozers, chargeuses, niveleuses",
+      "Camions-bennes et citerne à eau",
+      "Niger et sous-région"
+    ],
+    "photo": {
+      "id": "parc-engins",
+      "legende": "Parc d'engins SOBAFOR"
+    },
+    "prestationsTitre": "Le parc disponible",
+    "prestations": [
+      {
+        "titre": "Bulldozers",
+        "texte": "Pour le débroussaillage, le décapage et le terrassement en masse."
+      },
+      {
+        "titre": "Chargeuses et tractopelles",
+        "texte": "Pour le chargement, les fouilles et la manutention de matériaux."
+      },
+      {
+        "titre": "Niveleuses",
+        "texte": "Pour le réglage des pistes, des plateformes et des couches de chaussée."
+      },
+      {
+        "titre": "Compacteurs",
+        "texte": "Pour le compactage des remblais, des pistes et des couches de forme."
+      },
+      {
+        "titre": "Camions-bennes et citerne à eau",
+        "texte": "Pour le transport des matériaux et l'arrosage des couches à compacter."
+      },
+      {
+        "titre": "Bétonnières et groupes électrogènes",
+        "texte": "Pour le béton sur site et l'alimentation électrique du chantier."
+      }
+    ],
+    "references": [],
+    "galerie": [
+      "tractopelle",
+      "niveleuse",
+      "engin-en-operation-sequence-1",
+      "engin-en-operation-sequence-3",
+      "engin-en-operation-sequence-2",
+      "engin-en-operation-sequence-6"
+    ],
+    "detailsPlaceholder": "Engins souhaités, durée de location, date de début, lieu du chantier…",
+    "faq": [
+      {
+        "q": "Comment connaître la disponibilité d'un engin ?",
+        "r": "Indiquez dans le formulaire les engins souhaités, la durée et la date de début : votre demande arrive sur notre WhatsApp et nous vous répondons avec la disponibilité et une proposition."
+      },
+      {
+        "q": "Où les engins peuvent-ils intervenir ?",
+        "r": "Au Niger et dans la sous-région. Précisez le lieu du chantier dans votre demande : il compte dans l'organisation du transport des engins."
+      },
+      {
+        "q": "Réalisez-vous aussi les travaux ?",
+        "r": "Oui. Si vous préférez confier le chantier entier, nos équipes réalisent aussi le terrassement, les routes et les pistes."
+      }
+    ]
+  }
+}

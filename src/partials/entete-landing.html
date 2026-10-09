@@ -1,0 +1,12 @@
+  <header class="site-header site-header-landing">
+    <div class="container header-inner">
+{{> marque }}
+      <div class="lp-entete-actions">
+        <a class="btn btn-outline lp-appel" href="tel:{{ site.telephones.principal.lien }}" aria-label="Appeler le {{ site.telephones.principal.affiche }}">
+          {{> icone-telephone }}
+          <span>{{ site.telephones.principal.court }}</span>
+        </a>
+        <a class="btn btn-primary lp-entete-devis" href="#devis">Devis</a>
+      </div>
+    </div>
+  </header>
