@@ -5,6 +5,7 @@ og_titre: Contact SOBAFOR SA
 og_description: Téléphone, WhatsApp, email et formulaire de contact direct pour vos demandes de projet.
 og_image: logo.jpeg
 classe: page-contact
+jsonld: contact
 bandeau: non
 slogan: Accompagnement professionnel de vos projets d'infrastructures publiques et privées au Niger.
 ---
@@ -23,7 +24,7 @@ slogan: Accompagnement professionnel de vos projets d'infrastructures publiques 
             <h2>Coordonnées SOBAFOR SA</h2>
             <div class="contact-item"><span class="ico">ADR</span><div>{{ site.adresse.rue }}, {{ site.adresse.ville }}, {{ site.adresse.pays }}</div></div>
             <div class="contact-item"><span class="ico">TEL</span><div><a href="tel:{{ site.telephones.principal.lien }}">{{ site.telephones.principal.affiche }}</a><span class="wa-tag">Appel &amp; WhatsApp</span><br><a href="tel:{{ site.telephones.dg.lien }}">{{ site.telephones.dg.affiche }} (DG)</a></div></div>
-            <div class="contact-item"><span class="ico">MAIL</span><div><a href="mailto:{{ site.email }}">{{ site.email }}</a></div></div>
+            <div class="contact-item"><span class="ico">MAIL</span><div>{{@ emails lignes }}</div></div>
             <div class="contact-item"><span class="ico">ID</span><div>RCCM {{ site.rccm }} | NIF {{ site.nif }}</div></div>
             <div class="contact-item"><span class="ico">DG</span><div>Directeur Général : {{ site.directeur }}</div></div>
             <div class="cta-row" style="margin-top:1rem;">
@@ -37,7 +38,7 @@ slogan: Accompagnement professionnel de vos projets d'infrastructures publiques 
 
           <article class="contact-box">
             <h2>Formulaire de contact rapide</h2>
-            <form data-contact-form data-email="{{ site.email }}" data-whatsapp="{{ whatsapp }}">
+            <form data-contact-form data-email="{{ emailsDestinataires }}" data-whatsapp="{{ whatsapp }}">
               <div>
                 <label for="nom">Nom et prénom</label>
                 <input id="nom" name="nom" type="text" required />

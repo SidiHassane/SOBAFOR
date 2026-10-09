@@ -4,7 +4,7 @@
   "slogan": "Bâtiments, Forages & Routes",
   "url": "https://sobafor.com/",
   "fondation": "1987",
-  "email": "sob_sarl@yahoo.fr",
+  "emails": ["contact@sobafor.com", "sob_sarl@yahoo.fr"],
   "rccm": "5326",
   "nif": "1021/R",
   "directeur": "Alhousseni Sidi Mohamed",

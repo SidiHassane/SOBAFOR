@@ -13,7 +13,7 @@
  * 95 Mo et saturerait le stockage du telephone.
  */
 
-const VERSION = "sobafor-88156e388f";
+const VERSION = "sobafor-53b89e40f5";
 const COQUE = VERSION + "-coque";
 const IMAGES = VERSION + "-images";
 const PAGES = VERSION + "-pages";
@@ -36,7 +36,7 @@ const A_PRECHARGER = [
   "./routes.html",
   "./services.html",
   "./assets/css/style.css?v=3c5c458761",
-  "./assets/js/main.js?v=9b27a5075b",
+  "./assets/js/main.js?v=ad54a7ba38",
   "./assets/fonts/archivo-500-800-latin.woff2",
   "./assets/fonts/plex-400-latin.woff2",
   "./assets/fonts/plex-600-latin.woff2",

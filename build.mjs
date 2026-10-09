@@ -259,6 +259,13 @@ const aides = {
 
   "nombre-realisations": () => String(galerie.elements.length),
 
+  // Adresses e-mail (site.json) : "lignes" les separe par un retour a la
+  // ligne, "liste" en fait des elements de liste.
+  emails: (ctx, format = "lignes") => {
+    const liens = site.emails.map((e) => `<a href="mailto:${echapper(e)}">${echapper(e)}</a>`);
+    return format === "liste" ? liens.map((l) => `<li>${l}</li>`).join("\n") : liens.join("<br />");
+  },
+
   // Bandeau defilant des references : trois pistes identiques, pour qu'aucun
   // vide n'apparaisse en fin de cycle meme sur un tres grand ecran. Seule la
   // premiere est lue par les lecteurs d'ecran.
@@ -305,11 +312,14 @@ const aides = {
 
   // Donnees structurees schema.org : reconstruites depuis site.json, donc
   // toujours d'accord avec les coordonnees affichees.
+  //   jsonld: oui      -> l'entreprise (accueil)
+  //   jsonld: contact  -> une page de contact qui decrit cette meme entreprise
+  // Les deux portent le meme @id : Google les rattache a une seule fiche.
   jsonld: (ctx) => {
-    if (ctx.page.jsonld !== "oui") return "";
-    const donnees = {
-      "@context": "https://schema.org",
+    if (ctx.page.jsonld !== "oui" && ctx.page.jsonld !== "contact") return "";
+    const entreprise = {
       "@type": "GeneralContractor",
+      "@id": site.url + "#entreprise",
       name: site.nom,
       alternateName: site.nomComplet,
       description:
@@ -318,7 +328,7 @@ const aides = {
       logo: site.url + "logo.jpeg",
       image: site.url + "logo.jpeg",
       foundingDate: site.fondation,
-      email: site.email,
+      email: site.emails,
       telephone: site.telephones.principal.lien,
       address: {
         "@type": "PostalAddress",
@@ -329,7 +339,28 @@ const aides = {
       geo: { "@type": "GeoCoordinates", ...site.geo },
       areaServed: site.pays.map((name) => ({ "@type": "Country", name })),
       knowsAbout: site.domaines,
+      // Point de contact explicite : c'est la forme que Google lit pour
+      // repondre a « comment contacter SOBAFOR ».
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "customer service",
+          telephone: site.telephones.principal.lien,
+          email: site.emails,
+          availableLanguage: ["French"],
+        },
+      ],
     };
+    const donnees =
+      ctx.page.jsonld === "contact"
+        ? {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            url: ctx.page.url,
+            name: ctx.page.titre,
+            mainEntity: entreprise,
+          }
+        : { "@context": "https://schema.org", ...entreprise };
     return `<script type="application/ld+json">\n${JSON.stringify(donnees, null, 2)}\n</script>`;
   },
 };
@@ -455,6 +486,8 @@ for (const { page, corps } of pages) {
     // Sur une page d'atterrissage, « Devis » mene au formulaire de la page
     // meme : le visiteur venu d'une publicite ne doit pas en sortir.
     lienDevis: page.gabarit === "landing" ? "#devis" : "devis.html",
+    // Le formulaire de contact ecrit a toutes les adresses a la fois.
+    emailsDestinataires: site.emails.join(","),
   };
   try {
     ctx.contenu = decouperTitres(rendre(corps, ctx));
