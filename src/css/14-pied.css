@@ -2,7 +2,7 @@
   margin-top: 0;
   padding: 4rem 0 5.5rem;
   background:
-    radial-gradient(circle at top left, rgba(251, 146, 60, 0.08), transparent 25%),
+    radial-gradient(circle at top var(--depart), rgba(251, 146, 60, 0.08), transparent 25%),
     linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(2, 6, 23, 1));
 }
 
@@ -35,7 +35,7 @@
 
 .footer-links a:hover {
   color: var(--accent);
-  transform: translateX(3px);
+  transform: translateX(calc(3px * var(--sens)));
 }
 
 .footer-bottom {

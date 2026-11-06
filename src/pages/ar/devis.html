@@ -1,0 +1,69 @@
+---
+titre: طلب عرض سعر | SOBAFOR SA
+description: اطلبوا عرض سعر من SOBAFOR SA لمشاريعكم في البناء والطرق وحفر الآبار والمياه والصرف الصحي والبنى التحتية في النيجر.
+og_titre: طلب عرض سعر من SOBAFOR SA
+og_description: استمارة بسيطة وسريعة لطلب عرض سعر، مع إرسال مباشر عبر واتساب.
+og_image: logo.jpeg
+classe: page-quote
+bandeau: non
+slogan: المرجع في البناء والأشغال العمومية والبنى التحتية في النيجر منذ 1987. التزام وجودة وموثوقية.
+---
+    <section class="hero hero-inner">
+      <div class="container">
+        <p class="eyebrow">طلب عرض سعر</p>
+        <h1>احصلوا على تقدير سريع لمشروعكم</h1>
+        <p>املأوا هذه الاستمارة في دقيقة واحدة. يُجهَّز طلبكم تلقائيًا ثم يُرسل إلى SOBAFOR SA عبر واتساب ({{{ tel.court }}}).</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cards two">
+          <article class="contact-box">
+            <h2>استمارة عرض السعر</h2>
+            <form class="form" data-quote-form data-whatsapp="{{ whatsapp }}">
+              <div class="form-group">
+                <label for="nom">الاسم الكامل أو الشركة</label>
+                <input type="text" id="nom" name="nom" required placeholder="مثال: محمد ولد أحمد">
+              </div>
+              <div class="form-group">
+                <label for="telephone">الهاتف (واتساب)</label>
+                <input type="tel" id="telephone" name="telephone" required placeholder="+227 90 00 00 00">
+              </div>
+              <div class="form-group">
+                <label for="service">مجال التدخل</label>
+                <select id="service" name="service" required>
+                  <option value="" disabled selected>اختاروا مجالًا...</option>
+                  <option value="Bâtiment & Génie Civil">المباني والهندسة المدنية</option>
+                  <option value="Routes & Assainissement">الطرق والصرف الصحي</option>
+                  <option value="Hydraulique & Forages">المياه وحفر الآبار</option>
+                  <option value="Énergie Solaire">الطاقة الشمسية</option>
+                  <option value="Location d'engins">تأجير الآليات</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ville">مدينة المشروع أو منطقته</label>
+                <input type="text" id="ville" name="ville" required placeholder="مثال: نيامي، مرادي...">
+              </div>
+              <div class="form-group">
+                <label for="details">تفاصيل الاحتياج</label>
+                <textarea id="details" name="details" required placeholder="صِفوا مشروعكم باختصار..."></textarea>
+              </div>
+              <button class="btn btn-whatsapp" type="submit">
+                {{> icone-whatsapp }}
+                أرسلوا عبر واتساب
+              </button>
+            </form>
+          </article>
+          <article class="contact-box soft">
+            <h3>لماذا تختارون SOBAFOR SA؟</h3>
+            <ul class="list">
+              <li><strong>خبرة ميدانية</strong>: أكثر من 30 عامًا من الخبرة في النيجر.</li>
+              <li><strong>معدات خاصة</strong>: أسطول آليات كامل وعالي الأداء.</li>
+              <li><strong>سرعة الاستجابة</strong>: تقدير فني سريع وواقعي للتكلفة.</li>
+              <li><strong>الجودة</strong>: احترام صارم لمعايير السلامة والاستدامة.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>

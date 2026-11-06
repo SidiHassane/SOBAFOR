@@ -1,12 +1,12 @@
-  <div class="sticky-mobile-cta" aria-label="Actions rapides mobile">
+  <div class="sticky-mobile-cta" aria-label="{{ t.actions_mobiles }}">
     <a class="call" href="tel:{{ site.telephones.principal.lien }}">
       {{> icone-telephone }}
-      Appeler
+      {{ t.appeler }}
     </a>
     <a class="wa" href="{{ whatsapp }}" target="_blank" rel="noopener">
       {{> icone-whatsapp }}
-      WhatsApp
-      <span class="cta-number">{{ site.telephones.principal.court }}</span>
+      {{ t.whatsapp }}
+      <span class="cta-number">{{{ tel.court }}}</span>
     </a>
     <a class="quote" href="{{ lienDevis }}">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -15,6 +15,6 @@
         <path d="M8 13h8"></path>
         <path d="M8 17h5"></path>
       </svg>
-      Devis
+      {{ t.devis_court }}
     </a>
   </div>

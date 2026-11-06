@@ -243,8 +243,8 @@
 }
 
 .phare-bloc {
-  padding-left: 0.9rem;
-  border-left: 2px solid rgba(251, 146, 60, 0.45);
+  padding-inline-start: 0.9rem;
+  border-inline-start: 2px solid rgba(251, 146, 60, 0.45);
 }
 
 .phare-bloc dt {
@@ -311,7 +311,7 @@
 
 .video-facade-texte {
   position: absolute;
-  left: 1.2rem;
+  inset-inline-start: 1.2rem;
   bottom: 1rem;
   z-index: 2;
   display: grid;

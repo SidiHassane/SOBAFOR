@@ -19,8 +19,9 @@ const PAGES = VERSION + "-pages";
 
 const MAX_IMAGES = 80;
 
-// Coque minimale : environ 350 Ko. On ne precharge pas les photos de la
-// galerie, qui arriveront au fil de la consultation.
+// Coque minimale, commune a toutes les langues. On ne precharge ni les photos
+// de la galerie, qui arriveront au fil de la consultation, ni les pages, que
+// le site demande ensuite dans la langue du visiteur (message ci-dessous).
 const A_PRECHARGER = __A_PRECHARGER__;
 
 self.addEventListener("install", (event) => {
@@ -50,6 +51,27 @@ self.addEventListener("activate", (event) => {
         )
       )
       .then(() => self.clients.claim())
+  );
+});
+
+/* Pages de la langue consultee, envoyees par la page apres son chargement.
+   Une page deja gardee n'est pas retelechargee : la visite suivante reste
+   gratuite en donnees, le reseau d'abord la rafraichit de toute facon. */
+self.addEventListener("message", (event) => {
+  const donnees = event.data;
+  if (!donnees || donnees.type !== "pages-de-la-langue" || !Array.isArray(donnees.pages)) return;
+  event.waitUntil(
+    caches.open(PAGES).then((cache) =>
+      Promise.all(
+        donnees.pages.map(async (adresse) => {
+          const url = new URL(adresse, self.location.href);
+          if (url.origin !== self.location.origin || !url.pathname.endsWith(".html")) return;
+          if (await caches.match(url.href)) return;
+          const rep = await fetch(url.href).catch(() => null);
+          if (rep && rep.ok) await cache.put(url.href, rep);
+        })
+      )
+    )
   );
 });
 
@@ -85,11 +107,14 @@ self.addEventListener("fetch", (event) => {
           caches.open(PAGES).then((c) => c.put(req, copie));
           return rep;
         })
-        .catch(() =>
-          caches
-            .match(req)
-            .then((hit) => hit || caches.match("./hors-ligne.html"))
-        )
+        .catch(async () => {
+          const dossier = url.pathname.startsWith("/ar/") ? "./ar/" : "./";
+          return (
+            (await caches.match(req)) ||
+            (url.pathname.endsWith("/") && (await caches.match(url.pathname + "index.html"))) ||
+            caches.match(dossier + "hors-ligne.html")
+          );
+        })
     );
     return;
   }

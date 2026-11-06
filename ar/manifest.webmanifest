@@ -1,0 +1,59 @@
+{
+  "name": "SOBAFOR SA — المباني وحفر الآبار والطرق",
+  "short_name": "SOBAFOR",
+  "description": "شركة نيجرية للبناء والأشغال العمومية منذ 1987: المباني والطرق والمياه وحفر الآبار وتأجير الآليات في النيجر ومنطقة الساحل.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "../",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "categories": [
+    "business",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "../assets/icons/icone-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../assets/icons/icone-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../assets/icons/icone-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "إنجازاتنا",
+      "url": "./realisations.html",
+      "icons": [
+        {
+          "src": "../assets/icons/icone-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "اطلبوا عرض سعر",
+      "url": "./devis.html",
+      "icons": [
+        {
+          "src": "../assets/icons/icone-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

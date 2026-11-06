@@ -32,6 +32,11 @@ const afficherSuite = (form, html) => {
   return bloc;
 };
 
+// Message envoye a l'equipe. Sur une version traduite, une ligne en francais
+// signale la langue du visiteur, pour lui repondre dans la bonne.
+const rediger = (lignes) =>
+  [...lignes, ...(T.langue_visiteur ? ["", T.langue_visiteur] : [])].join("\n");
+
 const champs = (form) => {
   const donnees = new FormData(form);
   return (nom) => String(donnees.get(nom) || "").trim();
@@ -44,25 +49,25 @@ if (quoteForm) {
     const val = champs(quoteForm);
     // Les champs facultatifs laisses vides ne produisent pas de ligne vide
     // dans le message recu sur WhatsApp.
-    const message = [
-      "Bonjour SOBAFOR SA,",
-      "Je souhaite demander un devis.",
-      "",
-      `Nom: ${val("nom")}`,
-      `Téléphone: ${val("telephone")}`,
-      `Service: ${val("service")}`,
-      val("ville") ? `Ville/Zone: ${val("ville")}` : null,
-      val("details") ? `Détails: ${val("details")}` : null,
-    ]
-      .filter((ligne) => ligne !== null)
-      .join("\n");
+    const message = rediger(
+      [
+        T.salut,
+        T.devis_intro,
+        "",
+        `${T.nom}: ${val("nom")}`,
+        `${T.telephone}: ${val("telephone")}`,
+        `${T.service}: ${val("service")}`,
+        val("ville") ? `${T.ville}: ${val("ville")}` : null,
+        val("details") ? `${T.details}: ${val("details")}` : null,
+      ].filter((ligne) => ligne !== null)
+    );
 
     const url = lienWhatsApp(quoteForm.dataset.whatsapp, message);
     afficherSuite(
       quoteForm,
-      `<p class="form-suite-titre">Votre demande est prête</p>
-      <p>WhatsApp s'ouvre avec votre message déjà rédigé : il ne vous reste qu'à appuyer sur <strong>Envoyer</strong>.</p>
-      <p class="form-suite-recours">Rien ne s'est ouvert ? <a href="${echapper(url)}" target="_blank" rel="noopener">Ouvrir WhatsApp</a></p>`
+      `<p class="form-suite-titre">${T.demande_prete}</p>
+      <p>${T.whatsapp_ouvre}</p>
+      <p class="form-suite-recours">${T.rien_ouvert} <a href="${echapper(url)}" target="_blank" rel="noopener">${T.ouvrir_whatsapp}</a></p>`
     );
     ouvrirWhatsApp(url);
   });
@@ -73,16 +78,16 @@ if (contactForm) {
   contactForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const val = champs(contactForm);
-    const sujet = val("sujet") || "Prise de contact site web";
-    const message = [
-      "Bonjour SOBAFOR SA,",
+    const sujet = val("sujet") || T.sujet_defaut;
+    const message = rediger([
+      T.salut,
       "",
-      `Nom: ${val("nom")}`,
-      `Téléphone: ${val("telephone")}`,
-      `Sujet: ${sujet}`,
+      `${T.nom}: ${val("nom")}`,
+      `${T.telephone}: ${val("telephone")}`,
+      `${T.sujet}: ${sujet}`,
       "",
       val("message"),
-    ].join("\n");
+    ]);
 
     const urlWhatsApp = lienWhatsApp(contactForm.dataset.whatsapp, message);
     const canal = (e.submitter && e.submitter.value) || "whatsapp";
@@ -93,22 +98,22 @@ if (contactForm) {
       const email = contactForm.dataset.email;
       const liensEmail = email
         .split(",")
-        .map((e) => `<a href="mailto:${echapper(e)}">${echapper(e)}</a>`)
-        .join(" ou ");
+        .map((e) => `<a href="mailto:${echapper(e)}"><bdi dir="ltr">${echapper(e)}</bdi></a>`)
+        .join(` ${T.ou} `);
       const mailto = `mailto:${email}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
       const bloc = afficherSuite(
         contactForm,
-        `<p class="form-suite-titre">Votre message est prêt</p>
-        <p>Votre messagerie s'ouvre avec le message déjà rédigé.</p>
-        <p class="form-suite-recours">Rien ne s'est ouvert ? Écrivez-nous à ${liensEmail}
-        (<button type="button" class="lien-bouton" data-copier>copier le message</button>),
-        ou <a href="${echapper(urlWhatsApp)}" target="_blank" rel="noopener">envoyez-le par WhatsApp</a>.</p>`
+        `<p class="form-suite-titre">${T.message_pret}</p>
+        <p>${T.messagerie_ouvre}</p>
+        <p class="form-suite-recours">${T.rien_ouvert} ${T.ecrivez_nous} ${liensEmail}
+        (<button type="button" class="lien-bouton" data-copier>${T.copier}</button>)${T.virgule}
+        ${T.ou} <a href="${echapper(urlWhatsApp)}" target="_blank" rel="noopener">${T.envoyer_whatsapp}</a>.</p>`
       );
       const copier = bloc.querySelector("[data-copier]");
       copier.addEventListener("click", () => {
         if (!navigator.clipboard) return;
         navigator.clipboard.writeText(message).then(() => {
-          copier.textContent = "message copié";
+          copier.textContent = T.copie;
         });
       });
       window.location.href = mailto;
@@ -117,9 +122,9 @@ if (contactForm) {
 
     afficherSuite(
       contactForm,
-      `<p class="form-suite-titre">Votre message est prêt</p>
-      <p>WhatsApp s'ouvre avec votre message déjà rédigé : il ne vous reste qu'à appuyer sur <strong>Envoyer</strong>.</p>
-      <p class="form-suite-recours">Rien ne s'est ouvert ? <a href="${echapper(urlWhatsApp)}" target="_blank" rel="noopener">Ouvrir WhatsApp</a></p>`
+      `<p class="form-suite-titre">${T.message_pret}</p>
+      <p>${T.whatsapp_ouvre}</p>
+      <p class="form-suite-recours">${T.rien_ouvert} <a href="${echapper(urlWhatsApp)}" target="_blank" rel="noopener">${T.ouvrir_whatsapp}</a></p>`
     );
     ouvrirWhatsApp(urlWhatsApp);
   });

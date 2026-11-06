@@ -1,0 +1,32 @@
+---
+titre: غير متصل | SOBAFOR SA
+classe: page-offline
+gabarit: minimal
+---
+    <section class="hero hero-inner">
+      <div class="container">
+        <h1>هذه الصفحة غير محفوظة بعد</h1>
+        <p>أنتم غير متصلين بالإنترنت، ولم تُفتح هذه الصفحة من قبل على هذا الجهاز. تبقى الصفحات التي زرتموها متاحة دون شبكة.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="index.html">العودة إلى الرئيسية</a>
+          <a class="btn btn-outline" href="realisations.html">إنجازاتنا</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>تواصلوا معنا رغم ذلك</h2>
+        <p class="section-intro">تعمل هذه الوسائل دون اتصال بالإنترنت، بمجرد توفر شبكة الهاتف.</p>
+        <div class="cards two">
+          <article class="card">
+            <h3>عبر الهاتف</h3>
+            <p><a href="tel:{{ site.telephones.principal.lien }}">{{{ tel.affiche }}}</a><span class="wa-tag">{{ t.appel_whatsapp }}</span></p>
+          </article>
+          <article class="card">
+            <h3>مكاتبنا</h3>
+            <p>{{ site.adresse.rue }}<br />{{ site.adresse.ville }}{{ t.sep }}{{ site.adresse.pays }}</p>
+          </article>
+        </div>
+      </div>
+    </section>

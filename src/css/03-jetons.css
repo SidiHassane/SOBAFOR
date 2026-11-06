@@ -1,3 +1,18 @@
+/* Sens de lecture. Les proprietes logiques (inset-inline, padding-inline...)
+   suivent seules l'attribut dir ; ces jetons servent la ou elles n'existent
+   pas : deplacements, degrades et points d'origine. */
+:root {
+  --sens: 1;
+  --vers-fin: 90deg;
+  --depart: left;
+}
+
+:root[dir="rtl"] {
+  --sens: -1;
+  --vers-fin: 270deg;
+  --depart: right;
+}
+
 :root {
   --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
   --font-body: "Plex", "Segoe UI", system-ui, sans-serif;

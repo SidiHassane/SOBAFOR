@@ -1,0 +1,95 @@
+---
+titre: اتصلوا بـ SOBAFOR SA | شركة بناء وأشغال عمومية في نيامي
+description: تواصلوا مع SOBAFOR SA في نيامي لمشاريعكم في المباني والطرق والمياه وحفر الآبار والبنى التحتية العمومية.
+og_titre: اتصلوا بـ SOBAFOR SA
+og_description: الهاتف وواتساب والبريد الإلكتروني واستمارة تواصل مباشرة لطلبات مشاريعكم.
+og_image: logo.jpeg
+classe: page-contact
+jsonld: contact
+bandeau: non
+slogan: مواكبة مهنية لمشاريع البنى التحتية العمومية والخاصة في النيجر.
+---
+    <section class="hero hero-inner">
+      <div class="container">
+        <p class="eyebrow">اتصلوا بنا</p>
+        <h1>لنتحدث عن مشروعكم</h1>
+        <p>تجيبكم فرقنا بسرعة لتحديد احتياجكم واقتراح حل فني مناسب.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cards two">
+          <article class="contact-box">
+            <h2>بيانات SOBAFOR SA</h2>
+            <div class="contact-item"><span class="ico">العنوان</span><div>{{ site.adresse.rue }}{{ t.sep }}{{ site.adresse.ville }}{{ t.sep }}{{ site.adresse.pays }}</div></div>
+            <div class="contact-item"><span class="ico">الهاتف</span><div><a href="tel:{{ site.telephones.principal.lien }}">{{{ tel.affiche }}}</a><span class="wa-tag">{{ t.appel_whatsapp }}</span><br><a href="tel:{{ site.telephones.dg.lien }}">{{{ tel.dg }}} (المدير العام)</a></div></div>
+            <div class="contact-item"><span class="ico">البريد</span><div>{{@ emails lignes }}</div></div>
+            <div class="contact-item"><span class="ico">السجل</span><div>{{{ legal }}}</div></div>
+            <div class="contact-item"><span class="ico">المدير</span><div>المدير العام: {{ site.directeur }}</div></div>
+            <div class="cta-row" style="margin-top:1rem;">
+              <a class="btn btn-whatsapp" href="{{ whatsapp }}" target="_blank" rel="noopener">
+                {{> icone-whatsapp }}
+                {{ t.whatsapp }} <span class="btn-numero">{{{ tel.court }}}</span>
+              </a>
+              <a class="btn btn-secondary" href="tel:{{ site.telephones.principal.lien }}">{{ t.appeler_maintenant }}</a>
+            </div>
+          </article>
+
+          <article class="contact-box">
+            <h2>استمارة تواصل سريعة</h2>
+            <form data-contact-form data-email="{{ emailsDestinataires }}" data-whatsapp="{{ whatsapp }}">
+              <div>
+                <label for="nom">الاسم الكامل</label>
+                <input id="nom" name="nom" type="text" required />
+              </div>
+              <div>
+                <label for="telephone">الهاتف</label>
+                <input id="telephone" name="telephone" type="tel" required />
+              </div>
+              <div>
+                <label for="sujet">الموضوع</label>
+                <select id="sujet" name="sujet" required>
+                  <option value="">اختاروا موضوعًا</option>
+                  <option value="Demande d'information">طلب معلومات</option>
+                  <option value="Projet BTP">مشروع بناء وأشغال عمومية</option>
+                  <option value="Projet hydraulique / forage">مشروع مياه أو حفر آبار</option>
+                  <option value="Partenariat">شراكة</option>
+                </select>
+              </div>
+              <div>
+                <label for="message">الرسالة</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-whatsapp" type="submit" name="canal" value="whatsapp">
+                  {{> icone-whatsapp }}
+                  أرسلوا عبر واتساب
+                </button>
+                <button class="btn btn-secondary" type="submit" name="canal" value="email">أرسلوا بالبريد الإلكتروني</button>
+              </div>
+            </form>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="container">
+        <p class="eyebrow" data-reveal>موقعنا</p>
+        <h2 data-reveal>موقع المقر الرئيسي</h2>
+        <p class="section-intro" data-reveal>تجدون SOBAFOR SA بسهولة في نيامي لمواعيدكم الفنية والإدارية.</p>
+        <div class="map-wrap" data-reveal>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11171.517882488182!2d2.1183289096850437!3d13.534561522367156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x11da9f34569669f3%3A0x5a3d2b19821b548e!2sSobafor%20SA!5e1!3m2!1sar!2sma!4v1778440976406!5m2!1sar!2sma"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            title="موقع SOBAFOR SA في نيامي">
+          </iframe>
+        </div>
+        <p class="map-actions" data-reveal>
+          <a class="btn btn-primary" href="https://www.google.com/maps/place/Sobafor/@13.534561522367156,2.1183289096850437,16z" target="_blank" rel="noopener">افتحوا الموقع في Google Maps</a>
+        </p>
+      </div>
+    </section>

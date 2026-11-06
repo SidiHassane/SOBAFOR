@@ -1,0 +1,105 @@
+/* ===================================================================
+   Choix de la langue
+   Le lien affiche le nom de la langue dans cette langue. Il reste visible
+   sur telephone, hors du menu : on ne doit pas fouiller pour trouver sa
+   langue quand on ne lit pas celle de la page.
+   =================================================================== */
+.langue-lien {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.85rem;
+  margin-inline-start: auto;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--heading);
+  /* Police systeme : sur une page francaise, afficher « العربية » ne doit pas
+     faire telecharger la fonte arabe. */
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: border-color var(--dur-ui) var(--ease), background var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease);
+}
+
+.langue-lien:hover {
+  border-color: rgba(251, 146, 60, 0.45);
+  background: rgba(251, 146, 60, 0.08);
+  color: var(--accent);
+}
+
+@media (min-width: 960px) {
+  .main-nav {
+    margin-inline-start: auto;
+  }
+
+  /* Sur grand ecran, le lien passe apres le menu. */
+  .site-header:not(.site-header-landing) .langue-lien {
+    order: 1;
+    margin-inline-start: 0;
+  }
+}
+
+.lp-entete-actions .langue-lien {
+  margin-inline-start: 0;
+}
+
+/* Proposition affichee une seule fois quand la langue de l'appareil existe sur
+   le site. Sous l'en-tete : la barre d'actions occupe deja le bas de l'ecran. */
+.suggestion-langue {
+  position: fixed;
+  top: calc(var(--header-height) + 0.6rem);
+  inset-inline: 0.75rem;
+  z-index: 80;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 0.5rem;
+  max-width: 26rem;
+  margin-inline: auto;
+  padding-block: 0.55rem;
+  padding-inline: 1rem 0.45rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 1rem;
+  background: var(--surface-strong);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+  font-size: 0.98rem;
+}
+
+.suggestion-langue p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.suggestion-langue a {
+  grid-column: 1;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.suggestion-langue button {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.suggestion-langue button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--heading);
+}

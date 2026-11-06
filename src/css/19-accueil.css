@@ -15,7 +15,8 @@
   align-items: center;
   gap: 0.65rem;
   margin: 0 0 1.6rem;
-  padding: 0.5rem 0.95rem 0.5rem 0.75rem;
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem 0.95rem;
   border: 1px solid rgba(251, 146, 60, 0.28);
   border-radius: 999px;
   background: rgba(2, 6, 23, 0.55);
@@ -130,7 +131,7 @@
   border-radius: 1.6rem;
   background: var(--bg-elevated);
   box-shadow: 0 30px 60px rgba(2, 6, 23, 0.55);
-  transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--s));
+  transform: translate(calc(var(--tx) * var(--sens)), var(--ty)) rotate(calc(var(--rot) * var(--sens))) scale(var(--s));
   filter: brightness(var(--lum));
   transition:
     transform 1s var(--ease),
@@ -198,12 +199,12 @@
 @keyframes pileSortie {
   0% {
     z-index: 4;
-    transform: translate(0%, 0%) rotate(-2deg) scale(1);
+    transform: translate(0%, 0%) rotate(calc(-2deg * var(--sens))) scale(1);
     filter: brightness(1);
   }
   42% {
     z-index: 4;
-    transform: translate(62%, 3%) rotate(12deg) scale(0.96);
+    transform: translate(calc(62% * var(--sens)), 3%) rotate(calc(12deg * var(--sens))) scale(0.96);
   }
   43% {
     z-index: 0;
@@ -220,7 +221,7 @@
 @keyframes pileEntree {
   from {
     opacity: 0;
-    transform: translate3d(40px, 20px, 0) rotate(4deg);
+    transform: translate3d(calc(40px * var(--sens)), 20px, 0) rotate(calc(4deg * var(--sens)));
   }
 }
 
@@ -325,7 +326,8 @@
   flex: none;
   gap: 3rem;
   margin: 0;
-  padding: 0 3rem 0 0;
+  padding: 0;
+  padding-inline-end: 3rem;
   list-style: none;
   animation: defilement 42s linear infinite;
 }
@@ -362,7 +364,7 @@
 
 @keyframes defilement {
   to {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% * var(--sens)));
   }
 }
 

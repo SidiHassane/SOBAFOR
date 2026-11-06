@@ -71,7 +71,7 @@
 .lightbox-compteur {
   position: absolute;
   top: clamp(0.75rem, 3vw, 1.5rem);
-  left: clamp(0.75rem, 3vw, 1.5rem);
+  inset-inline-start: clamp(0.75rem, 3vw, 1.5rem);
   margin: 0;
   padding: 0.55rem 0.95rem;
   border: 1px solid var(--border);
@@ -150,17 +150,17 @@
 
 .lightbox-close {
   top: clamp(0.75rem, 3vw, 1.5rem);
-  right: clamp(0.75rem, 3vw, 1.5rem);
+  inset-inline-end: clamp(0.75rem, 3vw, 1.5rem);
 }
 
 .lightbox-prev {
-  left: clamp(0.5rem, 2vw, 1.5rem);
+  inset-inline-start: clamp(0.5rem, 2vw, 1.5rem);
   top: 50%;
   transform: translateY(-50%);
 }
 
 .lightbox-next {
-  right: clamp(0.5rem, 2vw, 1.5rem);
+  inset-inline-end: clamp(0.5rem, 2vw, 1.5rem);
   top: 50%;
   transform: translateY(-50%);
 }
@@ -207,11 +207,11 @@ body.lightbox-open {
   }
 
   .lightbox-prev {
-    left: 0.4rem;
+    inset-inline-start: 0.4rem;
   }
 
   .lightbox-next {
-    right: 0.4rem;
+    inset-inline-end: 0.4rem;
   }
 }
 

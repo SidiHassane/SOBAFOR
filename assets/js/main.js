@@ -5,17 +5,108 @@
   const mouvementReduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const pointeurFin = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+  // Textes des scripts, dans toutes les langues du site (src/i18n/*.json).
+  const TEXTES = {"fr":{"visionneuse":"Visionneuse des réalisations","fermer":"Fermer","precedent":"Élément précédent","suivant":"Élément suivant","video_chantier":"Vidéo de chantier","salut":"Bonjour SOBAFOR SA,","devis_intro":"Je souhaite demander un devis.","nom":"Nom","telephone":"Téléphone","service":"Service","ville":"Ville/Zone","details":"Détails","sujet":"Sujet","sujet_defaut":"Prise de contact site web","langue_visiteur":"","demande_prete":"Votre demande est prête","message_pret":"Votre message est prêt","whatsapp_ouvre":"WhatsApp s'ouvre avec votre message déjà rédigé : il ne vous reste qu'à appuyer sur <strong>Envoyer</strong>.","rien_ouvert":"Rien ne s'est ouvert ?","ouvrir_whatsapp":"Ouvrir WhatsApp","messagerie_ouvre":"Votre messagerie s'ouvre avec le message déjà rédigé.","ecrivez_nous":"Écrivez-nous à","ou":"ou","virgule":",","copier":"copier le message","copie":"message copié","envoyer_whatsapp":"envoyez-le par WhatsApp","suggestion":"Ce site existe aussi en français.","suggestion_lien":"Voir en français"},"ar":{"visionneuse":"عارض الإنجازات","fermer":"إغلاق","precedent":"العنصر السابق","suivant":"العنصر التالي","video_chantier":"فيديو من الورشة","salut":"السلام عليكم SOBAFOR SA،","devis_intro":"أرغب في طلب عرض سعر.","nom":"الاسم","telephone":"الهاتف","service":"الخدمة","ville":"المدينة/المنطقة","details":"التفاصيل","sujet":"الموضوع","sujet_defaut":"تواصل عبر الموقع","langue_visiteur":"Langue du visiteur : arabe","demande_prete":"طلبكم جاهز","message_pret":"رسالتكم جاهزة","whatsapp_ouvre":"يُفتح واتساب ورسالتكم محرَّرة مسبقًا: لم يبقَ سوى الضغط على <strong>إرسال</strong>.","rien_ouvert":"لم يُفتح شيء؟","ouvrir_whatsapp":"افتحوا واتساب","messagerie_ouvre":"يُفتح بريدكم الإلكتروني والرسالة محرَّرة مسبقًا.","ecrivez_nous":"راسلونا على","ou":"أو","virgule":"،","copier":"انسخوا الرسالة","copie":"تم نسخ الرسالة","envoyer_whatsapp":"أرسلوها عبر واتساب","suggestion":"هذا الموقع متوفر أيضًا باللغة العربية.","suggestion_lien":"الانتقال إلى النسخة العربية"}};
+  const T = TEXTES[document.documentElement.lang] || TEXTES.fr;
+
+  // 1 dans une page de gauche a droite, -1 dans une page arabe : les gestes et
+  // les fleches du clavier suivent le sens de lecture.
+  const sens = document.documentElement.dir === "rtl" ? -1 : 1;
+
   // ---- 10-hors-ligne.js
   {
     // Consultation hors ligne. Enregistre apres le chargement pour ne pas
     // disputer la bande passante aux ressources de la page : sur une
     // connexion faible, l'affichage passe avant la mise en cache.
-    if ("serviceWorker" in navigator) {
+    //
+    // sw.js vit a la racine quelle que soit la langue : son adresse se deduit de
+    // celle de ce script, seule reference valable depuis /ar/ comme depuis /.
+    // currentScript n'existe que pendant l'execution initiale, d'ou la lecture ici.
+    const adresseScript = document.currentScript && document.currentScript.src;
+
+    if ("serviceWorker" in navigator && adresseScript) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("sw.js").catch(() => {
-          /* pas de hors-ligne, le site fonctionne normalement */
-        });
+        navigator.serviceWorker
+          .register(new URL("../../sw.js", adresseScript).href)
+          .then(() => navigator.serviceWorker.ready)
+          .then((enregistrement) => {
+            // Le service worker garde les pages de la langue du visiteur, et elles
+            // seules : pas de donnees mobiles gaspillees pour une autre version.
+            const connexion = navigator.connection;
+            if (connexion && connexion.saveData) return;
+            const pages = [...document.querySelectorAll(".footer-links a")].map((lien) => lien.href);
+            if (pages.length && enregistrement.active) {
+              enregistrement.active.postMessage({ type: "pages-de-la-langue", pages });
+            }
+          })
+          .catch(() => {
+            /* pas de hors-ligne, le site fonctionne normalement */
+          });
       });
+    }
+  }
+
+  // ---- 12-langue.js
+  {
+    // --- Choix de la langue ---
+    // Jamais de redirection automatique : un telephone reglé en arabe n'empeche
+    // pas de vouloir lire le francais, et Google doit pouvoir visiter chaque
+    // version. On se contente d'une proposition discrete, une seule fois.
+    const CLE_LANGUE = "sobafor-langue";
+
+    const langueChoisie = () => {
+      try {
+        return localStorage.getItem(CLE_LANGUE);
+      } catch {
+        return null;
+      }
+    };
+
+    const retenirLangue = (code) => {
+      try {
+        localStorage.setItem(CLE_LANGUE, code);
+      } catch {
+        /* navigation privee : la proposition reviendra, sans gravite */
+      }
+    };
+
+    const liensLangue = document.querySelectorAll("[data-langue]");
+    liensLangue.forEach((lien) => {
+      lien.addEventListener("click", () => retenirLangue(lien.dataset.langue));
+    });
+
+    // La langue preferee de l'appareil, et non l'une des suivantes : quelqu'un qui
+    // a place le francais en tete n'a rien a se voir proposer.
+    const prefere = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+    const codePrefere = prefere.toLowerCase().split("-")[0];
+    const lienPropose = [...liensLangue].find((lien) => lien.dataset.langue === codePrefere);
+
+    if (lienPropose && TEXTES[codePrefere] && !langueChoisie()) {
+      const textes = TEXTES[codePrefere];
+      const proposition = document.createElement("aside");
+      proposition.className = "suggestion-langue";
+      proposition.lang = codePrefere;
+      proposition.dir = lienPropose.dir;
+
+      const message = document.createElement("p");
+      message.textContent = textes.suggestion;
+
+      const lien = document.createElement("a");
+      lien.href = lienPropose.href;
+      lien.textContent = textes.suggestion_lien;
+      lien.addEventListener("click", () => retenirLangue(codePrefere));
+
+      const fermer = document.createElement("button");
+      fermer.type = "button";
+      fermer.setAttribute("aria-label", textes.fermer);
+      fermer.textContent = "\u00d7";
+      fermer.addEventListener("click", () => {
+        retenirLangue(document.documentElement.lang);
+        proposition.remove();
+      });
+
+      proposition.append(message, lien, fermer);
+      document.body.appendChild(proposition);
     }
   }
 
@@ -387,14 +478,14 @@
         lightbox.className = "lightbox";
         lightbox.setAttribute("role", "dialog");
         lightbox.setAttribute("aria-modal", "true");
-        lightbox.setAttribute("aria-label", "Visionneuse des realisations");
+        lightbox.setAttribute("aria-label", T.visionneuse);
         lightbox.innerHTML =
           '<div class="lightbox-stage"></div>' +
           '<p class="lightbox-caption"></p>' +
           '<p class="lightbox-compteur" aria-live="polite"></p>' +
-          '<button class="lightbox-close" type="button" aria-label="Fermer">&times;</button>' +
-          '<button class="lightbox-prev" type="button" aria-label="Element precedent">&#8249;</button>' +
-          '<button class="lightbox-next" type="button" aria-label="Element suivant">&#8250;</button>';
+          `<button class="lightbox-close" type="button" aria-label="${T.fermer}">&times;</button>` +
+          `<button class="lightbox-prev" type="button" aria-label="${T.precedent}">&#8249;</button>` +
+          `<button class="lightbox-next" type="button" aria-label="${T.suivant}">&#8250;</button>`;
         document.body.appendChild(lightbox);
 
         const stage = lightbox.querySelector(".lightbox-stage");
@@ -438,7 +529,7 @@
             video.autoplay = true;
             video.playsInline = true;
             video.preload = "auto";
-            video.setAttribute("aria-label", opener.dataset.title || "Video de chantier");
+            video.setAttribute("aria-label", opener.dataset.title || T.video_chantier);
             stage.appendChild(video);
             video.play().catch(() => {});
           } else {
@@ -520,8 +611,8 @@
         document.addEventListener("keydown", (event) => {
           if (!isOpen()) return;
           if (event.key === "Escape") close();
-          if (event.key === "ArrowLeft") show(current - 1);
-          if (event.key === "ArrowRight") show(current + 1);
+          if (event.key === "ArrowLeft") show(current - sens);
+          if (event.key === "ArrowRight") show(current + sens);
         });
 
         // --- Gestes tactiles ---
@@ -582,7 +673,7 @@
           const dy = t.clientY - y0;
           finDeGeste();
           if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SEUIL_X) {
-            show(dx < 0 ? current + 1 : current - 1);
+            show(dx < 0 ? current + sens : current - sens);
           } else if (dy > SEUIL_Y) {
             close();
           }
@@ -778,6 +869,11 @@
       return bloc;
     };
 
+    // Message envoye a l'equipe. Sur une version traduite, une ligne en francais
+    // signale la langue du visiteur, pour lui repondre dans la bonne.
+    const rediger = (lignes) =>
+      [...lignes, ...(T.langue_visiteur ? ["", T.langue_visiteur] : [])].join("\n");
+
     const champs = (form) => {
       const donnees = new FormData(form);
       return (nom) => String(donnees.get(nom) || "").trim();
@@ -790,25 +886,25 @@
         const val = champs(quoteForm);
         // Les champs facultatifs laisses vides ne produisent pas de ligne vide
         // dans le message recu sur WhatsApp.
-        const message = [
-          "Bonjour SOBAFOR SA,",
-          "Je souhaite demander un devis.",
-          "",
-          `Nom: ${val("nom")}`,
-          `Téléphone: ${val("telephone")}`,
-          `Service: ${val("service")}`,
-          val("ville") ? `Ville/Zone: ${val("ville")}` : null,
-          val("details") ? `Détails: ${val("details")}` : null,
-        ]
-          .filter((ligne) => ligne !== null)
-          .join("\n");
+        const message = rediger(
+          [
+            T.salut,
+            T.devis_intro,
+            "",
+            `${T.nom}: ${val("nom")}`,
+            `${T.telephone}: ${val("telephone")}`,
+            `${T.service}: ${val("service")}`,
+            val("ville") ? `${T.ville}: ${val("ville")}` : null,
+            val("details") ? `${T.details}: ${val("details")}` : null,
+          ].filter((ligne) => ligne !== null)
+        );
 
         const url = lienWhatsApp(quoteForm.dataset.whatsapp, message);
         afficherSuite(
           quoteForm,
-          `<p class="form-suite-titre">Votre demande est prête</p>
-          <p>WhatsApp s'ouvre avec votre message déjà rédigé : il ne vous reste qu'à appuyer sur <strong>Envoyer</strong>.</p>
-          <p class="form-suite-recours">Rien ne s'est ouvert ? <a href="${echapper(url)}" target="_blank" rel="noopener">Ouvrir WhatsApp</a></p>`
+          `<p class="form-suite-titre">${T.demande_prete}</p>
+          <p>${T.whatsapp_ouvre}</p>
+          <p class="form-suite-recours">${T.rien_ouvert} <a href="${echapper(url)}" target="_blank" rel="noopener">${T.ouvrir_whatsapp}</a></p>`
         );
         ouvrirWhatsApp(url);
       });
@@ -819,16 +915,16 @@
       contactForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const val = champs(contactForm);
-        const sujet = val("sujet") || "Prise de contact site web";
-        const message = [
-          "Bonjour SOBAFOR SA,",
+        const sujet = val("sujet") || T.sujet_defaut;
+        const message = rediger([
+          T.salut,
           "",
-          `Nom: ${val("nom")}`,
-          `Téléphone: ${val("telephone")}`,
-          `Sujet: ${sujet}`,
+          `${T.nom}: ${val("nom")}`,
+          `${T.telephone}: ${val("telephone")}`,
+          `${T.sujet}: ${sujet}`,
           "",
           val("message"),
-        ].join("\n");
+        ]);
 
         const urlWhatsApp = lienWhatsApp(contactForm.dataset.whatsapp, message);
         const canal = (e.submitter && e.submitter.value) || "whatsapp";
@@ -839,22 +935,22 @@
           const email = contactForm.dataset.email;
           const liensEmail = email
             .split(",")
-            .map((e) => `<a href="mailto:${echapper(e)}">${echapper(e)}</a>`)
-            .join(" ou ");
+            .map((e) => `<a href="mailto:${echapper(e)}"><bdi dir="ltr">${echapper(e)}</bdi></a>`)
+            .join(` ${T.ou} `);
           const mailto = `mailto:${email}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
           const bloc = afficherSuite(
             contactForm,
-            `<p class="form-suite-titre">Votre message est prêt</p>
-            <p>Votre messagerie s'ouvre avec le message déjà rédigé.</p>
-            <p class="form-suite-recours">Rien ne s'est ouvert ? Écrivez-nous à ${liensEmail}
-            (<button type="button" class="lien-bouton" data-copier>copier le message</button>),
-            ou <a href="${echapper(urlWhatsApp)}" target="_blank" rel="noopener">envoyez-le par WhatsApp</a>.</p>`
+            `<p class="form-suite-titre">${T.message_pret}</p>
+            <p>${T.messagerie_ouvre}</p>
+            <p class="form-suite-recours">${T.rien_ouvert} ${T.ecrivez_nous} ${liensEmail}
+            (<button type="button" class="lien-bouton" data-copier>${T.copier}</button>)${T.virgule}
+            ${T.ou} <a href="${echapper(urlWhatsApp)}" target="_blank" rel="noopener">${T.envoyer_whatsapp}</a>.</p>`
           );
           const copier = bloc.querySelector("[data-copier]");
           copier.addEventListener("click", () => {
             if (!navigator.clipboard) return;
             navigator.clipboard.writeText(message).then(() => {
-              copier.textContent = "message copié";
+              copier.textContent = T.copie;
             });
           });
           window.location.href = mailto;
@@ -863,9 +959,9 @@
 
         afficherSuite(
           contactForm,
-          `<p class="form-suite-titre">Votre message est prêt</p>
-          <p>WhatsApp s'ouvre avec votre message déjà rédigé : il ne vous reste qu'à appuyer sur <strong>Envoyer</strong>.</p>
-          <p class="form-suite-recours">Rien ne s'est ouvert ? <a href="${echapper(urlWhatsApp)}" target="_blank" rel="noopener">Ouvrir WhatsApp</a></p>`
+          `<p class="form-suite-titre">${T.message_pret}</p>
+          <p>${T.whatsapp_ouvre}</p>
+          <p class="form-suite-recours">${T.rien_ouvert} <a href="${echapper(urlWhatsApp)}" target="_blank" rel="noopener">${T.ouvrir_whatsapp}</a></p>`
         );
         ouvrirWhatsApp(urlWhatsApp);
       });
