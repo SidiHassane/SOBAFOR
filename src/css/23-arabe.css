@@ -1,0 +1,125 @@
+/* ===================================================================
+   Version arabe
+   IBM Plex Sans Arabic prolonge le Plex du texte courant : meme dessin,
+   meme sobriete. Le fichier ne couvre que l'arabe : les chiffres et les
+   mots latins restent en Archivo et Plex, comme sur le site francais.
+   Ces regles ne s'appliquent qu'a html[lang="ar"] : une page francaise
+   ne reference jamais ces polices et ne les telecharge donc pas.
+   =================================================================== */
+
+@font-face {
+  font-family: "Plex Arabe";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/plex-arabe-400.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+  font-family: "Plex Arabe";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/plex-arabe-700.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+html[lang="ar"] {
+  --font-display: "Plex Arabe", "Archivo", "Segoe UI", Tahoma, sans-serif;
+  --font-body: "Plex Arabe", "Plex", "Segoe UI", Tahoma, sans-serif;
+}
+
+/* L'interlettrage casse la liaison entre les lettres arabes : aucune
+   exception, d'ou le !important face aux reglages hérités du latin. */
+html[lang="ar"] *,
+html[lang="ar"] *::before,
+html[lang="ar"] *::after {
+  letter-spacing: normal !important;
+}
+
+/* L'arabe a des hampes et des points hauts et bas : il lui faut plus
+   d'interligne que le latin, surtout dans les titres serres. */
+html[lang="ar"] body {
+  line-height: 1.8;
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] .footer-title {
+  line-height: 1.4;
+}
+
+/* A corps egal, l'arabe parait plus petit : les petits libelles remontent. */
+html[lang="ar"] .eyebrow,
+html[lang="ar"] .hero-badge {
+  font-size: 0.92rem;
+}
+
+html[lang="ar"] .main-nav a {
+  font-size: 1rem;
+}
+
+html[lang="ar"] .brand-sub {
+  font-size: 0.8rem;
+}
+
+html[lang="ar"] .btn {
+  font-size: 0.98rem;
+}
+
+html[lang="ar"] .lp-entete-actions .btn {
+  font-size: 0.9rem;
+}
+
+html[lang="ar"] .sticky-mobile-cta a {
+  font-size: 0.8rem;
+}
+
+html[lang="ar"] .pile-carte figcaption {
+  font-size: 0.95rem;
+}
+
+html[lang="ar"] .pile-carte figcaption span {
+  font-size: 0.78rem;
+}
+
+/* Le masque des titres anime rognerait le bas des lettres (ي, ج, ع). */
+html[lang="ar"] .titre-anime .mot {
+  --mot-depart: 145%;
+  padding-block: 0.3em 0.42em;
+  margin-block: -0.3em -0.42em;
+}
+
+/* Fleche des liens de carte : elle pointe vers la suite du texte. */
+html[lang="ar"] .card-lien::after {
+  content: "←";
+}
+
+/* Les numeros restent lisibles de gauche a droite, y compris en saisie. */
+html[lang="ar"] input[type="tel"] {
+  direction: ltr;
+  text-align: right;
+}
+
+html[lang="ar"] input[type="tel"]::placeholder {
+  direction: ltr;
+  text-align: right;
+}
+
+/* Etiquettes de la fiche de contact : des mots entiers au lieu d'abreviations. */
+html[lang="ar"] .contact-item .ico {
+  min-width: 4.4rem;
+  font-size: 0.82rem;
+}
+
+/* L'arabe n'a pas d'italique : le navigateur ne ferait que pencher les lettres. */
+html[lang="ar"] .phare-officiel {
+  font-style: normal;
+}
+
+/* Un numero ne se coupe jamais en fin de ligne. */
+html[lang="ar"] bdi {
+  white-space: nowrap;
+}

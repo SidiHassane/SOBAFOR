@@ -192,14 +192,14 @@ if (gallery) {
     lightbox.className = "lightbox";
     lightbox.setAttribute("role", "dialog");
     lightbox.setAttribute("aria-modal", "true");
-    lightbox.setAttribute("aria-label", "Visionneuse des realisations");
+    lightbox.setAttribute("aria-label", T.visionneuse);
     lightbox.innerHTML =
       '<div class="lightbox-stage"></div>' +
       '<p class="lightbox-caption"></p>' +
       '<p class="lightbox-compteur" aria-live="polite"></p>' +
-      '<button class="lightbox-close" type="button" aria-label="Fermer">&times;</button>' +
-      '<button class="lightbox-prev" type="button" aria-label="Element precedent">&#8249;</button>' +
-      '<button class="lightbox-next" type="button" aria-label="Element suivant">&#8250;</button>';
+      `<button class="lightbox-close" type="button" aria-label="${T.fermer}">&times;</button>` +
+      `<button class="lightbox-prev" type="button" aria-label="${T.precedent}">&#8249;</button>` +
+      `<button class="lightbox-next" type="button" aria-label="${T.suivant}">&#8250;</button>`;
     document.body.appendChild(lightbox);
 
     const stage = lightbox.querySelector(".lightbox-stage");
@@ -243,7 +243,7 @@ if (gallery) {
         video.autoplay = true;
         video.playsInline = true;
         video.preload = "auto";
-        video.setAttribute("aria-label", opener.dataset.title || "Video de chantier");
+        video.setAttribute("aria-label", opener.dataset.title || T.video_chantier);
         stage.appendChild(video);
         video.play().catch(() => {});
       } else {
@@ -325,8 +325,8 @@ if (gallery) {
     document.addEventListener("keydown", (event) => {
       if (!isOpen()) return;
       if (event.key === "Escape") close();
-      if (event.key === "ArrowLeft") show(current - 1);
-      if (event.key === "ArrowRight") show(current + 1);
+      if (event.key === "ArrowLeft") show(current - sens);
+      if (event.key === "ArrowRight") show(current + sens);
     });
 
     // --- Gestes tactiles ---
@@ -387,7 +387,7 @@ if (gallery) {
       const dy = t.clientY - y0;
       finDeGeste();
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SEUIL_X) {
-        show(dx < 0 ? current + 1 : current - 1);
+        show(dx < 0 ? current + sens : current - sens);
       } else if (dy > SEUIL_Y) {
         close();
       }

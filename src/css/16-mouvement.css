@@ -82,7 +82,7 @@
 
 @keyframes motMonte {
   from {
-    transform: translate3d(0, 110%, 0);
+    transform: translate3d(0, var(--mot-depart, 110%), 0);
   }
 }
 

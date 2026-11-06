@@ -36,8 +36,8 @@
       right: 0;
       bottom: -1px;
       height: 2px;
-      background: linear-gradient(90deg, var(--accent-strong), #fdba74);
-      transform-origin: 0 50%;
+      background: linear-gradient(var(--vers-fin), var(--accent-strong), #fdba74);
+      transform-origin: var(--depart) center;
       animation: progressionLecture linear both;
       animation-timeline: scroll(root);
     }

@@ -25,7 +25,8 @@
 .kpi::before {
   content: "";
   position: absolute;
-  inset: 0 auto auto 0;
+  inset-block: 0 auto;
+  inset-inline: 0 auto;
   width: 8rem;
   height: 8rem;
   background: radial-gradient(circle, rgba(251, 146, 60, 0.14), transparent 70%);
@@ -214,7 +215,7 @@
 
 .list li {
   position: relative;
-  padding-left: 1.6rem;
+  padding-inline-start: 1.6rem;
 }
 
 .list li + li {
@@ -225,7 +226,7 @@
   content: "";
   position: absolute;
   top: 0.58rem;
-  left: 0;
+  inset-inline-start: 0;
   width: 0.55rem;
   height: 0.55rem;
   border-radius: 999px;

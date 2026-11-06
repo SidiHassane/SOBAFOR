@@ -2,7 +2,23 @@
   "nom": "SOBAFOR SA",
   "nomComplet": "Société de Bâtiments, Forages et Routes",
   "slogan": "Bâtiments, Forages & Routes",
-  "url": "https://sobafor.com/",
+  "url": "https://www.sobafor.com/",
+  "langues": [
+    { "code": "fr", "nom": "Français", "nomAnglais": "French", "dir": "ltr", "prefixe": "", "locale": "fr_FR" },
+    {
+      "code": "ar",
+      "nom": "العربية",
+      "nomAnglais": "Arabic",
+      "dir": "rtl",
+      "prefixe": "ar/",
+      "locale": "ar_AR",
+      "latinAutorise": [
+        "SOBAFOR SA", "LEGENI SA", "ASECNA", "Alhousseni Sidi Mohamed", "Moustapha Mahamane",
+        "Guindo Abduraman", "Ibrahim Moussa Garba", "Idrissa Mamane Bizo", "Ibrahim Hamidou",
+        "Illou Issoufa Souleymane", "Hamani", "Google Maps"
+      ]
+    }
+  ],
   "fondation": "1987",
   "emails": ["contact@sobafor.com", "sob_sarl@yahoo.fr"],
   "rccm": "5326",

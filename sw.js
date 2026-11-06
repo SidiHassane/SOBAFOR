@@ -13,30 +13,22 @@
  * 95 Mo et saturerait le stockage du telephone.
  */
 
-const VERSION = "sobafor-53b89e40f5";
+const VERSION = "sobafor-cef81dbbab";
 const COQUE = VERSION + "-coque";
 const IMAGES = VERSION + "-images";
 const PAGES = VERSION + "-pages";
 
 const MAX_IMAGES = 80;
 
-// Coque minimale : environ 350 Ko. On ne precharge pas les photos de la
-// galerie, qui arriveront au fil de la consultation.
+// Coque minimale, commune a toutes les langues. On ne precharge ni les photos
+// de la galerie, qui arriveront au fil de la consultation, ni les pages, que
+// le site demande ensuite dans la langue du visiteur (message ci-dessous).
 const A_PRECHARGER = [
   "./",
-  "./a-propos.html",
-  "./batiments.html",
-  "./contact.html",
-  "./devis.html",
-  "./forages.html",
   "./hors-ligne.html",
-  "./index.html",
-  "./location-engins.html",
-  "./realisations.html",
-  "./routes.html",
-  "./services.html",
-  "./assets/css/style.css?v=3c5c458761",
-  "./assets/js/main.js?v=ad54a7ba38",
+  "./ar/hors-ligne.html",
+  "./assets/css/style.css?v=49900afdc5",
+  "./assets/js/main.js?v=eed0526ff3",
   "./assets/fonts/archivo-500-800-latin.woff2",
   "./assets/fonts/plex-400-latin.woff2",
   "./assets/fonts/plex-600-latin.woff2",
@@ -75,6 +67,27 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+/* Pages de la langue consultee, envoyees par la page apres son chargement.
+   Une page deja gardee n'est pas retelechargee : la visite suivante reste
+   gratuite en donnees, le reseau d'abord la rafraichit de toute facon. */
+self.addEventListener("message", (event) => {
+  const donnees = event.data;
+  if (!donnees || donnees.type !== "pages-de-la-langue" || !Array.isArray(donnees.pages)) return;
+  event.waitUntil(
+    caches.open(PAGES).then((cache) =>
+      Promise.all(
+        donnees.pages.map(async (adresse) => {
+          const url = new URL(adresse, self.location.href);
+          if (url.origin !== self.location.origin || !url.pathname.endsWith(".html")) return;
+          if (await caches.match(url.href)) return;
+          const rep = await fetch(url.href).catch(() => null);
+          if (rep && rep.ok) await cache.put(url.href, rep);
+        })
+      )
+    )
+  );
+});
+
 /* Plafonne un cache en supprimant les entrees les plus anciennes. */
 async function plafonner(nomCache, maximum) {
   const cache = await caches.open(nomCache);
@@ -107,11 +120,14 @@ self.addEventListener("fetch", (event) => {
           caches.open(PAGES).then((c) => c.put(req, copie));
           return rep;
         })
-        .catch(() =>
-          caches
-            .match(req)
-            .then((hit) => hit || caches.match("./hors-ligne.html"))
-        )
+        .catch(async () => {
+          const dossier = url.pathname.startsWith("/ar/") ? "./ar/" : "./";
+          return (
+            (await caches.match(req)) ||
+            (url.pathname.endsWith("/") && (await caches.match(url.pathname + "index.html"))) ||
+            caches.match(dossier + "hors-ligne.html")
+          );
+        })
     );
     return;
   }

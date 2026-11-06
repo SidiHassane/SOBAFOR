@@ -18,7 +18,7 @@
   width: 28rem;
   height: 28rem;
   top: -8rem;
-  right: -10rem;
+  inset-inline-end: -10rem;
   background: radial-gradient(circle, rgba(251, 146, 60, 0.2), transparent 68%);
 }
 
@@ -26,7 +26,7 @@
   width: 22rem;
   height: 22rem;
   bottom: -10rem;
-  left: -6rem;
+  inset-inline-start: -6rem;
   background: radial-gradient(circle, rgba(59, 130, 246, 0.12), transparent 72%);
 }
 
@@ -38,7 +38,7 @@
 .page-home .hero {
   padding: 7rem 0 6rem;
   background:
-    linear-gradient(90deg, rgba(2, 6, 23, 0.92), rgba(2, 6, 23, 0.74)),
+    linear-gradient(var(--vers-fin), rgba(2, 6, 23, 0.92), rgba(2, 6, 23, 0.74)),
     linear-gradient(180deg, rgba(2, 6, 23, 0.15), rgba(2, 6, 23, 0.75)),
     url("../img/gallery/parc-engins-1080.jpg") center/cover;
 }

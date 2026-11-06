@@ -82,7 +82,7 @@
 
 .process .step {
   position: relative;
-  padding-left: calc(var(--pastille) + 1.25rem);
+  padding-inline-start: calc(var(--pastille) + 1.25rem);
   min-height: var(--pastille);
   view-timeline-name: --etape;
 }
@@ -96,7 +96,7 @@
   content: "0" counter(step);
   position: absolute;
   top: 0;
-  left: 0;
+  inset-inline-start: 0;
   z-index: 1;
   width: var(--pastille);
   height: var(--pastille);
@@ -118,7 +118,7 @@
   position: absolute;
   top: var(--pastille);
   bottom: calc(-1 * var(--ecart-etapes));
-  left: calc(var(--pastille) / 2 - 1px);
+  inset-inline-start: calc(var(--pastille) / 2 - 1px);
   width: 2px;
   background:
     linear-gradient(var(--accent), #fdba74) top / 100% var(--rempli, 100%) no-repeat,
@@ -157,19 +157,18 @@
   }
 
   .process .step {
-    padding-left: 0;
+    padding-inline-start: 0;
     padding-top: calc(var(--pastille) + 1.1rem);
   }
 
   .process .step:not(:last-child)::before {
     top: calc(var(--pastille) / 2 - 1px);
     bottom: auto;
-    left: var(--pastille);
-    right: calc(-1 * var(--ecart-etapes));
+    inset-inline: var(--pastille) calc(-1 * var(--ecart-etapes));
     width: auto;
     height: 2px;
     background:
-      linear-gradient(90deg, var(--accent), #fdba74) left / var(--rempli, 100%) 100% no-repeat,
+      linear-gradient(var(--vers-fin), var(--accent), #fdba74) var(--depart) / var(--rempli, 100%) 100% no-repeat,
       var(--border-strong);
   }
 }

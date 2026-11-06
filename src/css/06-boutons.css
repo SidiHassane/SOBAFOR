@@ -31,7 +31,7 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
-  transform: translateX(-120%);
+  transform: translateX(calc(-120% * var(--sens)));
   pointer-events: none;
 }
 
@@ -41,7 +41,7 @@
   }
 
   .btn:hover::after {
-    transform: translateX(120%);
+    transform: translateX(calc(120% * var(--sens)));
     transition: transform 720ms var(--ease);
   }
 }

@@ -2,11 +2,12 @@
     <div class="container header-inner">
 {{> marque }}
       <div class="lp-entete-actions">
-        <a class="btn btn-outline lp-appel" href="tel:{{ site.telephones.principal.lien }}" aria-label="Appeler le {{ site.telephones.principal.affiche }}">
+        {{@ langues }}
+        <a class="btn btn-outline lp-appel" href="tel:{{ site.telephones.principal.lien }}" aria-label="{{ t.appeler_le }} {{ site.telephones.principal.affiche }}">
           {{> icone-telephone }}
-          <span>{{ site.telephones.principal.court }}</span>
+          <span>{{{ tel.court }}}</span>
         </a>
-        <a class="btn btn-primary lp-entete-devis" href="#devis">Devis</a>
+        <a class="btn btn-primary lp-entete-devis" href="#devis">{{ t.devis_court }}</a>
       </div>
     </div>
   </header>

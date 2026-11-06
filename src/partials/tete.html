@@ -1,0 +1,22 @@
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.titre }}</title>
+  <meta name="description" content="{{ page.description }}" />
+  <link rel="canonical" href="{{ page.url }}" />
+  {{@ alternatives }}
+  <meta name="theme-color" content="#020617" />
+  <meta property="og:title" content="{{ page.og_titre }}" />
+  <meta property="og:description" content="{{ page.og_description }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="{{ langue.locale }}" />
+  {{@ locales-alternatives }}
+  <meta property="og:url" content="{{ page.url }}" />
+  <meta property="og:image" content="{{ site.url }}{{ page.og_image }}" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="SOBAFOR" />
+  <link rel="icon" type="image/jpeg" href="logo.jpeg" />
+  <link rel="stylesheet" href="assets/css/style.css?v={{ versions.css }}" />
+  <script>document.documentElement.classList.add("js")</script>
+  {{@ jsonld }}

@@ -56,6 +56,21 @@
   }
 }
 
+/* Sens de lecture. Les proprietes logiques (inset-inline, padding-inline...)
+   suivent seules l'attribut dir ; ces jetons servent la ou elles n'existent
+   pas : deplacements, degrades et points d'origine. */
+:root {
+  --sens: 1;
+  --vers-fin: 90deg;
+  --depart: left;
+}
+
+:root[dir="rtl"] {
+  --sens: -1;
+  --vers-fin: 270deg;
+  --depart: right;
+}
+
 :root {
   --font-display: "Archivo", "Segoe UI", system-ui, sans-serif;
   --font-body: "Plex", "Segoe UI", system-ui, sans-serif;
@@ -178,7 +193,7 @@ svg {
 
 .skip-link {
   position: fixed;
-  left: 1rem;
+  inset-inline-start: 1rem;
   top: 1rem;
   z-index: 200;
   padding: 0.75rem 1rem;
@@ -321,7 +336,7 @@ svg {
 .main-nav {
   position: fixed;
   top: calc(var(--header-height) + 0.5rem);
-  right: 0.75rem;
+  inset-inline-end: 0.75rem;
   bottom: 0.75rem;
   width: min(84vw, 360px);
   padding: 1rem;
@@ -330,11 +345,11 @@ svg {
     linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.98));
   border: 1px solid var(--border);
   border-radius: 1.5rem;
-  box-shadow: -24px 0 60px rgba(2, 6, 23, 0.42);
+  box-shadow: calc(-24px * var(--sens)) 0 60px rgba(2, 6, 23, 0.42);
   /* Ferme, le panneau sort entierement de l'ecran (l'ancien 102 % en
      laissait depasser 5 px sur le bord droit) et devient invisible : ses
      liens ne sont plus atteignables au clavier tant qu'il est replie. */
-  transform: translateX(calc(100% + 1.5rem));
+  transform: translateX(calc((100% + 1.5rem) * var(--sens)));
   visibility: hidden;
   transition:
     transform 0.32s var(--ease),
@@ -385,13 +400,12 @@ svg {
   color: var(--accent);
   border-color: rgba(251, 146, 60, 0.38);
   background: rgba(251, 146, 60, 0.08);
-  transform: translateX(4px);
+  transform: translateX(calc(4px * var(--sens)));
 }
 
 @media (max-width: 959px) {
   .main-nav {
-    left: 0.75rem;
-    right: 0.75rem;
+    inset-inline: 0.75rem;
     bottom: auto;
     width: auto;
     min-height: 20rem;
@@ -449,7 +463,7 @@ svg {
   position: absolute;
   inset: 0;
   background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
-  transform: translateX(-120%);
+  transform: translateX(calc(-120% * var(--sens)));
   pointer-events: none;
 }
 
@@ -459,7 +473,7 @@ svg {
   }
 
   .btn:hover::after {
-    transform: translateX(120%);
+    transform: translateX(calc(120% * var(--sens)));
     transition: transform 720ms var(--ease);
   }
 }
@@ -514,7 +528,7 @@ svg {
   width: 28rem;
   height: 28rem;
   top: -8rem;
-  right: -10rem;
+  inset-inline-end: -10rem;
   background: radial-gradient(circle, rgba(251, 146, 60, 0.2), transparent 68%);
 }
 
@@ -522,7 +536,7 @@ svg {
   width: 22rem;
   height: 22rem;
   bottom: -10rem;
-  left: -6rem;
+  inset-inline-start: -6rem;
   background: radial-gradient(circle, rgba(59, 130, 246, 0.12), transparent 72%);
 }
 
@@ -534,7 +548,7 @@ svg {
 .page-home .hero {
   padding: 7rem 0 6rem;
   background:
-    linear-gradient(90deg, rgba(2, 6, 23, 0.92), rgba(2, 6, 23, 0.74)),
+    linear-gradient(var(--vers-fin), rgba(2, 6, 23, 0.92), rgba(2, 6, 23, 0.74)),
     linear-gradient(180deg, rgba(2, 6, 23, 0.15), rgba(2, 6, 23, 0.75)),
     url("../img/gallery/parc-engins-1080.jpg") center/cover;
 }
@@ -652,7 +666,8 @@ h3,
 .kpi::before {
   content: "";
   position: absolute;
-  inset: 0 auto auto 0;
+  inset-block: 0 auto;
+  inset-inline: 0 auto;
   width: 8rem;
   height: 8rem;
   background: radial-gradient(circle, rgba(251, 146, 60, 0.14), transparent 70%);
@@ -841,7 +856,7 @@ h3,
 
 .list li {
   position: relative;
-  padding-left: 1.6rem;
+  padding-inline-start: 1.6rem;
 }
 
 .list li + li {
@@ -852,7 +867,7 @@ h3,
   content: "";
   position: absolute;
   top: 0.58rem;
-  left: 0;
+  inset-inline-start: 0;
   width: 0.55rem;
   height: 0.55rem;
   border-radius: 999px;
@@ -1138,7 +1153,7 @@ h3,
 .lightbox-compteur {
   position: absolute;
   top: clamp(0.75rem, 3vw, 1.5rem);
-  left: clamp(0.75rem, 3vw, 1.5rem);
+  inset-inline-start: clamp(0.75rem, 3vw, 1.5rem);
   margin: 0;
   padding: 0.55rem 0.95rem;
   border: 1px solid var(--border);
@@ -1217,17 +1232,17 @@ h3,
 
 .lightbox-close {
   top: clamp(0.75rem, 3vw, 1.5rem);
-  right: clamp(0.75rem, 3vw, 1.5rem);
+  inset-inline-end: clamp(0.75rem, 3vw, 1.5rem);
 }
 
 .lightbox-prev {
-  left: clamp(0.5rem, 2vw, 1.5rem);
+  inset-inline-start: clamp(0.5rem, 2vw, 1.5rem);
   top: 50%;
   transform: translateY(-50%);
 }
 
 .lightbox-next {
-  right: clamp(0.5rem, 2vw, 1.5rem);
+  inset-inline-end: clamp(0.5rem, 2vw, 1.5rem);
   top: 50%;
   transform: translateY(-50%);
 }
@@ -1274,11 +1289,11 @@ body.lightbox-open {
   }
 
   .lightbox-prev {
-    left: 0.4rem;
+    inset-inline-start: 0.4rem;
   }
 
   .lightbox-next {
-    right: 0.4rem;
+    inset-inline-end: 0.4rem;
   }
 }
 
@@ -1297,7 +1312,7 @@ body.lightbox-open {
 }
 
 .chip-count {
-  margin-left: 0.4rem;
+  margin-inline-start: 0.4rem;
   opacity: 0.65;
   font-size: 0.92em;
   font-variant-numeric: tabular-nums;
@@ -1476,7 +1491,7 @@ body.lightbox-open {
 
 .process .step {
   position: relative;
-  padding-left: calc(var(--pastille) + 1.25rem);
+  padding-inline-start: calc(var(--pastille) + 1.25rem);
   min-height: var(--pastille);
   view-timeline-name: --etape;
 }
@@ -1490,7 +1505,7 @@ body.lightbox-open {
   content: "0" counter(step);
   position: absolute;
   top: 0;
-  left: 0;
+  inset-inline-start: 0;
   z-index: 1;
   width: var(--pastille);
   height: var(--pastille);
@@ -1512,7 +1527,7 @@ body.lightbox-open {
   position: absolute;
   top: var(--pastille);
   bottom: calc(-1 * var(--ecart-etapes));
-  left: calc(var(--pastille) / 2 - 1px);
+  inset-inline-start: calc(var(--pastille) / 2 - 1px);
   width: 2px;
   background:
     linear-gradient(var(--accent), #fdba74) top / 100% var(--rempli, 100%) no-repeat,
@@ -1551,19 +1566,18 @@ body.lightbox-open {
   }
 
   .process .step {
-    padding-left: 0;
+    padding-inline-start: 0;
     padding-top: calc(var(--pastille) + 1.1rem);
   }
 
   .process .step:not(:last-child)::before {
     top: calc(var(--pastille) / 2 - 1px);
     bottom: auto;
-    left: var(--pastille);
-    right: calc(-1 * var(--ecart-etapes));
+    inset-inline: var(--pastille) calc(-1 * var(--ecart-etapes));
     width: auto;
     height: 2px;
     background:
-      linear-gradient(90deg, var(--accent), #fdba74) left / var(--rempli, 100%) 100% no-repeat,
+      linear-gradient(var(--vers-fin), var(--accent), #fdba74) var(--depart) / var(--rempli, 100%) 100% no-repeat,
       var(--border-strong);
   }
 }
@@ -1733,7 +1747,7 @@ textarea {
   margin-top: 0;
   padding: 4rem 0 5.5rem;
   background:
-    radial-gradient(circle at top left, rgba(251, 146, 60, 0.08), transparent 25%),
+    radial-gradient(circle at top var(--depart), rgba(251, 146, 60, 0.08), transparent 25%),
     linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(2, 6, 23, 1));
 }
 
@@ -1766,7 +1780,7 @@ textarea {
 
 .footer-links a:hover {
   color: var(--accent);
-  transform: translateX(3px);
+  transform: translateX(calc(3px * var(--sens)));
 }
 
 .footer-bottom {
@@ -1863,7 +1877,7 @@ textarea {
   font-weight: 600;
   letter-spacing: 0.02em;
   color: #34d399;
-  margin-left: 0.35em;
+  margin-inline-start: 0.35em;
 }
 
 /* ===================================================================
@@ -1950,7 +1964,7 @@ textarea {
 
 @keyframes motMonte {
   from {
-    transform: translate3d(0, 110%, 0);
+    transform: translate3d(0, var(--mot-depart, 110%), 0);
   }
 }
 
@@ -2225,8 +2239,8 @@ textarea {
       right: 0;
       bottom: -1px;
       height: 2px;
-      background: linear-gradient(90deg, var(--accent-strong), #fdba74);
-      transform-origin: 0 50%;
+      background: linear-gradient(var(--vers-fin), var(--accent-strong), #fdba74);
+      transform-origin: var(--depart) center;
       animation: progressionLecture linear both;
       animation-timeline: scroll(root);
     }
@@ -2444,7 +2458,8 @@ textarea {
   align-items: center;
   gap: 0.65rem;
   margin: 0 0 1.6rem;
-  padding: 0.5rem 0.95rem 0.5rem 0.75rem;
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem 0.95rem;
   border: 1px solid rgba(251, 146, 60, 0.28);
   border-radius: 999px;
   background: rgba(2, 6, 23, 0.55);
@@ -2559,7 +2574,7 @@ textarea {
   border-radius: 1.6rem;
   background: var(--bg-elevated);
   box-shadow: 0 30px 60px rgba(2, 6, 23, 0.55);
-  transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--s));
+  transform: translate(calc(var(--tx) * var(--sens)), var(--ty)) rotate(calc(var(--rot) * var(--sens))) scale(var(--s));
   filter: brightness(var(--lum));
   transition:
     transform 1s var(--ease),
@@ -2627,12 +2642,12 @@ textarea {
 @keyframes pileSortie {
   0% {
     z-index: 4;
-    transform: translate(0%, 0%) rotate(-2deg) scale(1);
+    transform: translate(0%, 0%) rotate(calc(-2deg * var(--sens))) scale(1);
     filter: brightness(1);
   }
   42% {
     z-index: 4;
-    transform: translate(62%, 3%) rotate(12deg) scale(0.96);
+    transform: translate(calc(62% * var(--sens)), 3%) rotate(calc(12deg * var(--sens))) scale(0.96);
   }
   43% {
     z-index: 0;
@@ -2649,7 +2664,7 @@ textarea {
 @keyframes pileEntree {
   from {
     opacity: 0;
-    transform: translate3d(40px, 20px, 0) rotate(4deg);
+    transform: translate3d(calc(40px * var(--sens)), 20px, 0) rotate(calc(4deg * var(--sens)));
   }
 }
 
@@ -2754,7 +2769,8 @@ textarea {
   flex: none;
   gap: 3rem;
   margin: 0;
-  padding: 0 3rem 0 0;
+  padding: 0;
+  padding-inline-end: 3rem;
   list-style: none;
   animation: defilement 42s linear infinite;
 }
@@ -2791,7 +2807,7 @@ textarea {
 
 @keyframes defilement {
   to {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% * var(--sens)));
   }
 }
 
@@ -3057,8 +3073,8 @@ textarea {
 }
 
 .phare-bloc {
-  padding-left: 0.9rem;
-  border-left: 2px solid rgba(251, 146, 60, 0.45);
+  padding-inline-start: 0.9rem;
+  border-inline-start: 2px solid rgba(251, 146, 60, 0.45);
 }
 
 .phare-bloc dt {
@@ -3125,7 +3141,7 @@ textarea {
 
 .video-facade-texte {
   position: absolute;
-  left: 1.2rem;
+  inset-inline-start: 1.2rem;
   bottom: 1rem;
   z-index: 2;
   display: grid;
@@ -3360,7 +3376,7 @@ textarea {
   gap: 0.2rem;
   padding: 0.9rem 1.1rem;
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
+  border-inline-start: 3px solid var(--accent);
   border-radius: 0.9rem;
   background: rgba(255, 255, 255, 0.03);
 }
@@ -3460,7 +3476,7 @@ textarea {
 }
 
 .card-lien:hover::after {
-  transform: translateX(4px);
+  transform: translateX(calc(4px * var(--sens)));
 }
 
 /* Sur telephone, l'en-tete ne garde que l'appel, en pastille : la barre
@@ -3483,4 +3499,234 @@ textarea {
   .lp-hero-photo {
     margin-top: 0.5rem;
   }
+}
+/* ===================================================================
+   Choix de la langue
+   Le lien affiche le nom de la langue dans cette langue. Il reste visible
+   sur telephone, hors du menu : on ne doit pas fouiller pour trouver sa
+   langue quand on ne lit pas celle de la page.
+   =================================================================== */
+.langue-lien {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.85rem;
+  margin-inline-start: auto;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--heading);
+  /* Police systeme : sur une page francaise, afficher « العربية » ne doit pas
+     faire telecharger la fonte arabe. */
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: border-color var(--dur-ui) var(--ease), background var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease);
+}
+
+.langue-lien:hover {
+  border-color: rgba(251, 146, 60, 0.45);
+  background: rgba(251, 146, 60, 0.08);
+  color: var(--accent);
+}
+
+@media (min-width: 960px) {
+  .main-nav {
+    margin-inline-start: auto;
+  }
+
+  /* Sur grand ecran, le lien passe apres le menu. */
+  .site-header:not(.site-header-landing) .langue-lien {
+    order: 1;
+    margin-inline-start: 0;
+  }
+}
+
+.lp-entete-actions .langue-lien {
+  margin-inline-start: 0;
+}
+
+/* Proposition affichee une seule fois quand la langue de l'appareil existe sur
+   le site. Sous l'en-tete : la barre d'actions occupe deja le bas de l'ecran. */
+.suggestion-langue {
+  position: fixed;
+  top: calc(var(--header-height) + 0.6rem);
+  inset-inline: 0.75rem;
+  z-index: 80;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 0.5rem;
+  max-width: 26rem;
+  margin-inline: auto;
+  padding-block: 0.55rem;
+  padding-inline: 1rem 0.45rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 1rem;
+  background: var(--surface-strong);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+  font-size: 0.98rem;
+}
+
+.suggestion-langue p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.suggestion-langue a {
+  grid-column: 1;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.suggestion-langue button {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.suggestion-langue button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--heading);
+}
+/* ===================================================================
+   Version arabe
+   IBM Plex Sans Arabic prolonge le Plex du texte courant : meme dessin,
+   meme sobriete. Le fichier ne couvre que l'arabe : les chiffres et les
+   mots latins restent en Archivo et Plex, comme sur le site francais.
+   Ces regles ne s'appliquent qu'a html[lang="ar"] : une page francaise
+   ne reference jamais ces polices et ne les telecharge donc pas.
+   =================================================================== */
+
+@font-face {
+  font-family: "Plex Arabe";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/plex-arabe-400.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+  font-family: "Plex Arabe";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/plex-arabe-700.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+html[lang="ar"] {
+  --font-display: "Plex Arabe", "Archivo", "Segoe UI", Tahoma, sans-serif;
+  --font-body: "Plex Arabe", "Plex", "Segoe UI", Tahoma, sans-serif;
+}
+
+/* L'interlettrage casse la liaison entre les lettres arabes : aucune
+   exception, d'ou le !important face aux reglages hérités du latin. */
+html[lang="ar"] *,
+html[lang="ar"] *::before,
+html[lang="ar"] *::after {
+  letter-spacing: normal !important;
+}
+
+/* L'arabe a des hampes et des points hauts et bas : il lui faut plus
+   d'interligne que le latin, surtout dans les titres serres. */
+html[lang="ar"] body {
+  line-height: 1.8;
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] .footer-title {
+  line-height: 1.4;
+}
+
+/* A corps egal, l'arabe parait plus petit : les petits libelles remontent. */
+html[lang="ar"] .eyebrow,
+html[lang="ar"] .hero-badge {
+  font-size: 0.92rem;
+}
+
+html[lang="ar"] .main-nav a {
+  font-size: 1rem;
+}
+
+html[lang="ar"] .brand-sub {
+  font-size: 0.8rem;
+}
+
+html[lang="ar"] .btn {
+  font-size: 0.98rem;
+}
+
+html[lang="ar"] .lp-entete-actions .btn {
+  font-size: 0.9rem;
+}
+
+html[lang="ar"] .sticky-mobile-cta a {
+  font-size: 0.8rem;
+}
+
+html[lang="ar"] .pile-carte figcaption {
+  font-size: 0.95rem;
+}
+
+html[lang="ar"] .pile-carte figcaption span {
+  font-size: 0.78rem;
+}
+
+/* Le masque des titres anime rognerait le bas des lettres (ي, ج, ع). */
+html[lang="ar"] .titre-anime .mot {
+  --mot-depart: 145%;
+  padding-block: 0.3em 0.42em;
+  margin-block: -0.3em -0.42em;
+}
+
+/* Fleche des liens de carte : elle pointe vers la suite du texte. */
+html[lang="ar"] .card-lien::after {
+  content: "←";
+}
+
+/* Les numeros restent lisibles de gauche a droite, y compris en saisie. */
+html[lang="ar"] input[type="tel"] {
+  direction: ltr;
+  text-align: right;
+}
+
+html[lang="ar"] input[type="tel"]::placeholder {
+  direction: ltr;
+  text-align: right;
+}
+
+/* Etiquettes de la fiche de contact : des mots entiers au lieu d'abreviations. */
+html[lang="ar"] .contact-item .ico {
+  min-width: 4.4rem;
+  font-size: 0.82rem;
+}
+
+/* L'arabe n'a pas d'italique : le navigateur ne ferait que pencher les lettres. */
+html[lang="ar"] .phare-officiel {
+  font-style: normal;
+}
+
+/* Un numero ne se coupe jamais en fin de ligne. */
+html[lang="ar"] bdi {
+  white-space: nowrap;
 }

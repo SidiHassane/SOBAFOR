@@ -1,53 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://sobafor.com/</loc>
-    <lastmod>2026-08-14</lastmod>
-    <priority>1.0</priority>
+    <loc>https://www.sobafor.com/a-propos.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/a-propos.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/a-propos.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/a-propos.html" />
   </url>
   <url>
-    <loc>https://sobafor.com/services.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <priority>0.8</priority>
+    <loc>https://www.sobafor.com/batiments.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/batiments.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/batiments.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/batiments.html" />
   </url>
   <url>
-    <loc>https://sobafor.com/realisations.html</loc>
-    <lastmod>2026-08-15</lastmod>
-    <priority>0.9</priority>
+    <loc>https://www.sobafor.com/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/contact.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/contact.html" />
   </url>
   <url>
-    <loc>https://sobafor.com/a-propos.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <priority>0.7</priority>
+    <loc>https://www.sobafor.com/devis.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/devis.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/devis.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/devis.html" />
   </url>
   <url>
-    <loc>https://sobafor.com/contact.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <priority>0.6</priority>
+    <loc>https://www.sobafor.com/forages.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/forages.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/forages.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/forages.html" />
   </url>
   <url>
-    <loc>https://sobafor.com/devis.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <priority>0.6</priority>
+    <loc>https://www.sobafor.com/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/" />
   </url>
   <url>
-    <loc>https://sobafor.com/batiments.html</loc>
-    <lastmod>2026-10-08</lastmod>
-    <priority>0.8</priority>
+    <loc>https://www.sobafor.com/location-engins.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/location-engins.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/location-engins.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/location-engins.html" />
   </url>
   <url>
-    <loc>https://sobafor.com/routes.html</loc>
-    <lastmod>2026-10-08</lastmod>
-    <priority>0.8</priority>
+    <loc>https://www.sobafor.com/realisations.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/realisations.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/realisations.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/realisations.html" />
   </url>
   <url>
-    <loc>https://sobafor.com/forages.html</loc>
-    <lastmod>2026-10-08</lastmod>
-    <priority>0.8</priority>
+    <loc>https://www.sobafor.com/routes.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/routes.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/routes.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/routes.html" />
   </url>
   <url>
-    <loc>https://sobafor.com/location-engins.html</loc>
-    <lastmod>2026-10-08</lastmod>
-    <priority>0.8</priority>
+    <loc>https://www.sobafor.com/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/services.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/services.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/services.html" />
+  </url>
+  <url>
+    <loc>https://www.sobafor.com/ar/a-propos.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/a-propos.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/a-propos.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/a-propos.html" />
+  </url>
+  <url>
+    <loc>https://www.sobafor.com/ar/batiments.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/batiments.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/batiments.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/batiments.html" />
+  </url>
+  <url>
+    <loc>https://www.sobafor.com/ar/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/contact.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/contact.html" />
+  </url>
+  <url>
+    <loc>https://www.sobafor.com/ar/devis.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/devis.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/devis.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/devis.html" />
+  </url>
+  <url>
+    <loc>https://www.sobafor.com/ar/forages.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/forages.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/forages.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/forages.html" />
+  </url>
+  <url>
+    <loc>https://www.sobafor.com/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/" />
+  </url>
+  <url>
+    <loc>https://www.sobafor.com/ar/location-engins.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/location-engins.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/location-engins.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/location-engins.html" />
+  </url>
+  <url>
+    <loc>https://www.sobafor.com/ar/realisations.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/realisations.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/realisations.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/realisations.html" />
+  </url>
+  <url>
+    <loc>https://www.sobafor.com/ar/routes.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/routes.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/routes.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/routes.html" />
+  </url>
+  <url>
+    <loc>https://www.sobafor.com/ar/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sobafor.com/services.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.sobafor.com/ar/services.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sobafor.com/services.html" />
   </url>
 </urlset>
