@@ -46,15 +46,15 @@
       },
       {
         "nom": "CNSS",
-        "detail": "Diffa — construction de 10 villas de type F3"
+        "detail": "Diffa, construction de 10 villas de type F3"
       },
       {
         "nom": "École TIC de Nouadhibou",
-        "detail": "Mauritanie — campus en cours de construction"
+        "detail": "Mauritanie, campus en cours de construction"
       },
       {
         "nom": "Palais de la Présidence",
-        "detail": "Niamey — guérite R+1 et héliport"
+        "detail": "Niamey, guérite R+1 et héliport"
       },
       {
         "nom": "Aéroport d'Agadez",
@@ -131,7 +131,7 @@
     "references": [
       {
         "nom": "Palais de la Présidence",
-        "detail": "Niamey — bitumage, éclairage, canalisation et drainage"
+        "detail": "Niamey, bitumage, éclairage, canalisation et drainage"
       }
     ],
     "galerie": [
@@ -200,7 +200,7 @@
     "references": [
       {
         "nom": "Palais de la Présidence",
-        "detail": "Niamey — adduction d'eau"
+        "detail": "Niamey, adduction d'eau"
       },
       {
         "nom": "Hydraulique villageoise",

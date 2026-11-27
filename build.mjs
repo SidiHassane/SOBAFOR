@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * Generateur du site SOBAFOR — aucune dependance, Node 18+ suffit.
+ * Generateur du site SOBAFOR : aucune dependance, Node 18+ suffit.
  *
  *     node build.mjs
  *
@@ -12,6 +12,7 @@
  *   src/data/site.json      coordonnees, navigation, langues : une seule source
  *   src/data/galerie.json   photos et videos des realisations
  *   src/data/metiers.json   pages d'atterrissage par metier
+ *   src/data/sous-titres.json  sous-titres des reportages (arabe, francais, anglais)
  *   src/data/<langue>/      textes traduits de ces trois fichiers
  *   src/i18n/<langue>.json  textes de l'interface (gabarits, aides, scripts)
  *   src/layouts/            squelettes de page
@@ -130,6 +131,7 @@ const IGNORER_SITE = new Set([
 ]);
 const IGNORER_GALERIE = new Set([
   "id", "cat", "projet", "source", "sources", "affiche", "accueil", "mosaique", "etat",
+  "vedette", "sousTitres",
 ]);
 const IGNORER_METIERS = new Set(["page", "categorie", "service", "galerie", "id"]);
 
@@ -181,6 +183,47 @@ const adressePage = (langue, slug) =>
 const profondeur = (prefixe) => prefixe.split("/").filter(Boolean).length;
 
 /* ------------------------------------------------------------------ */
+/* Sous-titres des reportages                                          */
+/* ------------------------------------------------------------------ */
+
+// Une seule source par reportage : chaque ligne porte son debut, sa fin et
+// son texte en arabe, francais et anglais (un 6e champ facultatif garde la
+// remarque de relecture). Une correction se fait la, puis node build.mjs.
+const sousTitres = lireJSON(join(SRC, "data/sous-titres.json"));
+const COLONNES_SOUS_TITRES = { fr: 3, en: 4, ar: 2 };
+const cheminSousTitres = (id, code) => `assets/video/sous-titres/${id}.${code}.vtt`;
+
+const horodatageVtt = (t) => {
+  const h = Math.floor(t / 3600);
+  const m = Math.floor((t % 3600) / 60);
+  const sec = (t % 60).toFixed(3).padStart(6, "0");
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${sec}`;
+};
+
+// Deux lignes au plus, coupees sur l'espace la plus proche du milieu.
+const couperSousTitre = (texte, largeur = 42) => {
+  if (texte.length <= largeur) return texte;
+  const milieu = texte.length / 2;
+  let coupure = -1;
+  for (let i = 0; i < texte.length; i++) {
+    if (texte[i] === " " && (coupure < 0 || Math.abs(i - milieu) < Math.abs(coupure - milieu))) coupure = i;
+  }
+  return coupure < 0 ? texte : texte.slice(0, coupure) + "\n" + texte.slice(coupure + 1);
+};
+
+// Attributs des pistes de sous-titres d'une video, lus par les scripts.
+const attributsPistes = (id) => {
+  if (!id) return "";
+  if (!sousTitres[id]) {
+    erreurs.push(`sous-titres inconnus : "${id}"`);
+    return "";
+  }
+  return Object.keys(COLONNES_SOUS_TITRES)
+    .map((code) => ` data-piste-${code}="${cheminSousTitres(id, code)}"`)
+    .join("");
+};
+
+/* ------------------------------------------------------------------ */
 /* Aides appelables depuis les gabarits : {{@ nom argument }}          */
 /* ------------------------------------------------------------------ */
 
@@ -193,7 +236,7 @@ const figure = (el, ctx) => {
   if (el.video) {
     return [
       `<figure class="shot is-video" data-cat="${el.cat}"${attributProjet(el)}>`,
-      `  <button class="shot-play" type="button" data-video="${urlFichier(el.video)}" style="--ar:${el.ar}" data-title="${echapper(el.titre)}">`,
+      `  <button class="shot-play" type="button" data-video="${urlFichier(el.video)}"${attributsPistes(el.sousTitres)} style="--ar:${el.ar}" data-title="${echapper(el.titre)}">`,
       `    <span class="play-badge" aria-hidden="true"></span>`,
       `    <span class="play-label">${echapper(el.label)} <span class="play-weight">${echapper(ctx.t.video)} · ${poidsVideo(el.video, ctx.t)}</span></span>`,
       `  </button>`,
@@ -253,6 +296,80 @@ const decouperTitres = (html) =>
     const spans = mots.map((mot, i) => `<span class="mot"><span style="--i:${i}">${mot}</span></span>`);
     return `<h1 class="titre-anime">${spans.join(" ")}</h1>`;
   });
+
+// Lecteur du chantier : une video a l'ecran, toutes les autres en liste dans
+// l'ordre chronologique. Rien n'est telecharge avant le clic : la page ne
+// porte que des affiches legeres et les adresses des fichiers.
+const LARGEURS_AFFICHE = [320, 640, 960, 1280];
+const affichesVideo = (base) =>
+  LARGEURS_AFFICHE.map((l) => [l, `assets/img/video/${base}-${l}.jpg`]).filter(([, f]) => existsSync(join(RACINE, f)));
+
+// Poids d'une video a plusieurs definitions : le petit ecran voit celui de
+// la version legere, le grand celui de la version nette.
+const poidsAffiche = (v, t) => {
+  const poids = Object.values(v.sources).map((f) => echapper(poidsVideo(f, t)));
+  return poids.length > 1
+    ? `<span class="poids-mobile">${poids[0]}</span><span class="poids-large">${poids[poids.length - 1]}</span>`
+    : poids[0];
+};
+
+const lecteurVideos = (projet, ctx) => {
+  const { t } = ctx;
+  const videos = projet.videos || [];
+  const vedette = videos.find((v) => v.id === projet.vedette) || videos[videos.length - 1];
+  if (!vedette) return "";
+  const affiches = new Map(videos.map((v) => [v.id, affichesVideo(v.affiche)]));
+  for (const v of videos) {
+    if (!affiches.get(v.id).length) erreurs.push(`affiche video manquante : assets/img/video/${v.affiche}-*.jpg`);
+  }
+  const grande = (v) => Object.values(v.sources).at(-1);
+  const attributs = (v) =>
+    Object.entries(v.sources)
+      .map(([hauteur, f]) => ` data-video-${hauteur}="${f}"`)
+      .join("") + attributsPistes(v.sousTitres);
+  const meta = (v) => `${echapper(v.origine)} · ${echapper(v.duree)} · ${poidsAffiche(v, t)}`;
+
+  const liste = videos.map((v, i) => {
+    const vignette = affiches.get(v.id)[0];
+    const actif = v === vedette ? ' aria-current="true"' : "";
+    return [
+      `<li>`,
+      `  <a class="lecteur-item" href="${grande(v)}" data-lecteur-item${attributs(v)} data-titre="${echapper(v.titre)}" data-legende="${echapper(v.legende)}" data-chapitres="${echapper(JSON.stringify(v.chapitres || []))}"${actif}>`,
+      `    <span class="lecteur-vignette"><img src="${vignette ? vignette[1] : ""}" width="320" height="180" alt="" loading="lazy" decoding="async" /></span>`,
+      `    <span class="lecteur-item-texte">`,
+      `      <span class="lecteur-etape">${i + 1} · ${echapper(v.etape)}</span>`,
+      `      <strong>${echapper(v.titre)}</strong>`,
+      `      <span class="lecteur-meta">${meta(v)}</span>`,
+      v.sousTitres ? `      <span class="lecteur-sous-titres">${echapper(t.phare.sous_titres)}</span>` : "",
+      `    </span>`,
+      `  </a>`,
+      `</li>`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+  });
+
+  const grandes = affiches.get(vedette.id);
+  const [largeur, image] = grandes.at(-1) || [1280, ""];
+  const srcset = grandes.map(([l, f]) => `${f} ${l}w`).join(", ");
+  return [
+    `<div class="lecteur" data-lecteur data-reveal>`,
+    `  <figure class="video-vedette">`,
+    `    <a class="video-facade" href="${grande(vedette)}" data-lecteur-facade>`,
+    `      <img src="${image}" srcset="${srcset}" sizes="${FORMATS.video}" width="${largeur}" height="${Math.round((largeur * 9) / 16)}" alt="" loading="lazy" decoding="async" />`,
+    `      <span class="play-badge" aria-hidden="true"></span>`,
+    `      <span class="video-facade-texte">${echapper(vedette.titre)} <span class="video-facade-infos">${meta(vedette)}</span></span>`,
+    `    </a>`,
+    `    <figcaption data-lecteur-legende>${echapper(vedette.legende)}</figcaption>`,
+    `  </figure>`,
+    `  <div class="lecteur-chapitres" role="group" aria-label="${echapper(t.phare.chapitres)}" data-lecteur-chapitres hidden></div>`,
+    `  <p class="lecteur-titre">${echapper(t.phare.lecteur)}</p>`,
+    `  <ol class="lecteur-liste">`,
+    ...liste.map((l) => l.replace(/^/gm, "    ")),
+    `  </ol>`,
+    `</div>`,
+  ].join("\n");
+};
 
 const aides = {
   photo: (ctx, id, format = "galerie") => photo(id, format, ctx),
@@ -325,7 +442,6 @@ const aides = {
     }
     const libelles = t.etats;
     const lienGalerie = `realisations.html?filtre=projet-${projet.id}`;
-    const affiche = (l) => `assets/img/video/${projet.video.affiche}-${l}.jpg`;
     const donnees = {
       ...projet,
       nombreMedias: galerie.elements.filter((el) => el.projet === projet.id).length,
@@ -344,11 +460,7 @@ const aides = {
       mosaiqueHtml: projet.mosaique
         .map((pid) => `<a class="phare-photo" href="${lienGalerie}">${photo(pid, "mosaique", ctx)}</a>`)
         .join("\n"),
-      afficheHtml: `<img src="${affiche(960)}" srcset="${[640, 960, 1280]
-        .map((l) => `${affiche(l)} ${l}w`)
-        .join(", ")}" sizes="${FORMATS.video}" width="1280" height="720" alt="" loading="lazy" decoding="async" />`,
-      poids540: poidsVideo(projet.video.sources["540"], t),
-      poids720: poidsVideo(projet.video.sources["720"], t),
+      lecteurHtml: lecteurVideos(projet, ctx),
     };
     return rendre(lire(join(SRC, "partials/chantier-phare.html")).replace(/\n$/, ""), { ...ctx, projet: donnees }, [
       "chantier-phare",
@@ -573,11 +685,24 @@ const ecrire = (relatif, contenu) => {
   return ancien !== contenu;
 };
 
-const bandeau = (source) => `Généré par build.mjs depuis ${source} — modifier la source, pas ce fichier.`;
+const bandeau = (source) => `Généré par build.mjs depuis ${source}. Modifier la source, pas ce fichier.`;
 
 const empreinteDe = (contenu) => createHash("sha256").update(contenu).digest("hex").slice(0, 10);
 
 // Feuille de styles : concatenation dans l'ordre des noms de fichiers.
+for (const [id, { cues }] of Object.entries(sousTitres)) {
+  cues.forEach((c, i) => {
+    if (!(c[1] > c[0])) erreurs.push(`sous-titres ${id} n°${i + 1} : fin avant le debut`);
+    if (i && c[0] < cues[i - 1][1]) erreurs.push(`sous-titres ${id} n°${i + 1} : chevauche le precedent`);
+  });
+  for (const [code, colonne] of Object.entries(COLONNES_SOUS_TITRES)) {
+    const blocs = cues.map(
+      (c, i) => `${i + 1}\n${horodatageVtt(c[0])} --> ${horodatageVtt(c[1])}\n${couperSousTitre(c[colonne])}`
+    );
+    ecrire(cheminSousTitres(id, code), `WEBVTT\n\n${blocs.join("\n\n")}\n`);
+  }
+}
+
 const css =
   `/* ${bandeau("src/css/")} */\n\n` + fichiers("css", ".css").map((f) => lire(join(SRC, "css", f))).join("");
 ecrire("assets/css/style.css", css);
@@ -619,7 +744,7 @@ const adapterChemins = (html, langue, locaux) => {
     return locaux.has(cible.split(/[?#]/)[0]) ? cible : remonter + cible;
   };
   return html
-    .replace(/(\s(?:src|href|data-full|data-video|data-video-540|data-video-720)=")([^"]+)"/g, (_, attribut, cible) => `${attribut}${adapter(cible)}"`)
+    .replace(/(\s(?:src|href|data-full|data-video(?:-\d+)?|data-piste-[a-z]+)=")([^"]+)"/g, (_, attribut, cible) => `${attribut}${adapter(cible)}"`)
     .replace(/(\ssrcset=")([^"]+)"/g, (_, attribut, liste) => {
       const sources = liste.split(",").map((source) => {
         const [url, ...largeur] = source.trim().split(/\s+/);
@@ -799,7 +924,7 @@ ecrire(
 for (const [fichier, contenu] of produits) {
   if (!fichier.endsWith(".html")) continue;
   const cibles = new Set();
-  for (const m of contenu.matchAll(/\s(?:src|href|data-full|data-video|data-video-540|data-video-720)="([^"]+)"/g)) {
+  for (const m of contenu.matchAll(/\s(?:src|href|data-full|data-video(?:-\d+)?|data-piste-[a-z]+)="([^"]+)"/g)) {
     cibles.add(m[1]);
   }
   for (const m of contenu.matchAll(/\ssrcset="([^"]+)"/g)) {

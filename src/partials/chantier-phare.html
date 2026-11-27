@@ -25,14 +25,7 @@
             </details>
           </div>
 
-          <figure class="video-vedette" data-reveal>
-            <a class="video-facade" href="{{ projet.video.sources.720 }}" data-video-vedette data-video-540="{{ projet.video.sources.540 }}" data-video-720="{{ projet.video.sources.720 }}">
-              {{{ projet.afficheHtml }}}
-              <span class="play-badge" aria-hidden="true"></span>
-              <span class="video-facade-texte">{{ t.phare.video }} <span class="video-facade-infos">{{ projet.video.duree }} · <span class="poids-mobile">{{ projet.poids540 }}</span><span class="poids-large">{{ projet.poids720 }}</span></span></span>
-            </a>
-            <figcaption>{{ projet.video.legende }}</figcaption>
-          </figure>
+          {{{ projet.lecteurHtml }}}
         </div>
 
         <div class="phare-mosaique">

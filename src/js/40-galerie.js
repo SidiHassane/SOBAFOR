@@ -244,6 +244,7 @@ if (gallery) {
         video.playsInline = true;
         video.preload = "auto";
         video.setAttribute("aria-label", opener.dataset.title || T.video_chantier);
+        ajouterPistes(video, opener);
         stage.appendChild(video);
         video.play().catch(() => {});
       } else {

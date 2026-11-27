@@ -1,8 +1,8 @@
-/* Généré par build.mjs depuis src/sw.js — modifier la source, pas ce fichier. */
+/* Généré par build.mjs depuis src/sw.js. Modifier la source, pas ce fichier. */
 /* Service worker SOBAFOR
  *
  * Objectif : que le site se rouvre instantanement, et reste consultable
- * quand le reseau lache — situation courante sur les chantiers.
+ * quand le reseau lache, situation courante sur les chantiers.
  *
  * Trois regles, selon la nature de la ressource :
  *   - pages HTML       : reseau d'abord, cache en secours (le contenu reste frais)
@@ -13,7 +13,7 @@
  * 95 Mo et saturerait le stockage du telephone.
  */
 
-const VERSION = "sobafor-cef81dbbab";
+const VERSION = "sobafor-c689f46546";
 const COQUE = VERSION + "-coque";
 const IMAGES = VERSION + "-images";
 const PAGES = VERSION + "-pages";
@@ -27,8 +27,8 @@ const A_PRECHARGER = [
   "./",
   "./hors-ligne.html",
   "./ar/hors-ligne.html",
-  "./assets/css/style.css?v=49900afdc5",
-  "./assets/js/main.js?v=eed0526ff3",
+  "./assets/css/style.css?v=a031e1e5c6",
+  "./assets/js/main.js?v=3d418893df",
   "./assets/fonts/archivo-500-800-latin.woff2",
   "./assets/fonts/plex-400-latin.woff2",
   "./assets/fonts/plex-600-latin.woff2",
