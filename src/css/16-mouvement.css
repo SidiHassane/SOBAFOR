@@ -10,7 +10,7 @@
    L'etat masque n'existe que si le script tourne (classe .js posee dans
    <head>) : sans JavaScript, tout reste lisible. Une fois revele, l'element
    perd son attribut data-reveal (30-revelations.js) et retrouve ses propres
-   transitions — sinon le leve au survol des cartes etait neutralise.
+   transitions ; sinon, le leve au survol des cartes etait neutralise.
    =================================================================== */
 .js [data-reveal] {
   transition:

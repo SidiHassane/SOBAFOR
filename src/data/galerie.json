@@ -25,13 +25,13 @@
       "nomOfficiel": "École d’Enseignement Technique et de Formation Professionnelle des Technologies de l’Information et de Communication à Nouadhibou",
       "lieu": "Nouadhibou, Mauritanie",
       "point": "septembre 2026",
-      "description": "SOBAFOR construit pour l’État mauritanien une école de formation aux métiers du numérique, appelée à accompagner le développement de la zone franche de Nouadhibou. Un campus complet : enseignement, internats, restauration et logements.",
+      "description": "SOBAFOR construit pour l’État mauritanien une école de formation aux métiers du numérique, appelée à accompagner le développement de la zone franche de Nouadhibou. Un campus complet : enseignement, internats, restauration et logements. Le Président de la République en a posé la première pierre le 28 juillet 2025.",
       "programme": [
         "9 salles de cours",
         "16 laboratoires et ateliers",
         "Amphithéâtre de 150 places",
         "Réfectoire de 300 places",
-        "Internats filles et garçons, 2 × 40 chambres",
+        "Internats filles et garçons, 2 × 42 chambres",
         "Logements de fonction, voiries et parkings"
       ],
       "etapes": [
@@ -58,15 +58,6 @@
         "nouadhibou-etaiement-dalle",
         "nouadhibou-base-vie"
       ],
-      "video": {
-        "sources": {
-          "540": "assets/video/presentation-sobafor-540.mp4",
-          "720": "assets/video/presentation-sobafor-720.mp4"
-        },
-        "affiche": "presentation",
-        "duree": "1 min 36",
-        "legende": "Le chantier au stade des fondations, filmé par drone"
-      },
       "blocs": [
         {
           "nom": "Bloc administration",
@@ -88,6 +79,97 @@
           "nom": "Foyer des filles",
           "travaux": "Fabrication des poutrelles, coffrage des poteaux et chaînage haut en cours."
         }
+      ],
+      "vedette": "radio-mauritanie",
+      "videos": [
+        {
+          "id": "presentation",
+          "etape": "Fondations",
+          "titre": "Les fondations vues du ciel",
+          "origine": "Vidéo SOBAFOR",
+          "duree": "1 min 36",
+          "legende": "Le chantier au stade des fondations, filmé par drone",
+          "sources": {
+            "540": "assets/video/presentation-sobafor-540.mp4",
+            "720": "assets/video/presentation-sobafor-720.mp4"
+          },
+          "affiche": "presentation",
+          "chapitres": []
+        },
+        {
+          "id": "el-mouritaniya",
+          "etape": "Structure · 60 %",
+          "titre": "Reportage de la télévision El Mouritaniya",
+          "origine": "El Mouritaniya",
+          "duree": "3 min 43",
+          "legende": "Journal des régions : l'école TIC et d'autres chantiers publics de Nouadhibou.",
+          "sources": {
+            "360": "assets/video/reportage-el-mouritaniya.mp4"
+          },
+          "affiche": "reportage-el-mouritaniya",
+          "sousTitres": "el-mouritaniya",
+          "chapitres": [
+            {
+              "t": 0,
+              "titre": "Présentation"
+            },
+            {
+              "t": 21,
+              "titre": "L'école TIC"
+            },
+            {
+              "t": 81,
+              "titre": "Le programme"
+            },
+            {
+              "t": 126,
+              "titre": "L'hôpital régional"
+            },
+            {
+              "t": 200,
+              "titre": "Conclusion"
+            }
+          ]
+        },
+        {
+          "id": "radio-mauritanie",
+          "etape": "Structure · 65 %",
+          "titre": "Reportage de Radio Mauritanie",
+          "origine": "Radio Mauritanie",
+          "duree": "5 min 54",
+          "legende": "De la première pierre, posée par le Président de la République, à l'avancement des travaux.",
+          "sources": {
+            "360": "assets/video/reportage-radio-mauritanie.mp4"
+          },
+          "affiche": "reportage-radio-mauritanie",
+          "sousTitres": "radio-mauritanie",
+          "chapitres": [
+            {
+              "t": 0,
+              "titre": "La première pierre"
+            },
+            {
+              "t": 45,
+              "titre": "Vu du ciel"
+            },
+            {
+              "t": 164,
+              "titre": "Le délégué du ministère"
+            },
+            {
+              "t": 215,
+              "titre": "L'école aujourd'hui"
+            },
+            {
+              "t": 239,
+              "titre": "Le directeur"
+            },
+            {
+              "t": 295,
+              "titre": "L'avenir"
+            }
+          ]
+        }
       ]
     }
   ],
@@ -104,8 +186,8 @@
       "id": "nouadhibou-etaiement-dalle",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc administration — étaiement et coffrage de dalle",
-      "legende": "Bloc administration — étaiement et coffrage de dalle",
+      "titre": "Nouadhibou · Bloc administration : étaiement et coffrage de dalle",
+      "legende": "Bloc administration : étaiement et coffrage de dalle",
       "alt": "Étais métalliques et coffrages sous une dalle du bloc administration de l'école TIC de Nouadhibou",
       "w": 1280,
       "h": 720,
@@ -120,8 +202,8 @@
       "id": "nouadhibou-poteaux-escalier",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc administration — poteaux, poutres et escalier",
-      "legende": "Bloc administration — poteaux, poutres et escalier",
+      "titre": "Nouadhibou · Bloc administration : poteaux, poutres et escalier",
+      "legende": "Bloc administration : poteaux, poutres et escalier",
       "alt": "Poteaux et poutres en béton armé du bloc administration, autour d'un escalier d'accès",
       "w": 1280,
       "h": 720,
@@ -136,8 +218,8 @@
       "id": "nouadhibou-facade-elevation",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc administration — façade en élévation",
-      "legende": "Bloc administration — façade en élévation",
+      "titre": "Nouadhibou · Bloc administration : façade en élévation",
+      "legende": "Bloc administration : façade en élévation",
       "alt": "Bloc administration en construction : rez-de-chaussée maçonné et étage en structure béton armé",
       "w": 1280,
       "h": 720,
@@ -152,8 +234,8 @@
       "id": "nouadhibou-batiment-principal",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc administration — maçonnerie et structure",
-      "legende": "Bloc administration — maçonnerie et structure",
+      "titre": "Nouadhibou · Bloc administration : maçonnerie et structure",
+      "legende": "Bloc administration : maçonnerie et structure",
       "alt": "Façade du bloc administration, murs en agglos et poteaux en béton armé",
       "w": 1280,
       "h": 720,
@@ -168,8 +250,8 @@
       "id": "nouadhibou-bloc-pedagogique",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc pédagogique — poteaux et maçonnerie",
-      "legende": "Bloc pédagogique — poteaux et maçonnerie",
+      "titre": "Nouadhibou · Bloc pédagogique : poteaux et maçonnerie",
+      "legende": "Bloc pédagogique : poteaux et maçonnerie",
       "alt": "Cour du bloc pédagogique : poteaux en cours de coffrage, maçonnerie et stock d'aciers",
       "w": 1280,
       "h": 720,
@@ -184,8 +266,8 @@
       "id": "nouadhibou-extension-ouest",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc pédagogique — extension ouest, maçonnerie",
-      "legende": "Bloc pédagogique — extension ouest, maçonnerie",
+      "titre": "Nouadhibou · Bloc pédagogique : extension ouest, maçonnerie",
+      "legende": "Bloc pédagogique : extension ouest, maçonnerie",
       "alt": "Extension ouest du bloc pédagogique, maçonnerie en cours",
       "w": 1280,
       "h": 720,
@@ -200,8 +282,8 @@
       "id": "nouadhibou-dalle-aciers",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc pédagogique — dalle coulée, aciers en attente",
-      "legende": "Bloc pédagogique — dalle coulée, aciers en attente",
+      "titre": "Nouadhibou · Bloc pédagogique : dalle coulée, aciers en attente",
+      "legende": "Bloc pédagogique : dalle coulée, aciers en attente",
       "alt": "Dalle du bloc pédagogique coulée, aciers en attente pour les poteaux de l'étage",
       "w": 1280,
       "h": 720,
@@ -216,8 +298,8 @@
       "id": "nouadhibou-coffrage-escalier",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc pédagogique — escalier coffré avant coulage",
-      "legende": "Bloc pédagogique — escalier coffré avant coulage",
+      "titre": "Nouadhibou · Bloc pédagogique : escalier coffré avant coulage",
+      "legende": "Bloc pédagogique : escalier coffré avant coulage",
       "alt": "Coffrage en bois d'un escalier du bloc pédagogique, en attente de coulage",
       "w": 1280,
       "h": 720,
@@ -232,8 +314,8 @@
       "id": "nouadhibou-cloisons",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc pédagogique — maçonnerie des salles",
-      "legende": "Bloc pédagogique — maçonnerie des salles",
+      "titre": "Nouadhibou · Bloc pédagogique : maçonnerie des salles",
+      "legende": "Bloc pédagogique : maçonnerie des salles",
       "alt": "Élévation des murs des salles du bloc pédagogique en blocs de béton",
       "w": 1280,
       "h": 720,
@@ -248,8 +330,8 @@
       "id": "nouadhibou-bloc-amphitheatre",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc amphithéâtre — étaiement et coulage",
-      "legende": "Bloc amphithéâtre — étaiement et coulage",
+      "titre": "Nouadhibou · Bloc amphithéâtre : étaiement et coulage",
+      "legende": "Bloc amphithéâtre : étaiement et coulage",
       "alt": "Bâtiment de l'amphithéâtre en construction, étaiement de l'étage et stock de hourdis au premier plan",
       "w": 1280,
       "h": 720,
@@ -264,8 +346,8 @@
       "id": "nouadhibou-plancher-hourdis",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc amphithéâtre — plancher poutrelles et hourdis",
-      "legende": "Bloc amphithéâtre — plancher poutrelles et hourdis",
+      "titre": "Nouadhibou · Bloc amphithéâtre : plancher poutrelles et hourdis",
+      "legende": "Bloc amphithéâtre : plancher poutrelles et hourdis",
       "alt": "Plancher en poutrelles et hourdis du bloc amphithéâtre avant le coulage de la dalle de compression",
       "w": 1280,
       "h": 720,
@@ -280,8 +362,8 @@
       "id": "nouadhibou-coulage-poteaux",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Bloc amphithéâtre — coulage des poteaux",
-      "legende": "Bloc amphithéâtre — coulage des poteaux",
+      "titre": "Nouadhibou · Bloc amphithéâtre : coulage des poteaux",
+      "legende": "Bloc amphithéâtre : coulage des poteaux",
       "alt": "Rangée de poteaux en béton armé décoffrés, ouvrier au travail en hauteur",
       "w": 1280,
       "h": 720,
@@ -296,8 +378,8 @@
       "id": "nouadhibou-ossature-beton",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Foyer des garçons — coffrage des poteaux",
-      "legende": "Foyer des garçons — coffrage des poteaux",
+      "titre": "Nouadhibou · Foyer des garçons : coffrage des poteaux",
+      "legende": "Foyer des garçons : coffrage des poteaux",
       "alt": "Ossature en béton armé du foyer des garçons, poteaux en cours de coffrage à l'étage",
       "w": 960,
       "h": 540,
@@ -312,8 +394,8 @@
       "id": "nouadhibou-perspective",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Foyer des garçons — structure et maçonnerie",
-      "legende": "Foyer des garçons — structure et maçonnerie",
+      "titre": "Nouadhibou · Foyer des garçons : structure et maçonnerie",
+      "legende": "Foyer des garçons : structure et maçonnerie",
       "alt": "Perspective le long du foyer des garçons, structure en béton armé et maçonnerie",
       "w": 960,
       "h": 540,
@@ -328,8 +410,8 @@
       "id": "nouadhibou-base-vie",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Foyer des filles — poteaux et chaînage haut",
-      "legende": "Foyer des filles — poteaux et chaînage haut",
+      "titre": "Nouadhibou · Foyer des filles : poteaux et chaînage haut",
+      "legende": "Foyer des filles : poteaux et chaînage haut",
       "alt": "Foyer des filles en construction, coffrage des poteaux et chaînage haut, conteneurs de chantier SOBAFOR au premier plan",
       "w": 960,
       "h": 540,
@@ -344,8 +426,8 @@
       "id": "nouadhibou-crepuscule",
       "cat": "batiments",
       "projet": "nouadhibou",
-      "titre": "Nouadhibou · Foyer des filles — la structure au crépuscule",
-      "legende": "Foyer des filles — la structure au crépuscule",
+      "titre": "Nouadhibou · Foyer des filles : la structure au crépuscule",
+      "legende": "Foyer des filles : la structure au crépuscule",
       "alt": "Silhouette de l'ossature du foyer des filles à la tombée du jour, conteneur SOBAFOR au premier plan",
       "w": 960,
       "h": 540,
@@ -362,13 +444,33 @@
       "projet": "nouadhibou",
       "video": "assets/video/presentation-sobafor-540.mp4",
       "ar": "16/9",
-      "titre": "Nouadhibou — les fondations vues du ciel",
+      "titre": "Nouadhibou : les fondations vues du ciel",
       "label": "Les fondations vues du ciel"
+    },
+    {
+      "id": "reportage-el-mouritaniya",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "video": "assets/video/reportage-el-mouritaniya.mp4",
+      "ar": "16/9",
+      "sousTitres": "el-mouritaniya",
+      "titre": "Nouadhibou : reportage de la télévision El Mouritaniya",
+      "label": "Reportage El Mouritaniya"
+    },
+    {
+      "id": "reportage-radio-mauritanie",
+      "cat": "batiments",
+      "projet": "nouadhibou",
+      "video": "assets/video/reportage-radio-mauritanie.mp4",
+      "ar": "16/9",
+      "sousTitres": "radio-mauritanie",
+      "titre": "Nouadhibou : reportage de Radio Mauritanie",
+      "label": "Reportage Radio Mauritanie"
     },
     {
       "id": "batiment-structure-r2",
       "cat": "batiments",
-      "titre": "Bâtiment R+2 — gros œuvre",
+      "titre": "Bâtiment R+2 : gros œuvre",
       "alt": "Bâtiment R+2 en cours de construction, structure poteaux-poutres en béton armé",
       "w": 333,
       "h": 187,
@@ -446,7 +548,7 @@
     {
       "id": "route-couche-de-base",
       "cat": "routes",
-      "titre": "Chaussée — couche de base",
+      "titre": "Chaussée : couche de base",
       "alt": "Chaussée en construction, mise en œuvre de la couche de base",
       "w": 353,
       "h": 234,
@@ -548,7 +650,7 @@
     {
       "id": "foreuse-detail",
       "cat": "hydraulique",
-      "titre": "Foreuse en chantier — détail",
+      "titre": "Foreuse en chantier : détail",
       "alt": "Détail mécanique de la foreuse SOBAFOR montée sur camion",
       "w": 720,
       "h": 1280,
@@ -562,7 +664,7 @@
       "cat": "hydraulique",
       "video": "Chantier/New/WhatsApp Video 2026-08-14 at 15.42.33.mp4",
       "ar": "576/1024",
-      "titre": "Foreuse en opération — séquence 1",
+      "titre": "Foreuse en opération (séquence 1)",
       "label": "Foreuse en opération"
     },
     {
@@ -570,7 +672,7 @@
       "cat": "hydraulique",
       "video": "Chantier/New/WhatsApp Video 2026-08-14 at 15.42.36.mp4",
       "ar": "576/1024",
-      "titre": "Foreuse en opération — séquence 2",
+      "titre": "Foreuse en opération (séquence 2)",
       "label": "Foreuse en opération"
     },
     {
@@ -578,7 +680,7 @@
       "cat": "hydraulique",
       "video": "Chantier/New/WhatsApp Video 2026-08-14 at 15.42.40.mp4",
       "ar": "576/1024",
-      "titre": "Foreuse en opération — séquence 3",
+      "titre": "Foreuse en opération (séquence 3)",
       "label": "Foreuse en opération"
     },
     {
@@ -586,7 +688,7 @@
       "cat": "hydraulique",
       "video": "Chantier/New/WhatsApp Video 2026-08-14 at 15.42.47.mp4",
       "ar": "576/1024",
-      "titre": "Foreuse en opération — séquence 4",
+      "titre": "Foreuse en opération (séquence 4)",
       "label": "Foreuse en opération"
     },
     {
@@ -594,7 +696,7 @@
       "cat": "hydraulique",
       "video": "Chantier/New/WhatsApp Video 2026-08-14 at 15.50.00.mp4",
       "ar": "576/1024",
-      "titre": "Foreuse en opération — séquence 5",
+      "titre": "Foreuse en opération (séquence 5)",
       "label": "Foreuse en opération"
     },
     {
@@ -645,7 +747,7 @@
       "cat": "batiments",
       "video": "Chantier/Constructions des 10 villa CNSS.mp4",
       "ar": "640/360",
-      "titre": "Villas CNSS à Diffa — séquence 1",
+      "titre": "Villas CNSS à Diffa (séquence 1)",
       "label": "Villas CNSS à Diffa"
     },
     {
@@ -653,7 +755,7 @@
       "cat": "batiments",
       "video": "Chantier/Constructions des 10 villa CNSS 2.mp4",
       "ar": "640/360",
-      "titre": "Villas CNSS à Diffa — séquence 2",
+      "titre": "Villas CNSS à Diffa (séquence 2)",
       "label": "Villas CNSS à Diffa"
     },
     {
@@ -661,7 +763,7 @@
       "cat": "batiments",
       "video": "Chantier/Chantier de l'ambassade de mauritanie a niamey 1.mp4",
       "ar": "306/640",
-      "titre": "Ambassade de Mauritanie à Niamey — séquence 1",
+      "titre": "Ambassade de Mauritanie à Niamey (séquence 1)",
       "label": "Ambassade de Mauritanie"
     },
     {
@@ -669,13 +771,13 @@
       "cat": "batiments",
       "video": "Chantier/Chantier de l'ambassade de mauritanie a niamey 2.mp4",
       "ar": "306/640",
-      "titre": "Ambassade de Mauritanie à Niamey — séquence 2",
+      "titre": "Ambassade de Mauritanie à Niamey (séquence 2)",
       "label": "Ambassade de Mauritanie"
     },
     {
       "id": "ambassade-mauritanie-finitions-cour",
       "cat": "batiments",
-      "titre": "Ambassade de Mauritanie — finitions de la cour pavée",
+      "titre": "Ambassade de Mauritanie : finitions de la cour pavée",
       "alt": "Cour intérieure pavée en fin de chantier à l'ambassade de Mauritanie, avec matériaux et outillage encore sur site",
       "w": 750,
       "h": 1000,
@@ -688,7 +790,7 @@
     {
       "id": "ambassade-mauritanie-amenagement-paysager",
       "cat": "batiments",
-      "titre": "Ambassade de Mauritanie — aménagement des espaces verts",
+      "titre": "Ambassade de Mauritanie : aménagement des espaces verts",
       "alt": "Allée pavée et pelouse nouvellement engazonnée le long du mur d'enceinte de l'ambassade de Mauritanie",
       "w": 744,
       "h": 892,
@@ -701,7 +803,7 @@
     {
       "id": "ambassade-mauritanie-mat-drapeau-pose",
       "cat": "batiments",
-      "titre": "Ambassade de Mauritanie — pose du mât porte-drapeau",
+      "titre": "Ambassade de Mauritanie : pose du mât porte-drapeau",
       "alt": "Pose du mât porte-drapeau contre le mur d'enceinte de l'ambassade de Mauritanie, échelle en appui",
       "w": 750,
       "h": 1000,
@@ -714,7 +816,7 @@
     {
       "id": "ambassade-mauritanie-mat-drapeau",
       "cat": "batiments",
-      "titre": "Ambassade de Mauritanie — mât porte-drapeau installé",
+      "titre": "Ambassade de Mauritanie : mât porte-drapeau installé",
       "alt": "Mât porte-drapeau installé devant le bâtiment principal de l'ambassade de Mauritanie à Niamey",
       "w": 750,
       "h": 1000,
@@ -729,7 +831,7 @@
       "cat": "engins",
       "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.09.58.mp4",
       "ar": "360/640",
-      "titre": "Engin en opération — séquence 1",
+      "titre": "Engin en opération (séquence 1)",
       "label": "Engin en opération"
     },
     {
@@ -737,7 +839,7 @@
       "cat": "engins",
       "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.00 (1).mp4",
       "ar": "576/1024",
-      "titre": "Engin en opération — séquence 2",
+      "titre": "Engin en opération (séquence 2)",
       "label": "Engin en opération"
     },
     {
@@ -745,7 +847,7 @@
       "cat": "engins",
       "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.00.mp4",
       "ar": "640/360",
-      "titre": "Engin en opération — séquence 3",
+      "titre": "Engin en opération (séquence 3)",
       "label": "Engin en opération"
     },
     {
@@ -753,7 +855,7 @@
       "cat": "engins",
       "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.01.mp4",
       "ar": "576/1024",
-      "titre": "Engin en opération — séquence 4",
+      "titre": "Engin en opération (séquence 4)",
       "label": "Engin en opération"
     },
     {
@@ -761,7 +863,7 @@
       "cat": "engins",
       "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.01 (1).mp4",
       "ar": "576/1024",
-      "titre": "Engin en opération — séquence 5",
+      "titre": "Engin en opération (séquence 5)",
       "label": "Engin en opération"
     },
     {
@@ -769,7 +871,7 @@
       "cat": "engins",
       "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.02.mp4",
       "ar": "576/1024",
-      "titre": "Engin en opération — séquence 6",
+      "titre": "Engin en opération (séquence 6)",
       "label": "Engin en opération"
     },
     {
@@ -777,7 +879,7 @@
       "cat": "engins",
       "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.09.55.mp4",
       "ar": "358/642",
-      "titre": "Engin en opération — séquence 7",
+      "titre": "Engin en opération (séquence 7)",
       "label": "Engin en opération"
     },
     {
@@ -785,7 +887,7 @@
       "cat": "engins",
       "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.10.02 (1).mp4",
       "ar": "576/1024",
-      "titre": "Engin en opération — séquence 8",
+      "titre": "Engin en opération (séquence 8)",
       "label": "Engin en opération"
     },
     {
@@ -793,7 +895,7 @@
       "cat": "engins",
       "video": "Chantier/Loction d'engin/WhatsApp Video 2026-08-14 at 00.09.56.mp4",
       "ar": "360/640",
-      "titre": "Engin en opération — séquence 9",
+      "titre": "Engin en opération (séquence 9)",
       "label": "Engin en opération"
     }
   ]

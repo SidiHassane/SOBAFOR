@@ -1,7 +1,7 @@
 /* Service worker SOBAFOR
  *
  * Objectif : que le site se rouvre instantanement, et reste consultable
- * quand le reseau lache — situation courante sur les chantiers.
+ * quand le reseau lache, situation courante sur les chantiers.
  *
  * Trois regles, selon la nature de la ressource :
  *   - pages HTML       : reseau d'abord, cache en secours (le contenu reste frais)

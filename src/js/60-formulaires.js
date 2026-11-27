@@ -3,7 +3,7 @@
 // WhatsApp ou a la messagerie du visiteur. Deux regles :
 //  - rien ne se perd : les champs restent remplis apres l'envoi ;
 //  - rien n'est muet : un encadre confirme l'envoi et propose un recours si
-//    rien ne s'est ouvert (fenetre bloquee, aucune messagerie installee —
+//    rien ne s'est ouvert (fenetre bloquee, aucune messagerie installee :
 //    cas frequent sur ordinateur, ou le lien mailto: ne fait alors rien).
 
 const echapper = (texte) =>

@@ -24,7 +24,7 @@
   "filtre_tout": "Tout",
   "jsonld_description": "Entreprise nigérienne de BTP fondée en 1987 : bâtiments et génie civil, routes et assainissement, hydraulique, forages, énergie solaire et location d'engins.",
   "manifest": {
-    "nom": "SOBAFOR SA — BTP, Forages & Routes",
+    "nom": "SOBAFOR SA · BTP, Forages & Routes",
     "description": "Entreprise nigérienne de BTP depuis 1987 : bâtiments, routes, hydraulique, forages et location d'engins au Niger et dans le Sahel.",
     "realisations": "Nos réalisations",
     "devis": "Demander un devis"
@@ -47,9 +47,11 @@
     "blocs": "Détail des travaux par bâtiment",
     "blocs_avant": "",
     "blocs_apres": " bâtiments",
-    "video": "Regarder la vidéo",
     "voir_avant": "Voir les ",
-    "voir_apres": " photos et vidéos du chantier"
+    "voir_apres": " photos et vidéos du chantier",
+    "lecteur": "Le chantier en vidéo, étape par étape",
+    "chapitres": "Chapitres de la vidéo",
+    "sous_titres": "Sous-titres en français et en anglais"
   },
   "processus": {
     "surtitre": "Méthode",

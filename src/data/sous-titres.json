@@ -1,0 +1,684 @@
+{
+  "radio-mauritanie": {
+    "cues": [
+      [
+        8.7,
+        13.8,
+        "في الثامن والعشرين من شهر يوليو سنة ألفين وخمسة وعشرين،",
+        "Le 28 juillet 2025,",
+        "On 28 July 2025,"
+      ],
+      [
+        13.9,
+        19.8,
+        "أشرف فخامة رئيس الجمهورية السيد محمد ولد الشيخ الغزواني على وضع حجر الأساس",
+        "le Président de la République, Mohamed Ould Cheikh El Ghazouani, a posé la première pierre",
+        "President Mohamed Ould Cheikh El Ghazouani laid the foundation stone"
+      ],
+      [
+        19.9,
+        28.1,
+        "لمشروع بناء مدرسة التعليم الفني والتكوين المهني لتقنيات الإعلام والاتصال في نواذيبو،",
+        "de l'École d'enseignement technique et de formation professionnelle aux TIC de Nouadhibou,",
+        "of the Nouadhibou School of Technical Education and Vocational Training in ICT,"
+      ],
+      [
+        28.2,
+        32.1,
+        "في خطوة تعكس الاهتمام بتطوير التكوين المهني",
+        "un geste qui montre l'attention portée à la formation professionnelle",
+        "a step that reflects the commitment to vocational training"
+      ],
+      [
+        32.2,
+        37.3,
+        "وتعزيز قدرات الشباب في مجالات التكنولوجيا والاتصال.",
+        "et aux compétences des jeunes dans les technologies et la communication.",
+        "and to young people's skills in technology and communication."
+      ],
+      [
+        47.9,
+        52.2,
+        "وعقب وضع حجر الأساس، انطلقت أشغال إنجاز هذا الصرح التعليمي",
+        "Après la pose de la première pierre, les travaux de cet établissement ont démarré,",
+        "After the foundation stone was laid, work began on this educational landmark,"
+      ],
+      [
+        52.3,
+        58.2,
+        "الذي تتولى وزارة الإسكان والعمران والاستصلاح الترابي الإشراف على تنفيذه",
+        "sous la supervision du ministère de l'Habitat, de l'Urbanisme et de l'Aménagement du territoire,",
+        "supervised by the Ministry of Housing, Urban Planning and Land Development,"
+      ],
+      [
+        58.3,
+        64.2,
+        "وفق مواصفات حديثة تستجيب لمتطلبات التكوين الفني والمهني.",
+        "selon des normes modernes adaptées à la formation technique et professionnelle.",
+        "to modern standards suited to technical and vocational training."
+      ],
+      [
+        76.1,
+        82.0,
+        "ويتضمن المشروع بنية تحتية متكاملة تشمل تسع قاعات دروس،",
+        "Le projet comprend un ensemble complet : neuf salles de cours,",
+        "The project includes complete facilities: nine classrooms,"
+      ],
+      [
+        82.1,
+        85.9,
+        "ومدرجا بـ150 مقعدا،",
+        "un amphithéâtre de 150 places,",
+        "a 150-seat lecture theatre,",
+        "La transcription automatique a entendu « 750 ». L'autre reportage et le site disent 150 : à vérifier à l'écoute."
+      ],
+      [
+        86.0,
+        92.3,
+        "وست عشرة قاعة مخصصة للمختبرات وورش العمل والمخازن،",
+        "seize salles pour les laboratoires, les ateliers et les magasins,",
+        "sixteen rooms for laboratories, workshops and storage,"
+      ],
+      [
+        92.4,
+        98.0,
+        "وأربعة عشر مكتبا إداريا، واثنين وعشرين مكتبا للأساتذة،",
+        "quatorze bureaux administratifs, vingt-deux bureaux d'enseignants,",
+        "fourteen administrative offices, twenty-two teachers' offices,"
+      ],
+      [
+        98.1,
+        103.9,
+        "وقاعتين للاجتماعات، إضافة إلى قاعة كبرى للأساتذة.",
+        "deux salles de réunion et une grande salle des professeurs.",
+        "two meeting rooms and a large staff room."
+      ],
+      [
+        115.6,
+        119.2,
+        "كما يضم المشروع مطعما يتسع لثلاثمائة شخص،",
+        "Il compte aussi un réfectoire de 300 places,",
+        "It also has a 300-seat canteen,"
+      ],
+      [
+        119.3,
+        126.5,
+        "ومحطة للتحويل الكهربائي، ومولدا كهربائيا، وطرقا معبدة بالإسمنت،",
+        "un poste de transformation électrique, un groupe électrogène, des voies en béton,",
+        "an electrical substation, a generator, concrete roads,"
+      ],
+      [
+        126.6,
+        129.8,
+        "ومواقف داخلية وخارجية للسيارات،",
+        "des parkings intérieurs et extérieurs,",
+        "indoor and outdoor car parks,"
+      ],
+      [
+        129.9,
+        135.0,
+        "فضلا عن مرافق سكنية تشمل أربعين غرفة للطلاب الذكور",
+        "ainsi que des logements : quarante chambres pour les garçons",
+        "and housing: forty rooms for male students"
+      ],
+      [
+        135.1,
+        138.3,
+        "مع غرفتين مهيأتين لأصحاب الهمم،",
+        "et deux chambres adaptées aux personnes handicapées,",
+        "and two rooms adapted for people with disabilities,"
+      ],
+      [
+        138.4,
+        141.2,
+        "وأربعين غرفة للطالبات الإناث",
+        "quarante chambres pour les filles",
+        "forty rooms for female students"
+      ],
+      [
+        141.3,
+        144.9,
+        "مع غرفتين مهيأتين لذوات الهمم،",
+        "et deux chambres adaptées aux personnes handicapées,",
+        "and two rooms adapted for people with disabilities,"
+      ],
+      [
+        145.0,
+        147.5,
+        "إلى جانب مسكنين للموظفين.",
+        "et deux logements de fonction.",
+        "and two staff residences."
+      ],
+      [
+        147.6,
+        153.4,
+        "وتبلغ التكلفة الإجمالية للمشروع 174 مليون أوقية.",
+        "Le coût total du projet s'élève à 174 millions d'ouguiyas.",
+        "The total cost of the project is 174 million ouguiyas.",
+        "MONTANT : vous aviez demandé de ne pas afficher ce montant sur le site."
+      ],
+      [
+        153.5,
+        157.7,
+        "وقد وصلت الأشغال فيه إلى مراحل متقدمة،",
+        "Les travaux ont atteint un stade avancé,",
+        "Work has reached an advanced stage,"
+      ],
+      [
+        157.8,
+        164.0,
+        "إيذانا بقرب توفير مقر حديث ومتكامل لهذه المؤسسة التعليمية.",
+        "annonçant un siège moderne et complet pour cet établissement.",
+        "heralding a modern, fully equipped home for this school."
+      ],
+      [
+        164.1,
+        168.6,
+        "تقدم الأشغال في هذا المشروع حتى الآن 65%.",
+        "L'avancement des travaux atteint à ce jour 65 %.",
+        "Progress on this project has reached 65% so far."
+      ],
+      [
+        170.0,
+        176.4,
+        "وكذلك هذا المشروع تشرف على تنفيذه شركة سوبافور،",
+        "L'exécution de ce projet est assurée par l'entreprise SOBAFOR,",
+        "The works are carried out by the company SOBAFOR,"
+      ],
+      [
+        177.6,
+        180.6,
+        "ومتابعته من طرف وزارة الإسكان،",
+        "et son suivi par le ministère de l'Habitat,",
+        "and monitored by the Ministry of Housing,",
+        "Passage en dialecte, mal reconnu : à vérifier."
+      ],
+      [
+        180.7,
+        186.6,
+        "أسبوعيا يُقدَّم لها تقرير عن تقدم الأشغال فيه،",
+        "qui reçoit chaque semaine un rapport sur l'avancement des travaux.",
+        "which receives a weekly report on progress.",
+        "Passage en dialecte, mal reconnu : à vérifier."
+      ],
+      [
+        189.0,
+        192.6,
+        "وكذلك عندها مكتب متابعة هنا دائما،",
+        "Il dispose aussi en permanence ici d'un bureau de suivi,",
+        "It also has a permanent monitoring office here,",
+        "Mots incompris par la machine (« قاضى برهد سويفين ») : peut-être « bureau de suivi ». À vérifier."
+      ],
+      [
+        192.7,
+        197.2,
+        "وهو عينه في عين المكان، ويوميا يعطيها تقدم الأشغال.",
+        "son œil sur le terrain, qui lui rend compte chaque jour de l'avancement.",
+        "its eyes on site, reporting progress to it every day."
+      ],
+      [
+        215.6,
+        218.3,
+        "هذا الصرح الجديد يشكل نقلة نوعية",
+        "Ce nouvel établissement marque un tournant",
+        "This new building marks a turning point"
+      ],
+      [
+        218.4,
+        225.5,
+        "في مسيرة المدرسة التي ظلت منذ نشأتها تستأجر مقرا متواضعا في مدينة نواذيبو،",
+        "pour l'école, qui louait depuis sa création un local modeste à Nouadhibou.",
+        "for the school, which has rented modest premises in Nouadhibou since it was founded."
+      ],
+      [
+        225.6,
+        230.7,
+        "حيث ستمكنها المنشأة الجديدة من أداء مهامها التكوينية والتعليمية",
+        "Le nouveau bâtiment lui permettra d'assurer ses missions d'enseignement",
+        "The new facility will let it carry out its teaching and training work"
+      ],
+      [
+        230.8,
+        235.7,
+        "في ظروف أفضل، وتعزيز قدرتها على تأهيل الكفاءات الشابة",
+        "dans de meilleures conditions, de mieux former les jeunes talents",
+        "in better conditions, train young talent more effectively"
+      ],
+      [
+        235.8,
+        239.0,
+        "وتزويد سوق العمل بالمهارات المطلوبة.",
+        "et de fournir au marché du travail les compétences attendues.",
+        "and supply the job market with the skills it needs."
+      ],
+      [
+        239.2,
+        243.2,
+        "هذه المدرسة أُنشئت بمرسوم سنة 2022،",
+        "Cette école a été créée par décret en 2022,",
+        "This school was created by decree in 2022,"
+      ],
+      [
+        244.6,
+        252.0,
+        "ولكنها منذ تلك الفترة إلى اليوم كانت سعتها محدودة،",
+        "mais depuis, sa capacité d'accueil est restée limitée,",
+        "but since then its capacity has remained limited,"
+      ],
+      [
+        252.1,
+        256.5,
+        "وعدد التلاميذ فيها محدود.",
+        "tout comme le nombre d'élèves.",
+        "and so has the number of students.",
+        "Machine : « وطلب تلاميذ لها محدود ». Sens probable, à vérifier."
+      ],
+      [
+        256.6,
+        262.5,
+        "ولكن مع هذا المشروع الجديد الذي وضع فخامة رئيس الجمهورية حجر أساسه سنة 2025،",
+        "Mais avec ce nouveau projet, dont le Président a posé la première pierre en 2025,",
+        "But with this new project, whose foundation stone the President laid in 2025,"
+      ],
+      [
+        262.6,
+        270.8,
+        "هذا المشروع الكبير، والحمد لله، الذي يزيد من السعة الاستيعابية للمدرسة",
+        "un grand projet, Dieu merci, qui augmente la capacité d'accueil de l'école",
+        "a major project, thank God, which increases the school's capacity"
+      ],
+      [
+        270.9,
+        275.6,
+        "ويزيد من جودة المخرجات، وهذا كله داخل الاستراتيجية الوطنية",
+        "et la qualité de la formation, dans le cadre de la stratégie nationale",
+        "and the quality of training, as part of the national strategy",
+        "Un mot mal reconnu (« الموالي ») : peut-être « المخرجات » (les diplômés). À vérifier."
+      ],
+      [
+        275.7,
+        282.0,
+        "للرفع من مستوى التكوين المهني في مدينة نواذيبو خاصة، وفي موريتانيا بشكل عام.",
+        "pour élever le niveau de la formation professionnelle à Nouadhibou et dans tout le pays.",
+        "to raise the standard of vocational training in Nouadhibou and across Mauritania."
+      ],
+      [
+        295.3,
+        298.8,
+        "ولا يقتصر هذا المشروع على توفير فضاء تعليمي جديد،",
+        "Ce projet ne se limite pas à un nouvel espace d'enseignement :",
+        "This project is about more than a new learning space:"
+      ],
+      [
+        298.9,
+        303.1,
+        "بل يمثل خطوة مهمة في تجسيد البرنامج الانتخابي",
+        "c'est une étape importante du programme électoral",
+        "it is an important step in delivering the election programme"
+      ],
+      [
+        303.2,
+        308.7,
+        "لفخامة رئيس الجمهورية السيد محمد ولد الشيخ الغزواني «طموحي للوطن»،",
+        "du Président Mohamed Ould Cheikh El Ghazouani, « Mon ambition pour la patrie »,",
+        "of President Mohamed Ould Cheikh El Ghazouani, \"My Ambition for the Nation\",",
+        "Titre officiel du programme en français et en anglais à confirmer."
+      ],
+      [
+        308.8,
+        316.3,
+        "الذي يجعل تنمية رأس المال البشري وتطوير مهارات الشباب في صميم الأولويات الوطنية.",
+        "qui place le capital humain et les compétences des jeunes au cœur des priorités nationales.",
+        "which puts human capital and young people's skills at the heart of national priorities."
+      ],
+      [
+        316.4,
+        322.1,
+        "كما يوفر المشروع بيئة تعليمية حديثة ومتكاملة",
+        "Le projet offre aussi un cadre d'enseignement moderne et complet,",
+        "The project also provides a modern, complete learning environment"
+      ],
+      [
+        322.2,
+        330.2,
+        "مخصصة لمسارات التكوين في التقنيات الحديثة وتكنولوجيا المعلومات والوسائط المتعددة والاتصالات،",
+        "dédié aux technologies modernes, à l'informatique, au multimédia et aux télécommunications,",
+        "for training in modern technologies, IT, multimedia and telecommunications,"
+      ],
+      [
+        330.3,
+        336.6,
+        "بما يعزز جودة التكوين المهني ويواكب التحولات التكنولوجية المتسارعة،",
+        "pour une formation de qualité, au rythme des évolutions technologiques,",
+        "raising the quality of training in step with rapid technological change,"
+      ],
+      [
+        336.7,
+        343.9,
+        "ويمنح الشباب فرصا أوسع لاكتساب المهارات والخبرات اللازمة",
+        "et donne aux jeunes plus de chances d'acquérir les compétences et l'expérience",
+        "and gives young people more chances to gain the skills and experience"
+      ],
+      [
+        344.0,
+        349.4,
+        "للاندماج في سوق العمل والمساهمة في التنمية الوطنية.",
+        "nécessaires pour trouver un emploi et contribuer au développement du pays.",
+        "they need to find work and contribute to national development."
+      ]
+    ]
+  },
+  "el-mouritaniya": {
+    "cues": [
+      [
+        0.2,
+        4.2,
+        "تشهد مدينة نواذيبو حاليا تنفيذ عدد من المشاريع",
+        "Plusieurs projets sont en cours à Nouadhibou",
+        "Several projects are under way in Nouadhibou"
+      ],
+      [
+        4.3,
+        9.3,
+        "لبناء وترميم المنشآت التعليمية والصحية بتمويل من ميزانية الدولة.",
+        "pour construire et rénover des écoles et des établissements de santé, sur budget de l'État.",
+        "to build and renovate schools and health facilities, funded by the state budget."
+      ],
+      [
+        10.3,
+        14.5,
+        "وسجلت بعض هذه المشاريع تقدما ملحوظا في الأشغال",
+        "Certains de ces chantiers ont nettement progressé,",
+        "Some of these projects have made significant progress,"
+      ],
+      [
+        14.6,
+        19.6,
+        "في إطار الجهود الرامية إلى تطوير البنية التحتية التعليمية والصحية.",
+        "dans le cadre des efforts pour développer les infrastructures d'éducation et de santé.",
+        "as part of efforts to develop education and health infrastructure."
+      ],
+      [
+        21.1,
+        25.0,
+        "تتواصل حاليا في مدينة نواذيبو أشغال تنفيذ عدد من المشاريع",
+        "Les travaux se poursuivent à Nouadhibou sur plusieurs projets",
+        "Work is continuing in Nouadhibou on several"
+      ],
+      [
+        25.1,
+        28.4,
+        "التنموية المهمة في مجال البنية التحتية،",
+        "d'infrastructures importants pour le développement,",
+        "major infrastructure development projects,"
+      ],
+      [
+        28.5,
+        32.2,
+        "تشمل قطاعات التعليم والتكوين المهني والصحة،",
+        "dans l'enseignement, la formation professionnelle et la santé,",
+        "covering education, vocational training and health,"
+      ],
+      [
+        32.3,
+        36.3,
+        "في إطار الجهود الرامية إلى تطوير المرافق العمومية",
+        "afin d'améliorer les équipements publics",
+        "as part of efforts to improve public facilities"
+      ],
+      [
+        36.4,
+        39.4,
+        "وتحسين جودة الخدمات المقدمة للمواطنين.",
+        "et la qualité des services rendus aux citoyens.",
+        "and the quality of services for citizens."
+      ],
+      [
+        39.5,
+        43.5,
+        "ومن أبرز هذه المشاريع بناء مدرسة التعليم الفني",
+        "L'un des principaux est la construction de l'École d'enseignement technique",
+        "One of the most important is the new School of Technical Education"
+      ],
+      [
+        43.6,
+        46.7,
+        "والتكوين المهني لتقنيات الإعلام والاتصال،",
+        "et de formation professionnelle aux TIC,",
+        "and Vocational Training in ICT,"
+      ],
+      [
+        46.8,
+        50.4,
+        "بإشراف قطاع الإسكان والعمران والاستصلاح الترابي،",
+        "sous la tutelle du ministère de l'Habitat et de l'Urbanisme,",
+        "overseen by the Ministry of Housing and Urban Planning,"
+      ],
+      [
+        50.5,
+        55.9,
+        "وبتكلفة إجمالية تتجاوز مليارا وسبعمائة مليون أوقية قديمة،",
+        "pour un coût total de plus de 1,7 milliard d'anciennes ouguiyas,",
+        "at a total cost of over 1.7 billion old ouguiyas,",
+        "MONTANT : vous aviez demandé de ne pas afficher le montant du marché sur le site."
+      ],
+      [
+        56.0,
+        61.6,
+        "بتمويل من ميزانية الدولة، فيما تتولى شركة سوبافور تنفيذ الأشغال.",
+        "financé par l'État. Les travaux sont réalisés par l'entreprise SOBAFOR.",
+        "funded by the state budget. The works are carried out by SOBAFOR."
+      ],
+      [
+        61.7,
+        66.5,
+        "ويتضمن المشروع إنشاء مجموعة من المرافق والتجهيزات الضرورية",
+        "Le projet comprend un ensemble d'installations et d'équipements",
+        "The project includes a range of essential facilities and equipment"
+      ],
+      [
+        66.6,
+        71.1,
+        "بهدف توفير بنية تحتية تعليمية وتكوينية متكاملة",
+        "pour offrir une infrastructure complète d'enseignement et de formation",
+        "to provide complete teaching and training infrastructure"
+      ],
+      [
+        71.2,
+        77.5,
+        "تستجيب لمتطلبات التكوين الفني والمهني في مجال تقنيات الإعلام والاتصال",
+        "adaptée à la formation technique et professionnelle aux TIC",
+        "meeting the needs of technical and vocational training in ICT"
+      ],
+      [
+        77.6,
+        81.2,
+        "وتسهم في إعداد كفاءات متخصصة.",
+        "et contribuer à former des compétences spécialisées.",
+        "and helping to develop specialised skills."
+      ],
+      [
+        81.3,
+        88.9,
+        "يتكون هذا المشروع من 9 قاعات للدروس و22 مكتبا للأساتذة،",
+        "Ce projet comprend 9 salles de cours, 22 bureaux d'enseignants,",
+        "This project has 9 classrooms, 22 teachers' offices,"
+      ],
+      [
+        89.0,
+        96.9,
+        "و16 مكتبا للإدارة، ومدرجا بسعة 150 طالبا،",
+        "16 bureaux administratifs, un amphithéâtre de 150 places,",
+        "16 administrative offices, a 150-seat lecture theatre,",
+        "Chiffre différent de l'autre reportage (14 bureaux administratifs et 16 salles de laboratoires) : à vérifier à l'écoute."
+      ],
+      [
+        97.0,
+        101.6,
+        "ومطعما بسعة 300 طالب،",
+        "un réfectoire de 300 places,",
+        "a 300-seat canteen,"
+      ],
+      [
+        101.7,
+        108.2,
+        "وكذلك فيه مسكنان للموظفين، وفيه سكن للطلاب:",
+        "deux logements de fonction et des internats :",
+        "two staff residences and student housing:"
+      ],
+      [
+        108.3,
+        113.8,
+        "سكن للطلاب يتكون من 42 غرفة، فيها غرفتان للأشخاص ذوي الإعاقة،",
+        "celui des garçons compte 42 chambres, dont deux pour les personnes handicapées,",
+        "the boys' residence has 42 rooms, two of them for people with disabilities,"
+      ],
+      [
+        113.9,
+        120.4,
+        "وسكن للطالبات أيضا يتكون من 42 غرفة، فيه غرفتان للأشخاص ذوي الإعاقة.",
+        "et celui des filles aussi 42 chambres, dont deux pour les personnes handicapées.",
+        "and the girls' residence also has 42 rooms, two for people with disabilities."
+      ],
+      [
+        120.5,
+        126.1,
+        "وهذا المشروع نسبة تقدمه حاليا 60%.",
+        "L'avancement du projet est actuellement de 60 %.",
+        "The project is currently 60% complete.",
+        "Machine : « متقدم فيه الأشخاص حالا تقدمه 60% ». Sens sûr, mots à vérifier."
+      ],
+      [
+        126.2,
+        132.9,
+        "وفي القطاع الصحي، تتواصل بمدينة نواذيبو أشغال ترميم وتوسعة المستشفى الجهوي",
+        "Côté santé, la rénovation et l'extension de l'hôpital régional de Nouadhibou se poursuivent,",
+        "In health, work continues to renovate and extend Nouadhibou's regional hospital,"
+      ],
+      [
+        133.0,
+        138.5,
+        "بتكلفة إجمالية تبلغ 346 مليون أوقية قديمة.",
+        "pour un coût total de 346 millions d'anciennes ouguiyas.",
+        "at a total cost of 346 million old ouguiyas."
+      ],
+      [
+        138.6,
+        143.0,
+        "ويهدف هذا المشروع إلى إعادة تأهيل البنية التحتية للمستشفى",
+        "Ce projet vise à réhabiliter les infrastructures de l'hôpital,",
+        "The project aims to rehabilitate the hospital's infrastructure,"
+      ],
+      [
+        143.1,
+        146.4,
+        "وتطوير تجهيزاته وشبكته الفنية،",
+        "à moderniser ses équipements et ses réseaux techniques,",
+        "upgrade its equipment and technical networks,"
+      ],
+      [
+        146.5,
+        150.4,
+        "فضلا عن تحسين ظروف العمل داخل المنشأة الصحية.",
+        "et à améliorer les conditions de travail dans l'établissement.",
+        "and improve working conditions in the facility."
+      ],
+      [
+        150.5,
+        158.0,
+        "نحن نرى هذا الجناح، البلوك C، الذي بدأت فيه الأشغال ويجري ترميمه.",
+        "Voici ce bâtiment, le bloc C, où les travaux ont commencé : il est en rénovation.",
+        "Here is this wing, Block C, where work has started: it is being renovated.",
+        "Interview en dialecte, mal reconnue : à vérifier."
+      ],
+      [
+        158.1,
+        162.7,
+        "هذا البلوك يتكون من 66 سريرا،",
+        "Ce bloc compte 66 lits,",
+        "This block has 66 beds,"
+      ],
+      [
+        162.8,
+        169.3,
+        "وفيه أيضا بلوك يتكون من ثلاث وحدات للخدمات،",
+        "il y a aussi un bloc de trois unités de service,",
+        "there is also a block of three service units,",
+        "Interview en dialecte, mal reconnue : à vérifier."
+      ],
+      [
+        169.4,
+        176.7,
+        "وفيه ثلاث قاعات للجراحة.",
+        "avec trois salles d'opération.",
+        "with three operating theatres."
+      ],
+      [
+        176.8,
+        184.3,
+        "وبعد ذلك، إن شاء الله، ننتقل خلال شهر إلى البلوك B.",
+        "Ensuite, si Dieu le veut, on passera au bloc B d'ici un mois.",
+        "Then, God willing, we will move to Block B within a month.",
+        "Passage peu audible pour la machine : sens incertain, à vérifier en priorité."
+      ],
+      [
+        184.4,
+        189.9,
+        "وهكذا يتواصل العمل بالتدريج:",
+        "Le travail avance ainsi, étape par étape :",
+        "Work goes on like this, step by step:",
+        "Interview en dialecte, mal reconnue : à vérifier."
+      ],
+      [
+        190.0,
+        197.4,
+        "كلما انتهينا من بلوك نسلمه للأطباء، فيدخلونه ونتحول إلى بلوك آخر،",
+        "chaque bloc terminé est remis aux médecins, qui s'y installent, et on passe au suivant,",
+        "each finished block is handed over to the doctors, who move in, and we move on to the next,"
+      ],
+      [
+        197.5,
+        199.8,
+        "لأن هذه هي طريقة العمل.",
+        "c'est notre méthode de travail.",
+        "because that is how we work."
+      ],
+      [
+        199.9,
+        203.8,
+        "وتعكس هذه المشاريع اهتمام السلطات العمومية",
+        "Ces projets traduisent l'intérêt des pouvoirs publics",
+        "These projects reflect the authorities' commitment"
+      ],
+      [
+        203.9,
+        206.4,
+        "بتطوير البنية التحتية في مدينة نواذيبو",
+        "pour développer les infrastructures de Nouadhibou",
+        "to developing Nouadhibou's infrastructure"
+      ],
+      [
+        206.5,
+        209.8,
+        "وتعزيز قدرات المرافق التعليمية والصحية،",
+        "et le renforcement de ses équipements scolaires et de santé,",
+        "and strengthening its education and health facilities,"
+      ],
+      [
+        209.9,
+        216.5,
+        "بما يستجيب للحاجات المتزايدة للسكان في هذين القطاعين الحيويين.",
+        "pour répondre aux besoins croissants de la population dans ces deux secteurs vitaux.",
+        "to meet the population's growing needs in these two vital sectors."
+      ],
+      [
+        216.6,
+        221.9,
+        "الشيخ ولد احميدي، الموريتانية، مدينة نواذيبو.",
+        "Cheikh Ould Ahmeidi, pour El Mouritaniya, à Nouadhibou.",
+        "Cheikh Ould Ahmeidi, El Mouritaniya, Nouadhibou.",
+        "Nom du journaliste deviné : à confirmer (incrustation « تقرير الشيخ ولد احميدي » au début du reportage)."
+      ]
+    ]
+  }
+}
